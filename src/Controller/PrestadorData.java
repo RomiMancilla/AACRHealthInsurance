@@ -1,0 +1,113 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Controller;
+
+
+public class PrestadorData {
+    private int idPrestador;
+    private String nombrePrestador, apellidoPrestador;
+    private int matricula;
+    private String domicilioPrestador, telefonoPrestador, especialidad;
+    private Boolean estado;
+
+    public PrestadorData() {
+    }
+
+    public PrestadorData(String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, String especialidad, Boolean estado) {
+        this.nombrePrestador = nombrePrestador;
+        this.apellidoPrestador = apellidoPrestador;
+        this.matricula = matricula;
+        this.domicilioPrestador = domicilioPrestador;
+        this.telefonoPrestador = telefonoPrestador;
+        this.especialidad = especialidad;
+        this.estado = estado;
+    }
+
+    public PrestadorData(int idPrestador, String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, String especialidad, Boolean estado) {
+        this.idPrestador = idPrestador;
+        this.nombrePrestador = nombrePrestador;
+        this.apellidoPrestador = apellidoPrestador;
+        this.matricula = matricula;
+        this.domicilioPrestador = domicilioPrestador;
+        this.telefonoPrestador = telefonoPrestador;
+        this.especialidad = especialidad;
+        this.estado = estado;
+    }
+
+    public int getIdPrestador() {
+        return idPrestador;
+    }
+
+    public void setIdPrestador(int idPrestador) {
+        this.idPrestador = idPrestador;
+    }
+
+    public String getNombrePrestador() {
+        return nombrePrestador;
+    }
+
+    public void setNombrePrestador(String nombrePrestador) {
+        this.nombrePrestador = nombrePrestador;
+    }
+
+    public String getApellidoPrestador() {
+        return apellidoPrestador;
+    }
+
+    public void setApellidoPrestador(String apellidoPrestador) {
+        this.apellidoPrestador = apellidoPrestador;
+    }
+
+    public int getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getDomicilioPrestador() {
+        return domicilioPrestador;
+    }
+
+    public void setDomicilioPrestador(String domicilioPrestador) {
+        this.domicilioPrestador = domicilioPrestador;
+    }
+
+    public String getTelefonoPrestador() {
+        return telefonoPrestador;
+    }
+
+    public void setTelefonoPrestador(String telefonoPrestador) {
+        this.telefonoPrestador = telefonoPrestador;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "PrestadorData{" + "idPrestador=" + idPrestador + ", nombrePrestador=" + nombrePrestador + ", apellidoPrestador=" + apellidoPrestador + ", matricula=" + matricula + ", domicilioPrestador=" + domicilioPrestador + ", telefonoPrestador=" + telefonoPrestador + ", especialidad=" + especialidad + ", estado=" + estado + '}';
+    }
+    
+    
+
+    
+
+    
+}

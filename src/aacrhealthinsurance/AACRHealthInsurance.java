@@ -4,17 +4,14 @@
  */
 package aacrhealthinsurance;
 
-/**
- *
- * @author telma
- */
+
 public class AACRHealthInsurance {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        System.out.println("aacrhealthinsurance.AACRHealthInsurance.main()");
+        System.out.println("hello");
     }
     
 }
