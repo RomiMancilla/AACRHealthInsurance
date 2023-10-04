@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Model;
 
 
@@ -10,7 +7,7 @@ public class Afiliado {
     private int idAfiliado;
     private String nombreAfiliado;
     private String apellidoAfiliado;
-    private int dni;
+    private String dni;
     private String domicilioAfiliado;
     private String telefonoAfiliado;
     private boolean estado;
@@ -18,7 +15,7 @@ public class Afiliado {
     public Afiliado() {
     }
 
-    public Afiliado(String nombreAfiliado, String apellidoAfiliado, int dni, String domicilioAfiliado, String telefonoAfiliado, boolean estado) {
+    public Afiliado(String nombreAfiliado, String apellidoAfiliado, String dni, String domicilioAfiliado, String telefonoAfiliado, boolean estado) {
         this.nombreAfiliado = nombreAfiliado;
         this.apellidoAfiliado = apellidoAfiliado;
         this.dni = dni;
@@ -27,7 +24,7 @@ public class Afiliado {
         this.estado = estado;
     }
 
-    public Afiliado(int idAfiliado, String nombreAfiliado, String apellidoAfiliado, int dni, String domicilioAfiliado, String telefonoAfiliado, boolean estado) {
+    public Afiliado(int idAfiliado, String nombreAfiliado, String apellidoAfiliado, String dni, String domicilioAfiliado, String telefonoAfiliado, boolean estado) {
         this.idAfiliado = idAfiliado;
         this.nombreAfiliado = nombreAfiliado;
         this.apellidoAfiliado = apellidoAfiliado;
@@ -61,11 +58,11 @@ public class Afiliado {
         this.apellidoAfiliado = apellidoAfiliado;
     }
 
-    public int getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -95,9 +92,9 @@ public class Afiliado {
 
     @Override
     public String toString() {
-        return "Member{" + "idAfiliado=" + idAfiliado + ", nombreAfiliado=" + nombreAfiliado + ", apellidoAfiliado=" + apellidoAfiliado + ", dni=" + dni + ", domicilioAfiliado=" + domicilioAfiliado + ", telefonoAfiliado=" + telefonoAfiliado + ", estado=" + estado + '}';
+        return "Afiliado{" + "idAfiliado=" + idAfiliado + ", nombreAfiliado=" + nombreAfiliado + ", apellidoAfiliado=" + apellidoAfiliado + ", dni=" + dni + ", domicilioAfiliado=" + domicilioAfiliado + ", telefonoAfiliado=" + telefonoAfiliado + ", estado=" + estado + '}';
     }
-    
-    
+
+       
     
 }
