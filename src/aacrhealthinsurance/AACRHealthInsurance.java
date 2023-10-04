@@ -1,17 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package aacrhealthinsurance;
+
+import Controller.AfiliadoData;
+import Model.Afiliado;
 
 
 public class AACRHealthInsurance {
 
     
     public static void main(String[] args) {
+        AfiliadoData afidata=new AfiliadoData();
         
-        System.out.println("aacrhealthinsurance.AACRHealthInsurance.main()");
-        System.out.println("hello");
+        //Prueba método Guardar
+        /*Afiliado afiliado=new Afiliado("Juan", "Padilla", "25123123", "Av. Nueva 123", "11456789", true);
+        afidata.guardarAfiliado(afiliado);*/
+        
+        //Prueba método Eliminar Afiliado
+        
+        
     }
     
 }
