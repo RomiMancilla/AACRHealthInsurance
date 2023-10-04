@@ -13,4 +13,8 @@ private Connection conn=null;
     }
     
     
+    public void guardarafiliado(Afiliado afiliado){
+        ///código...
+    }
+    
 }
