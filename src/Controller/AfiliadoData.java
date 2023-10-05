@@ -129,5 +129,30 @@ public class AfiliadoData {
             return false;
         }
     }
+    
+    public Afiliado obtenerAfiliadoPorId(int id) {
+    String sql = "SELECT * FROM afiliados WHERE idAfiliado = ? AND estado = 1;"; 
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                int idAfiliado = rs.getInt("idAfiliado");
+                String nombre = rs.getString("nombreAfiliado");
+                String apellido = rs.getString("ApellidoAfiliado");
+                String dni = rs.getString("dni");
+                String domicilio = rs.getString("domicilioAfiliado");
+                String telefono = rs.getString("telefonoAfiliado");
+                boolean estado = rs.getBoolean("estado");
+                return new Afiliado(idAfiliado, nombre, apellido, dni, domicilio, telefono, estado);
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(AfiliadoData.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
+}
+
 
 }
