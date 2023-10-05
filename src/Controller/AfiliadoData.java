@@ -118,17 +118,6 @@ public class AfiliadoData {
         return listaAfiliados;
     }
 
-    private boolean esActivo(int idAfiliado) throws SQLException {
-        String sql = "SELECT estado FROM afiliados WHERE idAfiliado=?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, idAfiliado);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            return rs.getBoolean("estado");
-        } else {
-            return false;
-        }
-    }
     
     public Afiliado obtenerAfiliadoPorId(int id) {
     String sql = "SELECT * FROM afiliados WHERE idAfiliado = ? AND estado = 1;"; 
@@ -154,5 +143,16 @@ public class AfiliadoData {
     return null;
 }
 
-
+//Método adhoc para Eliminación
+    private boolean esActivo(int idAfiliado) throws SQLException {
+        String sql = "SELECT estado FROM afiliados WHERE idAfiliado=?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, idAfiliado);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getBoolean("estado");
+        } else {
+            return false;
+        }
+    }
 }

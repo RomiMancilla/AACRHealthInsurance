@@ -37,14 +37,16 @@ public class AACRHealthInsurance {
         }*/
         
         //Prueba Método obtener alumno por ID
-        Afiliado afiliado=afidata.obtenerAfiliadoPorId(5);
+        Afiliado afiliado=new Afiliado();
+        afiliado=afidata.obtenerAfiliadoPorId(10);
         if (afiliado!=null) {
-            System.out.println("Afiliado Encontrado:");
+            System.out.println(afiliado.getIdAfiliado());
             System.out.println(afiliado.getApellidoAfiliado());
             System.out.println(afiliado.getNombreAfiliado());
             System.out.println(afiliado.getDni());
-        }
-        
+            System.out.println(afiliado.getDomicilioAfiliado());
+            System.out.println(afiliado.getTelefonoAfiliado());
+        }else System.out.println("No se encontró el afiliado.");
     }
     
 }
