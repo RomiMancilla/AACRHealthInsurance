@@ -9,13 +9,14 @@ public class Prestador {
     private int idPrestador;
     private String nombrePrestador, apellidoPrestador;
     private int matricula;
-    private String domicilioPrestador, telefonoPrestador, especialidad;
+    private String domicilioPrestador, telefonoPrestador;
+    private Especialidad especialidad;
     private Boolean estado;
 
     public Prestador() {
     }
 
-    public Prestador(String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, String especialidad, Boolean estado) {
+    public Prestador(String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, Especialidad especialidad, Boolean estado) {
         this.nombrePrestador = nombrePrestador;
         this.apellidoPrestador = apellidoPrestador;
         this.matricula = matricula;
@@ -25,7 +26,7 @@ public class Prestador {
         this.estado = estado;
     }
 
-    public Prestador(int idPrestador, String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, String especialidad, Boolean estado) {
+    public Prestador(int idPrestador, String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, Especialidad especialidad, Boolean estado) {
         this.idPrestador = idPrestador;
         this.nombrePrestador = nombrePrestador;
         this.apellidoPrestador = apellidoPrestador;
@@ -84,11 +85,11 @@ public class Prestador {
         this.telefonoPrestador = telefonoPrestador;
     }
 
-    public String getEspecialidad() {
+    public Especialidad getEspecialidad() {
         return especialidad;
     }
 
-    public void setEspecialidad(String especialidad) {
+    public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
     }
 
@@ -102,11 +103,15 @@ public class Prestador {
 
     @Override
     public String toString() {
-        return "MedicalSupplier{" + "idPrestador=" + idPrestador + ", nombrePrestador=" + nombrePrestador + ", apellidoPrestador=" + apellidoPrestador + ", matricula=" + matricula + ", domicilioPrestador=" + domicilioPrestador + ", telefonoPrestador=" + telefonoPrestador + ", especialidad=" + especialidad + ", estado=" + estado + '}';
+        return "Prestador{" + "idPrestador=" + idPrestador + ", nombrePrestador=" + nombrePrestador + ", apellidoPrestador=" + apellidoPrestador + ", matricula=" + matricula + ", domicilioPrestador=" + domicilioPrestador + ", telefonoPrestador=" + telefonoPrestador + ", especialidad=" + especialidad + ", estado=" + estado + '}';
     }
+
+   
+    }
+
     
     
      
     
     
-}
+

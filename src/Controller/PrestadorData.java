@@ -4,110 +4,51 @@
  */
 package Controller;
 
+import Model.Prestador;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.sql.SQLSyntaxErrorException;
 
 public class PrestadorData {
-    private int idPrestador;
-    private String nombrePrestador, apellidoPrestador;
-    private int matricula;
-    private String domicilioPrestador, telefonoPrestador, especialidad;
-    private Boolean estado;
+
+    private Connection conn = null;
 
     public PrestadorData() {
+        conn = ConnectionDB.obtenerConexion();
     }
 
-    public PrestadorData(String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, String especialidad, Boolean estado) {
-        this.nombrePrestador = nombrePrestador;
-        this.apellidoPrestador = apellidoPrestador;
-        this.matricula = matricula;
-        this.domicilioPrestador = domicilioPrestador;
-        this.telefonoPrestador = telefonoPrestador;
-        this.especialidad = especialidad;
-        this.estado = estado;
+    public void guardarPrestador(Prestador prestador) {
+        String sql = "INSERT INTO prestadores(nombrePrestador, apellidoPrestador, matricula, domicilioPrestador, telefonoPrestador, estado, idEspecialidad) VALUES (?,?,?,?,?,?,?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, prestador.getNombrePrestador());
+            ps.setString(2, prestador.getApellidoPrestador());
+            ps.setInt(3, prestador.getMatricula());
+            ps.setString(4, prestador.getDomicilioPrestador());
+            ps.setString(5, prestador.getTelefonoPrestador());
+            ps.setBoolean(6, true);
+            ps.setInt(7, prestador.getEspecialidad().getIdEspecialidad());
+            int exito = ps.executeUpdate();
+            if (exito > 0) {
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        int idPrestador = rs.getInt(1);
+                        prestador.setIdPrestador(idPrestador);
+                        JOptionPane.showMessageDialog(null, "Prestador agregado con Id: " + idPrestador);
+                    }
+                }
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (SQLIntegrityConstraintViolationException integrity) {
+            JOptionPane.showMessageDialog(null, "Registro duplicado: " + integrity.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error en acceso a Prestadores" + e.getMessage());
+        }
+
     }
 
-    public PrestadorData(int idPrestador, String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, String especialidad, Boolean estado) {
-        this.idPrestador = idPrestador;
-        this.nombrePrestador = nombrePrestador;
-        this.apellidoPrestador = apellidoPrestador;
-        this.matricula = matricula;
-        this.domicilioPrestador = domicilioPrestador;
-        this.telefonoPrestador = telefonoPrestador;
-        this.especialidad = especialidad;
-        this.estado = estado;
-    }
-
-    public int getIdPrestador() {
-        return idPrestador;
-    }
-
-    public void setIdPrestador(int idPrestador) {
-        this.idPrestador = idPrestador;
-    }
-
-    public String getNombrePrestador() {
-        return nombrePrestador;
-    }
-
-    public void setNombrePrestador(String nombrePrestador) {
-        this.nombrePrestador = nombrePrestador;
-    }
-
-    public String getApellidoPrestador() {
-        return apellidoPrestador;
-    }
-
-    public void setApellidoPrestador(String apellidoPrestador) {
-        this.apellidoPrestador = apellidoPrestador;
-    }
-
-    public int getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(int matricula) {
-        this.matricula = matricula;
-    }
-
-    public String getDomicilioPrestador() {
-        return domicilioPrestador;
-    }
-
-    public void setDomicilioPrestador(String domicilioPrestador) {
-        this.domicilioPrestador = domicilioPrestador;
-    }
-
-    public String getTelefonoPrestador() {
-        return telefonoPrestador;
-    }
-
-    public void setTelefonoPrestador(String telefonoPrestador) {
-        this.telefonoPrestador = telefonoPrestador;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
-    @Override
-    public String toString() {
-        return "PrestadorData{" + "idPrestador=" + idPrestador + ", nombrePrestador=" + nombrePrestador + ", apellidoPrestador=" + apellidoPrestador + ", matricula=" + matricula + ", domicilioPrestador=" + domicilioPrestador + ", telefonoPrestador=" + telefonoPrestador + ", especialidad=" + especialidad + ", estado=" + estado + '}';
-    }
-    
-    
-
-    
-
-    
 }
