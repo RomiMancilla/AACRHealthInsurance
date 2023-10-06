@@ -2,6 +2,7 @@
 package aacrhealthinsurance;
 
 import Controller.AfiliadoData;
+import Controller.EspecialidadData;
 import Controller.PrestadorData;
 import Model.Afiliado;
 import Model.Especialidad;
@@ -16,6 +17,7 @@ public class AACRHealthInsurance {
     public static void main(String[] args) {
         AfiliadoData afidata=new AfiliadoData();
         PrestadorData prestaData=new PrestadorData();
+        EspecialidadData espData=new EspecialidadData();
         
         //Prueba método Guardar
         /*Afiliado afiliado=new Afiliado("Juan", "Padilla", "25123123", "Av. Nueva 123", "11456789", true);
@@ -50,11 +52,14 @@ public class AACRHealthInsurance {
             System.out.println(afiliado.getDomicilioAfiliado());
             System.out.println(afiliado.getTelefonoAfiliado());
         }else System.out.println("No se encontró el afiliado.");
-    }*/
+    }
         //-------------------------------------------------------
-        //Prueba Método guardarPrestador
-        Especialidad espe=new Especialidad("Diagnostico por Imagenes");
-        Prestador prestador=new Prestador("Ivo", "Miller", 1111, "Ocean Highway", "61 587 568", espe, true);
-        prestaData.guardarPrestador(prestador);
+        //Prueba de métodos de Especialidades
+        Especialidad especialidad1=new Especialidad("Rayos X", true);
+        espData.agregarEspecialidad(especialidad1);*/
+        
+        //Prueba método Eliminar Especialidades
+        espData.eliminarEspecialidad(1);
+        
     }    
 }
