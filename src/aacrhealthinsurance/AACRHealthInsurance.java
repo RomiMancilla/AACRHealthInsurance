@@ -1,4 +1,3 @@
-
 package aacrhealthinsurance;
 
 import Controller.AfiliadoData;
@@ -10,19 +9,17 @@ import Model.Prestador;
 import java.util.List;
 import org.w3c.dom.ls.LSOutput;
 
-
 public class AACRHealthInsurance {
 
     public static void main(String[] args) {
-        AfiliadoData afidata=new AfiliadoData();
-        PrestadorData prestaData=new PrestadorData();
-        EspecialidadData espData=new EspecialidadData();
-     
-        
+        AfiliadoData afidata = new AfiliadoData();
+        PrestadorData prestaData = new PrestadorData();
+        EspecialidadData espData = new EspecialidadData();
+
         //Prueba métodos de AfiliadoData
         //Prueba método Guardar
-        Afiliado afiliado=new Afiliado("Juan", "Padilla", "25123123", "Av. Nueva 123", "11456789", true);
-        afidata.guardarAfiliado(afiliado);/*
+        /*Afiliado afiliado=new Afiliado("Juan", "Padilla", "25123123", "Av. Nueva 123", "11456789", true);
+        afidata.guardarAfiliado(afiliado);
         
         //Prueba método Eliminar Afiliado
         afidata.eliminarAfiliado(19);
@@ -87,8 +84,20 @@ public class AACRHealthInsurance {
         Especialidad especialidad=espData.obtenerEspecialidadPorId(8);
         Prestador prestador=new Prestador("John", "Wicht", 1000, "Continental Hotel", "123123", especialidad, true);
         prestaData.guardarPrestador(prestador);
-        
+         */
         //Prueba de método buscar prestador por ID
-        
-    }    
+        Prestador presta = prestaData.obtenerPrestadorPorId(5);
+        if (presta!=null) {
+            System.out.println("Datos del Prestador");
+            System.out.println(presta.getIdPrestador());
+            System.out.println(presta.getApellidoPrestador());
+            System.out.println(presta.getNombrePrestador());
+            System.out.println(presta.getDomicilioPrestador());
+            System.out.println(presta.getTelefonoPrestador());
+            System.out.println(presta.getEspecialidad().getNombreEspecialidad());
+            System.out.println(presta.getMatricula());
+            System.out.println(presta.getEstado());
+            
+        }else System.out.println("No hay Prestador con ese ID");
+    }
 }

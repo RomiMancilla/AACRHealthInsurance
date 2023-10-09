@@ -76,4 +76,23 @@ public class PrestadorData {
         return prestador;
     }
 
+    public void borrarPrestador(int idPrestador) {
+        try {
+            String sql="UPDATE prestadores SET ";
+            
+        } catch (Exception e) {
+        }
+    }
+
+    //Extra prestador existe
+    private boolean existePrestador(int idPrestador) throws SQLException {
+        String sql = "SELECT * FROM prestadores WHERE idPrestador=?;";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, idPrestador);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return true;
+        }
+        return false;
+    }
 }
