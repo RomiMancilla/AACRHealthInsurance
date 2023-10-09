@@ -7,31 +7,32 @@ public class Prestador {
     private String nombrePrestador, apellidoPrestador;
     private int matricula;
     private String domicilioPrestador, telefonoPrestador;
+    private boolean estado;
     private Especialidad especialidad;
-    private Boolean estado;
+    
 
     public Prestador() {
     }
 
-    public Prestador(String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, Especialidad especialidad, Boolean estado) {
-        this.nombrePrestador = nombrePrestador;
-        this.apellidoPrestador = apellidoPrestador;
-        this.matricula = matricula;
-        this.domicilioPrestador = domicilioPrestador;
-        this.telefonoPrestador = telefonoPrestador;
-        this.especialidad = especialidad;
-        this.estado = estado;
-    }
-
-    public Prestador(int idPrestador, String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, Especialidad especialidad, Boolean estado) {
+    public Prestador(int idPrestador, String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, boolean estado, Especialidad especialidad) {
         this.idPrestador = idPrestador;
         this.nombrePrestador = nombrePrestador;
         this.apellidoPrestador = apellidoPrestador;
         this.matricula = matricula;
         this.domicilioPrestador = domicilioPrestador;
         this.telefonoPrestador = telefonoPrestador;
-        this.especialidad = especialidad;
         this.estado = estado;
+        this.especialidad = especialidad;
+    }
+
+    public Prestador(String nombrePrestador, String apellidoPrestador, int matricula, String domicilioPrestador, String telefonoPrestador, boolean estado, Especialidad especialidad) {
+        this.nombrePrestador = nombrePrestador;
+        this.apellidoPrestador = apellidoPrestador;
+        this.matricula = matricula;
+        this.domicilioPrestador = domicilioPrestador;
+        this.telefonoPrestador = telefonoPrestador;
+        this.estado = estado;
+        this.especialidad = especialidad;
     }
 
     public int getIdPrestador() {
@@ -82,6 +83,14 @@ public class Prestador {
         this.telefonoPrestador = telefonoPrestador;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     public Especialidad getEspecialidad() {
         return especialidad;
     }
@@ -90,19 +99,12 @@ public class Prestador {
         this.especialidad = especialidad;
     }
 
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-
     @Override
     public String toString() {
-        return "Prestador{" + "idPrestador=" + idPrestador + ", nombrePrestador=" + nombrePrestador + ", apellidoPrestador=" + apellidoPrestador + ", matricula=" + matricula + ", domicilioPrestador=" + domicilioPrestador + ", telefonoPrestador=" + telefonoPrestador + ", especialidad=" + especialidad + ", estado=" + estado + '}';
+        return "Prestador{" + "idPrestador=" + idPrestador + ", nombrePrestador=" + nombrePrestador + ", apellidoPrestador=" + apellidoPrestador + ", matricula=" + matricula + ", domicilioPrestador=" + domicilioPrestador + ", telefonoPrestador=" + telefonoPrestador + ", estado=" + estado + ", especialidad=" + especialidad + '}';
     }
 
+    
    
     }
 
