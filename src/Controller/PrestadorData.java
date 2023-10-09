@@ -1,6 +1,6 @@
-
 package Controller;
 
+import Model.Especialidad;
 import Model.Prestador;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,6 +13,7 @@ import java.sql.SQLSyntaxErrorException;
 public class PrestadorData {
 
     private Connection conn = null;
+    EspecialidadData espeData = new EspecialidadData();
 
     public PrestadorData() {
         conn = ConnectionDB.obtenerConexion();
@@ -45,7 +46,34 @@ public class PrestadorData {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error en acceso a Prestadores" + e.getMessage());
         }
+    }
 
+    public Prestador obtenerPrestadorPorId(int idPrestador) {
+        Prestador prestador = null;
+        String sql = "SELECT * FROM prestadores WHERE idPrestador = ?;";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idPrestador);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    prestador = new Prestador();
+                    prestador.setIdPrestador(rs.getInt("idPrestador"));
+                    prestador.setNombrePrestador(rs.getString("nombrePrestador"));
+                    prestador.setApellidoPrestador(rs.getString("apellidoPrestador"));
+                    prestador.setMatricula(rs.getInt("matricula"));
+                    prestador.setDomicilioPrestador(rs.getString("domicilioPrestador"));
+                    prestador.setTelefonoPrestador(rs.getString("telefonoPrestador"));
+                    prestador.setEstado(rs.getBoolean("estado"));
+
+                    // Obtener la especialidad del prestador a partir de su idEspecialidad
+                    int idEspecialidad = rs.getInt("idEspecialidad");
+                    Especialidad especialidad = espeData.obtenerEspecialidadPorId(idEspecialidad);
+                    prestador.setEspecialidad(especialidad);
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el prestador: " + e.getMessage());
+        }
+        return prestador;
     }
 
 }

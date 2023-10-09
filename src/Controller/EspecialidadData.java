@@ -45,48 +45,60 @@ public class EspecialidadData {
         }
     }
 
-    public void eliminarEspecialidad(int idEsp) {
+    public void eliminarEspecialidad(int idEspecialidad) {
         try {
-            String sql = "UPDATE especialidades SET estado=0 WHERE idEspecialidad=?;";
-            if (existe(idEsp)) {
-                try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setInt(1, idEsp);
-                    int exito = ps.executeUpdate();
-                    if (esActivo(idEsp) && exito > 0) {
-                        JOptionPane.showMessageDialog(null, "Especialidad Eliminada.");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "La Especialidad ya se encuentra dada de baja.");
+            if (existe(idEspecialidad)) {//verifico si existe
+                if (esActivo(idEspecialidad)) {//verifico si está activa
+                    String sql = "UPDATE especialidades SET estado=0 WHERE idEspecialidad=?;";
+                    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                        ps.setInt(1, idEspecialidad);
+                        int exito = ps.executeUpdate();
+                        if (exito > 0) {
+                            JOptionPane.showMessageDialog(null, "Especialidad eliminada.");
+                        }
                     }
-                } catch (SQLSyntaxErrorException syn) {
-                    JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+                } else {
+                    JOptionPane.showMessageDialog(null, "La especialidad ya se encuentra dada de baja");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "No existe especialidad con ese ID.");
             }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede acceder a Especilaidades");
+            JOptionPane.showMessageDialog(null, "No se puede acceder a Especialidad: " + ex.getMessage());
         }
     }
 
     public void actualizarEspecialidad(Especialidad especialidad) {
-        String sql = "UPDATE especialidades SET nombreEspecialidad=? WHERE idEspecialidad=?;";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, especialidad.getNombreEspecialidad());
-            ps.setInt(0, especialidad.getIdEspecialidad());
-            int exito = ps.executeUpdate();
-            if (exito > 0) {
-                JOptionPane.showMessageDialog(null, "Especialidad actualizada.");
+        try {
+            String sql = "UPDATE especialidades SET nombreEspecialidad=? WHERE idEspecialidad=?;";
+            if (!existe(especialidad.getIdEspecialidad())) {
+                JOptionPane.showMessageDialog(null, "No existe Especialidad con ese ID.");
+                return;
             }
-        } catch (SQLSyntaxErrorException syn) {
-            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
-        } catch (SQLException e) {
+            if (nombreEsIgual(especialidad.getIdEspecialidad(), especialidad.getNombreEspecialidad())) {
+                JOptionPane.showMessageDialog(null, "El nombre de la especialidad ya existe en la base de datos.");
+                return;
+            }
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, especialidad.getNombreEspecialidad());
+                ps.setInt(2, especialidad.getIdEspecialidad());
+                int exito = ps.executeUpdate();
+                if (exito > 0) {
+                    JOptionPane.showMessageDialog(null, "Especialidad actualizada.");
+                }
+            } catch (SQLSyntaxErrorException syn) {
+                JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+            }
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede acceder a Especialidades");
         }
     }
 
     public List<Especialidad> listarEspecialidades() {
         List<Especialidad> listaEspecialidades = new ArrayList<>();
-        String sql = "SELECT idEspecialidad,nombreEspecialidad,estado FROM especialidades WHERE estado=1;";
+        String sql = "SELECT idEspecialidad, nombreEspecialidad, estado FROM especialidades WHERE estado=1;";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -124,19 +136,7 @@ public class EspecialidadData {
         return null;
     }
 
-//Extra: Método AdHoc
-    private boolean esActivo(int idEspecialidad) throws SQLException {
-        String sql = "SELECT * FROM especialidades WHERE idEspecialidad=?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, idEspecialidad);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            return rs.getBoolean("estado");
-        } else {
-            return false;
-        }
-    }
-
+    //******************************************************************************************************************
     //Extra: método para validar existencia de especialidad
     private boolean existe(int idEspecialidad) throws SQLException {
         String sql = "SELECT idEspecialidad FROM especialidades WHERE idEspecialidad=?;";
@@ -149,4 +149,30 @@ public class EspecialidadData {
         return false;
     }
 
+//Extra: Método AdHoc para verificar si la especialidad está activa o no.
+    private boolean esActivo(int idEspecialidad) throws SQLException {
+        String sql = "SELECT * FROM especialidades WHERE idEspecialidad=?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, idEspecialidad);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getBoolean("estado");
+        } else {
+            return false;
+        }
+    }
+
+    //método AdHoc para verificar si el nombre de Especialidad no es el mismo
+    private boolean nombreEsIgual(int idEspecialidad, String nombreEspecialidad) throws SQLException {
+        String sql = "SELECT nombreEspecialidad FROM especialidades WHERE idEspecialidad = ?;";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idEspecialidad);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String nombreExistente = rs.getString("nombreEspecialidad");
+                return nombreExistente.equals(nombreEspecialidad);
+            }
+        }
+        return false;
+    }
 }
