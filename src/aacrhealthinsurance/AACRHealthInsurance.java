@@ -100,10 +100,29 @@ public class AACRHealthInsurance {
             
         }else System.out.println("No hay Prestador con ese ID");
        //Prueba metodo eliminar prestador
-       prestaData.borrarPrestador(2);*/
+       prestaData.borrarPrestador(2);
         //Prueba metodo actualizar prestador
-        Especialidad especialidad = espData.obtenerEspecialidadPorId(6);
+        Especialidad especialidad = espData.obtenerEspecialidadPorId(5);
         Prestador prestador = new Prestador(3, "John", "Cyrus", 100, "Av SUR", "2155", true, especialidad);
-        prestaData.actualizarPrestador(prestador);
+        prestaData.actualizarPrestador(prestador);*/
+        //Prueba Metodo Listar Prestadores
+        List<Prestador> lista = prestaData.listarPrestadores();
+        if(lista!= null){
+            for (Prestador prestador : lista) {
+                System.out.println(prestador.getIdPrestador());
+                System.out.println(prestador.getNombrePrestador());
+                System.out.println(prestador.getApellidoPrestador());
+                System.out.println(prestador.getMatricula());
+                System.out.println(prestador.getTelefonoPrestador());
+                System.out.println(prestador.getDomicilioPrestador());
+                System.out.println(prestador.isEstado());
+                if(prestador.getEspecialidad()!=null){
+                System.out.println(prestador.getEspecialidad().getIdEspecialidad());
+                System.out.println(prestador.getEspecialidad().getNombreEspecialidad());
+                }
+                System.out.println("----------------------------------------------------");
+            }
+             
+        }
     }
 }

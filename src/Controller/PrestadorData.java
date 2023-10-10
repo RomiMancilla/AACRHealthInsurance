@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLSyntaxErrorException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -106,9 +108,9 @@ public class PrestadorData {
         }
     }
 
-    public void actualizarPrestador(Prestador prestador){
-        String sql ="UPDATE prestadores SET nombrePrestador =?, apellidoPrestador =?, matricula=?, domicilioPrestador =?, telefonoPrestador=?, idEspecialidad=? WHERE idPrestador =? AND estado=1;";
-        try(PreparedStatement ps = conn.prepareStatement(sql)){
+    public void actualizarPrestador(Prestador prestador) {
+        String sql = "UPDATE prestadores SET nombrePrestador =?, apellidoPrestador =?, matricula=?, domicilioPrestador =?, telefonoPrestador=?, idEspecialidad=? WHERE idPrestador =? AND estado=1;";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, prestador.getNombrePrestador());
             ps.setString(2, prestador.getApellidoPrestador());
             ps.setInt(3, prestador.getMatricula());
@@ -116,24 +118,52 @@ public class PrestadorData {
             ps.setString(5, prestador.getTelefonoPrestador());
             ps.setInt(6, prestador.getEspecialidad().getIdEspecialidad());
             ps.setInt(7, prestador.getIdPrestador());
-            int exito=ps.executeUpdate();
-            if(exito>0){
+            int exito = ps.executeUpdate();
+            if (exito > 0) {
                 JOptionPane.showMessageDialog(null, "Prestador Actualizado");
             }
-            
+
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error en acceso a Prestadores" + e.getMessage());
-         
+
         }
-         
+
     }
-    
-    
-    
-    
+    //Controlar que especialidad no sea null en vistas
+    public List<Prestador> listarPrestadores() {
+        List<Prestador> lista = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM prestadores WHERE estado =1;";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                try (ResultSet rs = ps.executeQuery()) {
+                    // Prestador prestador = new Prestador();
+                    Especialidad especialidad = new Especialidad();
+                    while (rs.next()) {
+                        int idPrestador = rs.getInt("idPrestador");
+                        String nombre = rs.getString("nombrePrestador");
+                        String apellido = rs.getString("apellidoPrestador");
+                        int matricula = rs.getInt("matricula");
+                        String domicilio = rs.getString("domicilioPrestador");
+                        String telefono = rs.getString("telefonoPrestador");
+                        boolean estado = rs.getBoolean("estado");
+                        int idEspecialidad = rs.getInt("idEspecialidad");
+                        especialidad = espeData.obtenerEspecialidadPorId(idEspecialidad);
+                        Prestador prestador = new Prestador(idPrestador, nombre, apellido, matricula, domicilio, telefono, estado, especialidad);
+                        lista.add(prestador);
+                    }
+                }
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error en acceso a prestadores.");
+        }
+        return lista;
+    }
+
     //Extra prestador existe
     private boolean existePrestador(int idPrestador) throws SQLException {
         String sql = "SELECT * FROM prestadores WHERE idPrestador=?;";
