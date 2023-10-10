@@ -103,7 +103,7 @@ public class AACRHealthInsurance {
        prestaData.borrarPrestador(2);*/
         //Prueba metodo actualizar prestador
         Especialidad especialidad = espData.obtenerEspecialidadPorId(6);
-        Prestador prestador = new Prestador(3, "Jon", "Cyrus", 100, "Av SUR", "2155", true, especialidad);
+        Prestador prestador = new Prestador(3, "John", "Cyrus", 100, "Av SUR", "2155", true, especialidad);
         prestaData.actualizarPrestador(prestador);
     }
 }
