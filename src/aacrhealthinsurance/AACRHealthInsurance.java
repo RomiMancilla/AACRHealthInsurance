@@ -2,9 +2,11 @@ package aacrhealthinsurance;
 
 import Controller.AfiliadoData;
 import Controller.EspecialidadData;
+import Controller.OrdenData;
 import Controller.PrestadorData;
 import Model.Afiliado;
 import Model.Especialidad;
+import Model.Orden;
 import Model.Prestador;
 import java.util.List;
 import org.w3c.dom.ls.LSOutput;
@@ -12,10 +14,10 @@ import org.w3c.dom.ls.LSOutput;
 public class AACRHealthInsurance {
 
     public static void main(String[] args) {
-        AfiliadoData afidata = new AfiliadoData();
+        AfiliadoData afiData = new AfiliadoData();
         PrestadorData prestaData = new PrestadorData();
         EspecialidadData espData = new EspecialidadData();
-
+        OrdenData ordenData = new OrdenData();
         //Prueba métodos de AfiliadoData
         //Prueba método Guardar
         /*Afiliado afiliado=new Afiliado("Juan", "Padilla", "25123123", "Av. Nueva 123", "11456789", true);
@@ -124,8 +126,11 @@ public class AACRHealthInsurance {
             }
              
         }*/
-        
+        //**********************************************************************************
         //Prueba de métodos de Órdenes
-        
+        Afiliado afiliado = afiData.obtenerAfiliadoPorId(1);
+        Prestador prestador = prestaData.obtenerPrestadorPorId(2);
+        //Orden orden = new Orden(1,2023-10-12,"Efectivo",5200.3,afiliado,prestador);
+        //ordenData.guardarOrden(orden);
     }
 }

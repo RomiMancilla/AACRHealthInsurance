@@ -4,7 +4,6 @@ import Model.Afiliado;
 import Model.Orden;
 import Model.Prestador;
 import java.sql.Connection;
-import java.time.LocalDate;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -12,10 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLSyntaxErrorException;
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class OrdenData {
 
     private Connection conn = null;
+    AfiliadoData afiData = new AfiliadoData();
+    PrestadorData prestaData = new PrestadorData();
 
     public OrdenData() {
         conn = ConnectionDB.obtenerConexion();
@@ -24,7 +26,7 @@ public class OrdenData {
     public void guardarOrden(Orden orden) {
         String sql = "SELECT INTO orden (fecha, formaPago, importe, idAfiliado, IdPrestador) VALUES (?,?,?,?,?);";
         try (PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            Date fecha=Date.valueOf(orden.getFecha());
+            Date fecha = Date.valueOf(orden.getFecha());
             ps.setDate(1, fecha);
             ps.setString(2, orden.getFormaPago());
             ps.setDouble(3, orden.getImporte());
@@ -40,12 +42,59 @@ public class OrdenData {
                     }
                 }
             }
-        }catch (SQLIntegrityConstraintViolationException integrity) {
+        } catch (SQLIntegrityConstraintViolationException integrity) {
             JOptionPane.showMessageDialog(null, "Registro duplicado: " + integrity.getMessage());
-        }catch (SQLSyntaxErrorException syn) {
-            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());           
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "Error al acceder a orden.");  
-        }        
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a orden.");
+        }
     }
-}   
+
+    public void buscarOrden(int id) {
+        Orden orden = null;
+        String sql = "SELECT * FROM orden WHERE idOrden =? AND estado =?; ";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            Date fecha = Date.valueOf(orden.getFecha());
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int idOrden = rs.getInt("idOrden");
+                    // LocalDate fecha = rs.getDate("fecha").toLocalDate();
+                    String formaPago = rs.getString("formaPago");
+                    Double importe = rs.getDouble("importe");
+                    int idAfiliado = rs.getInt("idAfiliado");
+                    Afiliado afiliado = afiData.obtenerAfiliadoPorId(id);
+                    int idPrestador = rs.getInt("idPrestador");
+                    orden.setAfiliado(afiliado);
+                    Prestador prestador = prestaData.obtenerPrestadorPorId(idPrestador);
+                    orden.setPrestador(prestador);
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse a orden.");
+        }
+    }
+
+    public void eliminarOrden(int idOrden) {
+        String sql = "UPDATE orde SET idOrden != null WHERE idOrden =?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idOrden);
+            int exito = ps.executeUpdate();
+            if (exito > 0) {
+                JOptionPane.showMessageDialog(null, "La orden se elimino correctamente.");
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse a orden.");
+        }
+
+    }
+    
+    public void actualizarOrden(Orden orden){
+        String sql = "UPDATE ordenSET";
+    }
+    
+    
+}
