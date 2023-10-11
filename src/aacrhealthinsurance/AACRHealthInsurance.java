@@ -104,7 +104,7 @@ public class AACRHealthInsurance {
         //Prueba metodo actualizar prestador
         Especialidad especialidad = espData.obtenerEspecialidadPorId(5);
         Prestador prestador = new Prestador(3, "John", "Cyrus", 100, "Av SUR", "2155", true, especialidad);
-        prestaData.actualizarPrestador(prestador);*/
+        prestaData.actualizarPrestador(prestador);
         //Prueba Metodo Listar Prestadores
         List<Prestador> lista = prestaData.listarPrestadores();
         if(lista!= null){
@@ -123,6 +123,9 @@ public class AACRHealthInsurance {
                 System.out.println("----------------------------------------------------");
             }
              
-        }
+        }*/
+        
+        //Prueba de métodos de Órdenes
+        
     }
 }

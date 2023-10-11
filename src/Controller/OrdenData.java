@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLSyntaxErrorException;
+import java.sql.Date;
 
 public class OrdenData {
 
@@ -21,9 +22,10 @@ public class OrdenData {
     }
 
     public void guardarOrden(Orden orden) {
-        String sql = "SELECT INTO orden (fecha, formaPago, importe, afiliado, prestador) VALUES (?,?,?,?,?);";
+        String sql = "SELECT INTO orden (fecha, formaPago, importe, idAfiliado, IdPrestador) VALUES (?,?,?,?,?);";
         try (PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-            ps.setDate(1, orden.getFecha());
+            Date fecha=Date.valueOf(orden.getFecha());
+            ps.setDate(1, fecha);
             ps.setString(2, orden.getFormaPago());
             ps.setDouble(3, orden.getImporte());
             ps.setInt(4, orden.getAfiliado().getIdAfiliado());
@@ -41,11 +43,9 @@ public class OrdenData {
         }catch (SQLIntegrityConstraintViolationException integrity) {
             JOptionPane.showMessageDialog(null, "Registro duplicado: " + integrity.getMessage());
         }catch (SQLSyntaxErrorException syn) {
-            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
-              
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());           
         }catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Error al acceder a orden.");  
-        }
-        
+        }        
     }
 }   
