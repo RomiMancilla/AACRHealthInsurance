@@ -1,15 +1,12 @@
-
 package Model;
 
 import java.time.LocalDate;
 
-
 public class Orden {
-    
-    
+
     private int idOrden;
     private LocalDate fecha;
-    private String formaPago;
+    private FormaDePagoEnum formaDePago;
     private Double importe;
     private Afiliado afiliado;
     private Prestador prestador;
@@ -17,18 +14,18 @@ public class Orden {
     public Orden() {
     }
 
-    public Orden(LocalDate fecha, String formaPago, Double importe, Afiliado afiliado, Prestador prestador) {
+    public Orden(LocalDate fecha, FormaDePagoEnum formaDePago, Double importe, Afiliado afiliado, Prestador prestador) {
         this.fecha = fecha;
-        this.formaPago = formaPago;
+        this.formaDePago = formaDePago;
         this.importe = importe;
         this.afiliado = afiliado;
         this.prestador = prestador;
     }
 
-    public Orden(int idOrden, LocalDate fecha, String formaPago, Double importe, Afiliado afiliado, Prestador prestador) {
+    public Orden(int idOrden, LocalDate fecha, FormaDePagoEnum formaDePago, Double importe, Afiliado afiliado, Prestador prestador) {
         this.idOrden = idOrden;
         this.fecha = fecha;
-        this.formaPago = formaPago;
+        this.formaDePago = formaDePago;
         this.importe = importe;
         this.afiliado = afiliado;
         this.prestador = prestador;
@@ -50,12 +47,12 @@ public class Orden {
         this.fecha = fecha;
     }
 
-    public String getFormaPago() {
-        return formaPago;
+    public FormaDePagoEnum getFormaDePago() {
+        return formaDePago;
     }
 
-    public void setFormaPago(String formaPago) {
-        this.formaPago = formaPago;
+    public void setFormaDePago(FormaDePagoEnum formaDePago) {
+        this.formaDePago = formaDePago;
     }
 
     public Double getImporte() {
@@ -84,9 +81,7 @@ public class Orden {
 
     @Override
     public String toString() {
-        return "Orden{" + "idOrden=" + idOrden + ", fecha=" + fecha + ", formaPago=" + formaPago + ", importe=" + importe + ", afiliado=" + afiliado + ", prestador=" + prestador + '}';
+        return "Orden{" + "idOrden=" + idOrden + ", fecha=" + fecha + ", formaDePago=" + formaDePago + ", importe=" + importe + ", afiliado=" + afiliado + ", prestador=" + prestador + '}';
     }
-    
-   
-    
+
 }

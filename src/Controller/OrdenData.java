@@ -24,11 +24,11 @@ public class OrdenData {
     }
 
     public void guardarOrden(Orden orden) {
-        String sql = "SELECT INTO orden (fecha, formaPago, importe, idAfiliado, IdPrestador) VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO ordenes (fecha, formaPago, importe, idAfiliado, IdPrestador) VALUES (?,?,?,?,?);";
         try (PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             Date fecha = Date.valueOf(orden.getFecha());
             ps.setDate(1, fecha);
-            ps.setString(2, orden.getFormaPago());
+            ps.setString(2, orden.getFormaDePago().toString());
             ps.setDouble(3, orden.getImporte());
             ps.setInt(4, orden.getAfiliado().getIdAfiliado());
             ps.setInt(5, orden.getPrestador().getIdPrestador());
@@ -43,7 +43,7 @@ public class OrdenData {
                 }
             }
         } catch (SQLIntegrityConstraintViolationException integrity) {
-            JOptionPane.showMessageDialog(null, "Registro duplicado: " + integrity.getMessage());
+            JOptionPane.showMessageDialog(null, "No se permiten dos órdenes en la misma fecha para el Afiliado\n" + integrity.getMessage());
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
         } catch (SQLException e) {
@@ -89,7 +89,6 @@ public class OrdenData {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al conectarse a orden.");
         }
-
     }
     
     public void actualizarOrden(Orden orden){

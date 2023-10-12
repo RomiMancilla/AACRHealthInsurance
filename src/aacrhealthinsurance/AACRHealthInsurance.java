@@ -6,8 +6,11 @@ import Controller.OrdenData;
 import Controller.PrestadorData;
 import Model.Afiliado;
 import Model.Especialidad;
+import Model.FormaDePagoEnum;
 import Model.Orden;
 import Model.Prestador;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 import org.w3c.dom.ls.LSOutput;
 
@@ -129,8 +132,9 @@ public class AACRHealthInsurance {
         //**********************************************************************************
         //Prueba de métodos de Órdenes
         Afiliado afiliado = afiData.obtenerAfiliadoPorId(1);
+        System.out.println(afiliado.getApellidoAfiliado());
         Prestador prestador = prestaData.obtenerPrestadorPorId(2);
-        //Orden orden = new Orden(1,2023-10-12,"Efectivo",5200.3,afiliado,prestador);
-        //ordenData.guardarOrden(orden);
+        Orden orden = new Orden(LocalDate.of(2023, Month.MARCH, 13),FormaDePagoEnum.EFECTIVO,500.0,afiliado,prestador);
+        ordenData.guardarOrden(orden);
     }
 }
