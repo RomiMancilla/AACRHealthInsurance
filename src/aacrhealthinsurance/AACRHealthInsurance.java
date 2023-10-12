@@ -128,12 +128,25 @@ public class AACRHealthInsurance {
                 System.out.println("----------------------------------------------------");
             }
              
-        }*/
+        }
         //**********************************************************************************
         //Prueba de métodos de Órdenes
+        //Prueba Metodo guardarOrden
         Afiliado afiliado = afiData.obtenerAfiliadoPorId(1);
         Prestador prestador = prestaData.obtenerPrestadorPorId(2);
-        Orden orden = new Orden(LocalDate.of(2023, Month.MARCH, 14),FormaDePagoEnum.EFECTIVO,500.0,true,afiliado,prestador);
+        Orden orden = new Orden(LocalDate.of(2023, Month.MARCH, 15),FormaDePagoEnum.EFECTIVO,500.0,true,afiliado,prestador);
         ordenData.guardarOrden(orden);
+        //Prueba Metodo buscarOrdenPorId
+        Orden orden = ordenData.buscarOrdenPorID(100);
+        if (orden != null) {
+            System.out.println(orden.getIdOrden());
+            System.out.println(orden.getFecha());
+            System.out.println(orden.getFormaDePago());
+            System.out.println(orden.getImporte());
+            System.out.println(orden.isEstado());
+            System.out.println(orden.getAfiliado());
+            System.out.println(orden.getPrestador());
+        }*/
+        ordenData.eliminarOrden(118);
     }
 }
