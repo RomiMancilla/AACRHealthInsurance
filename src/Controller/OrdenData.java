@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Afiliado;
+import Model.FormaDePagoEnum;
 import Model.Orden;
 import Model.Prestador;
 import java.sql.Connection;
@@ -11,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLSyntaxErrorException;
 import java.sql.Date;
-import java.time.LocalDate;
 
 public class OrdenData {
 
@@ -24,14 +24,15 @@ public class OrdenData {
     }
 
     public void guardarOrden(Orden orden) {
-        String sql = "INSERT INTO ordenes (fecha, formaPago, importe, idAfiliado, IdPrestador) VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO ordenes (fecha, formaPago, importe, estado, idAfiliado, IdPrestador) VALUES (?,?,?,?,?,?);";
         try (PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             Date fecha = Date.valueOf(orden.getFecha());
             ps.setDate(1, fecha);
             ps.setString(2, orden.getFormaDePago().toString());
             ps.setDouble(3, orden.getImporte());
-            ps.setInt(4, orden.getAfiliado().getIdAfiliado());
-            ps.setInt(5, orden.getPrestador().getIdPrestador());
+            ps.setBoolean(4, orden.isEstado());
+            ps.setInt(5, orden.getAfiliado().getIdAfiliado());
+            ps.setInt(6, orden.getPrestador().getIdPrestador());
             int exito = ps.executeUpdate();
             if (exito > 0) {
                 try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -51,15 +52,21 @@ public class OrdenData {
         }
     }
 
-    public void buscarOrden(int id) {
+    public void buscarOrdenPorID(int idOrden) {
         Orden orden = null;
-        String sql = "SELECT * FROM orden WHERE idOrden =? AND estado =?; ";
+        String sql = "SELECT * FROM orden WHERE idOrden =? AND estado =1;";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            Date fecha = Date.valueOf(orden.getFecha());
-            ps.setInt(1, id);
+            ps.setInt(1, idOrden);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    int idOrden = rs.getInt("idOrden");
+                    orden=new Orden();
+                    orden.setIdOrden(rs.getInt("idOrden"));
+                    orden.setFecha(rs.getDate("fecha").toLocalDate());
+                    orden.setFormaDePago(FormaDePagoEnum.valueOf(rs.getString("formaPago")));
+                    orden.setImporte(rs.getDouble("importe"));
+                    orden.setEstado(rs.getBoolean("estado"));
+                    orden.setAfiliado(afiliado);
+                    
                     // LocalDate fecha = rs.getDate("fecha").toLocalDate();
                     String formaPago = rs.getString("formaPago");
                     Double importe = rs.getDouble("importe");

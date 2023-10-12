@@ -8,25 +8,28 @@ public class Orden {
     private LocalDate fecha;
     private FormaDePagoEnum formaDePago;
     private Double importe;
+    private boolean estado;
     private Afiliado afiliado;
     private Prestador prestador;
 
     public Orden() {
     }
 
-    public Orden(LocalDate fecha, FormaDePagoEnum formaDePago, Double importe, Afiliado afiliado, Prestador prestador) {
+    public Orden(LocalDate fecha, FormaDePagoEnum formaDePago, Double importe, boolean estado, Afiliado afiliado, Prestador prestador) {
         this.fecha = fecha;
         this.formaDePago = formaDePago;
         this.importe = importe;
+        this.estado = estado;
         this.afiliado = afiliado;
         this.prestador = prestador;
     }
 
-    public Orden(int idOrden, LocalDate fecha, FormaDePagoEnum formaDePago, Double importe, Afiliado afiliado, Prestador prestador) {
+    public Orden(int idOrden, LocalDate fecha, FormaDePagoEnum formaDePago, Double importe, boolean estado, Afiliado afiliado, Prestador prestador) {
         this.idOrden = idOrden;
         this.fecha = fecha;
         this.formaDePago = formaDePago;
         this.importe = importe;
+        this.estado = estado;
         this.afiliado = afiliado;
         this.prestador = prestador;
     }
@@ -63,6 +66,14 @@ public class Orden {
         this.importe = importe;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     public Afiliado getAfiliado() {
         return afiliado;
     }
@@ -81,7 +92,6 @@ public class Orden {
 
     @Override
     public String toString() {
-        return "Orden{" + "idOrden=" + idOrden + ", fecha=" + fecha + ", formaDePago=" + formaDePago + ", importe=" + importe + ", afiliado=" + afiliado + ", prestador=" + prestador + '}';
+        return "Orden{" + "idOrden=" + idOrden + ", fecha=" + fecha + ", formaDePago=" + formaDePago + ", importe=" + importe + ", estado=" + estado + ", afiliado=" + afiliado + ", prestador=" + prestador + '}';
     }
-
 }
