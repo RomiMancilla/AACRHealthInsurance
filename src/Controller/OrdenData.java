@@ -83,6 +83,11 @@ public class OrdenData {
 
     public void eliminarOrden(int idOrden) {
         try {
+            if(!existeOrden(idOrden)){
+                JOptionPane.showMessageDialog(null, "No existe orden con ese Id.");
+                return;
+            }
+        try {
             if (esActivo(idOrden)) {
                 String sql = "UPDATE ordenes SET estado = 0 WHERE idOrden =?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -95,6 +100,8 @@ public class OrdenData {
             } else {
                 JOptionPane.showMessageDialog(null, "La orden ya se encuentra dada de baja.");
             }
+        }
+            
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
 
@@ -102,7 +109,7 @@ public class OrdenData {
             JOptionPane.showMessageDialog(null, "Error al acceder a ordenes." + ex.getMessage());
         }
     }
-
+    /////////    
     public void actualizarOrden(Orden orden) {
         String sql = "UPDATE ordenSET";
     }
@@ -117,5 +124,15 @@ public class OrdenData {
          } else {
             return false;
         }
+    }
+    private boolean existeOrden(int idOrden) throws SQLException{
+        String sql = "SELECT idOrden FROM ordenes WHERE idOrden = ?;";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, idOrden);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            return true;
+        }
+        return false;
     }
 }
