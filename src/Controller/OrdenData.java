@@ -76,19 +76,18 @@ public class OrdenData {
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al conectarse a orden.");
+            JOptionPane.showMessageDialog(null, "Error al acceder a orden.");
         }
         return orden;
     }
 
     public void eliminarOrden(int idOrden) {
         try {
-            if(!existeOrden(idOrden)){
-                JOptionPane.showMessageDialog(null, "No existe orden con ese Id.");
+            if (!existeOrden(idOrden)) {//Si no existe el ID se termina la ejecución del método
+                JOptionPane.showMessageDialog(null, "No existe orden con ese ID.");
                 return;
             }
-        try {
-            if (esActivo(idOrden)) {
+            if (esActivo(idOrden)) {//Si no está ativo se pasa al "ELSE (100)"
                 String sql = "UPDATE ordenes SET estado = 0 WHERE idOrden =?";
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
                     ps.setInt(1, idOrden);
@@ -100,8 +99,6 @@ public class OrdenData {
             } else {
                 JOptionPane.showMessageDialog(null, "La orden ya se encuentra dada de baja.");
             }
-        }
-            
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
 
@@ -109,7 +106,7 @@ public class OrdenData {
             JOptionPane.showMessageDialog(null, "Error al acceder a ordenes." + ex.getMessage());
         }
     }
-    /////////    
+
     public void actualizarOrden(Orden orden) {
         String sql = "UPDATE ordenSET";
     }
@@ -120,17 +117,18 @@ public class OrdenData {
         ps.setInt(1, idOrden);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-          return  rs.getBoolean("estado");
-         } else {
+            return rs.getBoolean("estado");
+        } else {
             return false;
         }
     }
-    private boolean existeOrden(int idOrden) throws SQLException{
+
+    private boolean existeOrden(int idOrden) throws SQLException {
         String sql = "SELECT idOrden FROM ordenes WHERE idOrden = ?;";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, idOrden);
         ResultSet rs = ps.executeQuery();
-        if(rs.next()){
+        if (rs.next()) {
             return true;
         }
         return false;

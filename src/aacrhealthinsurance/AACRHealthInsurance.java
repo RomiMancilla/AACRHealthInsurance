@@ -147,6 +147,6 @@ public class AACRHealthInsurance {
             System.out.println(orden.getAfiliado());
             System.out.println(orden.getPrestador());
         }*/
-        ordenData.eliminarOrden(118);
+        ordenData.eliminarOrden(1);
     }
 }
