@@ -11,6 +11,7 @@ import Model.Orden;
 import Model.Prestador;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.ls.LSOutput;
 
@@ -146,7 +147,26 @@ public class AACRHealthInsurance {
             System.out.println(orden.isEstado());
             System.out.println(orden.getAfiliado());
             System.out.println(orden.getPrestador());
-        }*/
+        }
+        //Prueba método Eliminar Orden
         ordenData.eliminarOrden(1);
+
+        //Prueba método actualizar orden
+        Afiliado afiliado=afiData.obtenerAfiliadoPorId(14);
+        Prestador prestador=prestaData.obtenerPrestadorPorId(7);
+        Orden orden = new Orden(1,LocalDate.of(2023, 11, 1), FormaDePagoEnum.MERCADOPAGO, 4500.0, true, afiliado, prestador);
+        ordenData.actualizarOrden(orden);*/
+        
+        //Prueba de método Listar Ordenes
+        List<Orden> lista = ordenData.listaDeOrdenes();
+        for (Orden orden : lista) {
+            System.out.println(orden.getIdOrden());
+            System.out.println(orden.getFecha());
+            System.out.println(orden.getFormaDePago().name());
+            System.out.println(orden.getImporte());
+            System.out.println(orden.getAfiliado().getIdAfiliado());
+            System.out.println(orden.getPrestador().getIdPrestador());
+            System.out.println("*************************");
+        }
     }
 }

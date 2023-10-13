@@ -12,19 +12,22 @@ import java.sql.ResultSet;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.SQLSyntaxErrorException;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OrdenData {
-
+    
     private Connection conn = null;
     AfiliadoData afiData = new AfiliadoData();
     PrestadorData prestaData = new PrestadorData();
-
+    
     public OrdenData() {
         conn = ConnectionDB.obtenerConexion();
     }
-
+    
     public void guardarOrden(Orden orden) {
         String sql = "INSERT INTO ordenes (fecha, formaPago, importe, estado, idAfiliado, IdPrestador) VALUES (?,?,?,?,?,?);";
         try (PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -53,7 +56,7 @@ public class OrdenData {
             JOptionPane.showMessageDialog(null, "Error al acceder a orden.");
         }
     }
-
+    
     public Orden buscarOrdenPorID(int idOrden) {
         Orden orden = null;
         String sql = "SELECT * FROM ordenes WHERE idOrden =? AND estado =1;";
@@ -80,7 +83,7 @@ public class OrdenData {
         }
         return orden;
     }
-
+    
     public void eliminarOrden(int idOrden) {
         try {
             if (!existeOrden(idOrden)) {//Si no existe el ID se termina la ejecución del método
@@ -101,16 +104,61 @@ public class OrdenData {
             }
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
-
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a ordenes." + ex.getMessage());
         }
     }
-
+    
     public void actualizarOrden(Orden orden) {
-        String sql = "UPDATE ordenSET";
+        String sql = "UPDATE ordenes SET fecha=?, formaPago=?, importe=?, idAfiliado=?, idPrestador=? WHERE idOrden=?;";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setDate(1, Date.valueOf(orden.getFecha()));
+            ps.setString(2, orden.getFormaDePago().toString());
+            ps.setDouble(3, orden.getImporte());
+            ps.setInt(4, orden.getAfiliado().getIdAfiliado());
+            ps.setInt(5, orden.getPrestador().getIdPrestador());
+            ps.setInt(6, orden.getIdOrden());
+            int exito = ps.executeUpdate();
+            if (exito > 0) {
+                JOptionPane.showMessageDialog(null, "Orden Actualizada.");
+            } else {
+                JOptionPane.showMessageDialog(null, "nop...");
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a ordenes. " + e.getMessage());
+        }
+    }
+    
+    public List<Orden> listaDeOrdenes() {
+        List<Orden> lista = new ArrayList<>();
+        String sql = "SELECT * FROM ordenes WHERE estado=1;";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int idOrden = rs.getInt("idOrden");
+                Date fecha = rs.getDate("fecha");
+                FormaDePagoEnum formaPago = FormaDePagoEnum.valueOf(rs.getString("formaPago"));
+                double importe = rs.getDouble("importe");
+                boolean estado = rs.getBoolean("estado");
+                Afiliado afiliado = afiData.obtenerAfiliadoPorId(rs.getInt("idAfiliado"));
+                Prestador prestador = prestaData.obtenerPrestadorPorId(rs.getInt("idPrestador"));
+                Orden orden = new Orden(idOrden, fecha.toLocalDate(), formaPago, importe, estado, afiliado, prestador);
+                lista.add(orden);
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se puede acceder a ordenes: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getStackTrace());
+        }
+        return lista;
     }
 
+////////////////////////////////
+    //Métodos Auxiliares
     private boolean esActivo(int idOrden) throws SQLException {
         String sql = "SELECT estado FROM ordenes WHERE idOrden = ?;";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -122,7 +170,7 @@ public class OrdenData {
             return false;
         }
     }
-
+    
     private boolean existeOrden(int idOrden) throws SQLException {
         String sql = "SELECT idOrden FROM ordenes WHERE idOrden = ?;";
         PreparedStatement ps = conn.prepareStatement(sql);

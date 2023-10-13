@@ -113,7 +113,7 @@ public class AfiliadoData {
                 JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AfiliadoData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se puede acceder a Afiliados: "+ex.getMessage());
         }
         return listaAfiliados;
     }
