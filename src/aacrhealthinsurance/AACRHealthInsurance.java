@@ -155,7 +155,7 @@ public class AACRHealthInsurance {
         Afiliado afiliado=afiData.obtenerAfiliadoPorId(14);
         Prestador prestador=prestaData.obtenerPrestadorPorId(7);
         Orden orden = new Orden(1,LocalDate.of(2023, 11, 1), FormaDePagoEnum.MERCADOPAGO, 4500.0, true, afiliado, prestador);
-        ordenData.actualizarOrden(orden);*/
+        ordenData.actualizarOrden(orden);
         
         //Prueba de método Listar Ordenes
         List<Orden> lista = ordenData.listaDeOrdenes();
@@ -167,6 +167,6 @@ public class AACRHealthInsurance {
             System.out.println(orden.getAfiliado().getIdAfiliado());
             System.out.println(orden.getPrestador().getIdPrestador());
             System.out.println("*************************");
-        }
+        }*/
     }
 }
