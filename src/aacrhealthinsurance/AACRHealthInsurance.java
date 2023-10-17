@@ -167,6 +167,18 @@ public class AACRHealthInsurance {
             System.out.println(orden.getAfiliado().getIdAfiliado());
             System.out.println(orden.getPrestador().getIdPrestador());
             System.out.println("*************************");
+        }
+        
+        //Prueba metodo obtenerAfiliadoPorDni
+         Afiliado afiliado = afiData.obtenerAfiliadoPorDni("234");
+        if(afiliado!= null){
+              System.out.println(afiliado.getIdAfiliado());
+            System.out.println(afiliado.getApellidoAfiliado());
+            System.out.println(afiliado.getNombreAfiliado());
+            System.out.println(afiliado.getDni());
+            System.out.println(afiliado.getDomicilioAfiliado());
+            System.out.println(afiliado.getTelefonoAfiliado()); 
         }*/
+        
     }
 }
