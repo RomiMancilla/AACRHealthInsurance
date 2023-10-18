@@ -23,7 +23,6 @@ public class PrincipalView extends javax.swing.JFrame {
 
     public PrincipalView() {
         initComponents();
-
     }
 
     /**
@@ -191,6 +190,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jpPanelDinamico.add(afiliadosView, BorderLayout.CENTER);
         jpPanelDinamico.revalidate();
         jpPanelDinamico.repaint();
+        afiliadosView.setFocusTfBusqueda();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

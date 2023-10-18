@@ -18,14 +18,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="520" max="-2" attributes="0"/>
-              <Component id="jTextField2" max="32767" attributes="0"/>
+              <Component id="tfBusqueda" max="32767" attributes="0"/>
               <EmptySpace min="67" pref="67" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="jTextField3" max="32767" attributes="0"/>
+              <Component id="tfIdEspecialidad" max="32767" attributes="0"/>
               <EmptySpace min="447" pref="447" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
@@ -33,9 +33,9 @@
               <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jButton1" min="-2" pref="150" max="-2" attributes="0"/>
-                  <Component id="jButton3" min="-2" pref="150" max="-2" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="150" max="-2" attributes="0"/>
+                  <Component id="btGuardar" min="-2" pref="150" max="-2" attributes="0"/>
+                  <Component id="btEliminar" min="-2" pref="150" max="-2" attributes="0"/>
+                  <Component id="btNuevo" min="-2" pref="150" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
           </Group>
@@ -51,14 +51,14 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1" max="32767" attributes="0"/>
+                      <Component id="rbEstado" max="32767" attributes="0"/>
                       <EmptySpace min="594" pref="594" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                      <Component id="jTextField4" max="32767" attributes="0"/>
+                      <Component id="tfNombreEspecialidad" max="32767" attributes="0"/>
                       <EmptySpace min="432" pref="432" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -74,7 +74,7 @@
               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="20" max="-2" attributes="0"/>
               <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-              <Component id="jTextField2" min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="tfBusqueda" min="-2" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
@@ -83,7 +83,7 @@
                               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jTextField3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="tfIdEspecialidad" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -92,22 +92,22 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="jTextField4" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="tfNombreEspecialidad" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
-                      <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbEstado" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="248" max="-2" attributes="0"/>
                       <EmptySpace pref="28" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btNuevo" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btEliminar" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btGuardar" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -127,16 +127,17 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Busqueda"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="tfBusqueda">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfBusquedaKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfBusquedaKeyTyped"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField3">
+    <Component class="javax.swing.JTextField" name="tfIdEspecialidad">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
+    <Component class="javax.swing.JTextField" name="tfNombreEspecialidad">
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+    <Component class="javax.swing.JRadioButton" name="rbEstado">
       <Properties>
         <Property name="text" type="java.lang.String" value="Estado"/>
       </Properties>
@@ -148,7 +149,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="tbEpecialidades">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
@@ -172,17 +173,17 @@
         <Property name="text" type="java.lang.String" value="Nombre"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btGuardar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btNuevo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nuevo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btEliminar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>

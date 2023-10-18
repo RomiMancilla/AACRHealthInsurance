@@ -131,9 +131,32 @@ public class EspecialidadData {
             }
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se puede acceder a Especialidades "+e.getMessage());
         }
         return null;
+    }
+
+    public List<Especialidad> obtenerEspecialidadPorNombre(String nombre) {
+        List<Especialidad> listadoEspecialidades = new ArrayList<>();
+        String sql = "SELECT * FROM especialidades Where nombreEspecialidad LIKE ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1,  nombre + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("idEspecialidad");
+                    String nombreEspecialidad = rs.getString("nombreEspecialidad");
+                    boolean estado = rs.getBoolean("estado");
+                    Especialidad especialidad = new Especialidad(id, nombreEspecialidad, estado);
+                    listadoEspecialidades.add(especialidad);
+                }
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se puede acceder a Especialidades");
+        }
+        return listadoEspecialidades;
     }
 
     //******************************************************************************************************************
