@@ -4,12 +4,21 @@ import Controller.EspecialidadData;
 import Model.Especialidad;
 import java.util.ArrayList;
 import java.util.List;
+import javax.management.loading.PrivateClassLoader;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class EspecialidadView extends javax.swing.JPanel {
 
-    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            // Hacer la columna 1 editable y lo demás no...
+            return column == 1;
+        }
+    };
     EspecialidadData espeData = new EspecialidadData();
+    boolean edit = true;
 
     public EspecialidadView() {
         initComponents();
@@ -53,7 +62,10 @@ public class EspecialidadView extends javax.swing.JPanel {
             }
         });
 
+        tfIdEspecialidad.setEditable(false);
+
         rbEstado.setText("Estado");
+        rbEstado.setEnabled(false);
 
         tbEpecialidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,6 +78,11 @@ public class EspecialidadView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbEpecialidades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbEpecialidadesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbEpecialidades);
 
         jLabel2.setText("Id Especialidad");
@@ -73,53 +90,67 @@ public class EspecialidadView extends javax.swing.JPanel {
         jLabel3.setText("Nombre");
 
         btGuardar.setText("Guardar");
+        btGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGuardarActionPerformed(evt);
+            }
+        });
 
         btNuevo.setText("Nuevo");
+        btNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNuevoActionPerformed(evt);
+            }
+        });
 
         btEliminar.setText("Eliminar");
+        btEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(520, 520, 520)
-                .addComponent(tfBusqueda)
-                .addGap(67, 67, 67))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel2)
                 .addGap(12, 12, 12)
-                .addComponent(tfIdEspecialidad)
-                .addGap(447, 447, 447))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(210, 210, 210)
+                .addComponent(jSeparator1)
+                .addGap(227, 227, 227))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(120, 120, 120)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67))
+                .addComponent(jScrollPane1)
+                .addGap(297, 297, 297))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(560, 560, 560)
+                        .addComponent(tfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(210, 210, 210)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel2)
+                        .addGap(22, 22, 22)
+                        .addComponent(tfIdEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(240, 240, 240)
+                        .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(rbEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(594, 594, 594))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(60, 60, 60)
                         .addComponent(jLabel3)
-                        .addGap(56, 56, 56)
-                        .addComponent(tfNombreEspecialidad)
-                        .addGap(432, 432, 432)))
-                .addGap(15, 15, 15))
+                        .addGap(46, 46, 46)
+                        .addComponent(tfNombreEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(240, 240, 240)
+                        .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(rbEstado)
+                        .addGap(402, 402, 402)
+                        .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,59 +159,115 @@ public class EspecialidadView extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(10, 10, 10)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(10, 10, 10)
                 .addComponent(tfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(tfIdEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(tfNombreEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel2))
-                            .addComponent(tfIdEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(tfNombreEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(30, 30, 30)
-                        .addComponent(rbEstado)
-                        .addGap(37, 37, 37)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(28, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50))))
+                        .addComponent(rbEstado))
+                    .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaKeyTyped
-      
+
     }//GEN-LAST:event_tfBusquedaKeyTyped
 
     private void tfBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaKeyReleased
-   cleanTable();
+        cleanTable();
+        desactivarCampoNombre();
+        cleanProperties();
         String busqueda = tfBusqueda.getText();
         List<Especialidad> listaEspe = new ArrayList<>();
 
         if (!busqueda.isEmpty()) {
             listaEspe = espeData.obtenerEspecialidadPorNombre(busqueda);
-            if (listaEspe != null) {
+            if (!listaEspe.isEmpty()) {
                 for (Especialidad espe : listaEspe) {
                     modelo.addRow(new Object[]{espe.getIdEspecialidad(), espe.getNombreEspecialidad(), espe.isEstado()});
                 }
+            } else {
+                modelo.addRow(new Object[]{"Sin Coincidencias...", "", ""});
             }
-        }else{
+        } else {
             cargarEspecialidades();
         }
     }//GEN-LAST:event_tfBusquedaKeyReleased
+
+    private void tbEpecialidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEpecialidadesMouseClicked
+        int rowSelected = tbEpecialidades.getSelectedRow();
+        if (rowSelected != -1) {
+            int idEspecialidad = (int) tbEpecialidades.getValueAt(rowSelected, 0);
+            Especialidad espe = espeData.obtenerEspecialidadPorId(idEspecialidad);
+            if (espe != null) {
+                tfIdEspecialidad.setText(String.valueOf(espe.getIdEspecialidad()));
+                tfNombreEspecialidad.setText(espe.getNombreEspecialidad());
+                rbEstado.setSelected(espe.isEstado());
+                edit = true;
+            }
+        }
+    }//GEN-LAST:event_tbEpecialidadesMouseClicked
+
+    private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
+        cleanAll();
+        edit = false;
+        cargarEspecialidades();
+        activarCampoNombre();
+        tfNombreEspecialidad.requestFocus();
+    }//GEN-LAST:event_btNuevoActionPerformed
+
+    private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
+        //Si el glag edit está en True se intenta hacer la edición...
+        String nombreActualizado = tfNombreEspecialidad.getText();
+        String idEspecialidadStr = tfIdEspecialidad.getText();
+        if (edit == true) {
+            if (!nombreActualizado.isEmpty() && !idEspecialidadStr.isEmpty()) {
+                int idEspecialidad = Integer.parseInt(tfIdEspecialidad.getText());
+                Especialidad especialidad = new Especialidad(idEspecialidad, nombreActualizado, true);
+                espeData.actualizarEspecialidad(especialidad);
+            }else{
+                JOptionPane.showMessageDialog(null, "El campo nombre de Especialida no puede estar vacio.");
+            }
+        } else {
+            //Si el flag está en False se intenta gurdar
+            if (!nombreActualizado.isEmpty()) {
+                Especialidad especialidad = new Especialidad(nombreActualizado, true);
+                espeData.agregarEspecialidad(especialidad);
+            }
+        }
+
+    }//GEN-LAST:event_btGuardarActionPerformed
+
+    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
+    String idEspecialidadSrt=tfIdEspecialidad.getText();
+        if (!idEspecialidadSrt.isEmpty()) {
+            int idEspecialidad= Integer.parseInt(idEspecialidadSrt);
+            espeData.eliminarEspecialidad(idEspecialidad);
+        }else{
+            JOptionPane.showMessageDialog(null, "Tiene que elegir una Especialidad");
+        }
+    }//GEN-LAST:event_btEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -217,4 +304,24 @@ public class EspecialidadView extends javax.swing.JPanel {
         modelo.setRowCount(0);
     }
 
+    private void cleanAll() {
+        tfBusqueda.setText("");
+        tfIdEspecialidad.setText("");
+        tfNombreEspecialidad.setText("");
+        rbEstado.setSelected(false);
+    }
+
+    private void cleanProperties() {
+        tfIdEspecialidad.setText("");
+        tfNombreEspecialidad.setText("");
+        rbEstado.setSelected(false);
+    }
+
+    private void activarCampoNombre() {
+        tfNombreEspecialidad.setEditable(true);
+    }
+
+    private void desactivarCampoNombre() {
+        tfNombreEspecialidad.setEditable(false);
+    }
 }

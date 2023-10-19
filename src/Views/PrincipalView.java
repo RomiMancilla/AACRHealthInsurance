@@ -45,6 +45,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jpPanelDinamico = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1080, 800));
 
         jpBack.setBackground(new java.awt.Color(204, 255, 204));
 
