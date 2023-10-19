@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.w3c.dom.ls.LSOutput;
 
 public class AACRHealthInsurance {
@@ -180,5 +181,12 @@ public class AACRHealthInsurance {
             System.out.println(afiliado.getTelefonoAfiliado()); 
         }*/
         
+        //Método buscar Prestador por Matrícula
+        Prestador prestador=prestaData.obtenerPrestadorPorMatricula(2);
+        if (prestador!=null) {
+            System.out.println(prestador.getIdPrestador());
+            System.out.println(prestador.getApellidoPrestador());
+            System.out.println(prestador.getEspecialidad().getNombreEspecialidad());
+        }else JOptionPane.showMessageDialog(null, "no está...");
     }
 }

@@ -80,6 +80,34 @@ public class PrestadorData {
         return prestador;
     }
 
+    public Prestador obtenerPrestadorPorMatricula(int matricula) {
+        Prestador prestador = null;
+        String sql = "SELECT * FROM prestadores WHERE matricula=? AND estado=1;";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, matricula);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    prestador = new Prestador();
+                    prestador.setIdPrestador(rs.getInt("idPrestador"));
+                    prestador.setNombrePrestador(rs.getString("nombrePrestador"));
+                    prestador.setApellidoPrestador(rs.getString("apellidoPrestador"));
+                    prestador.setMatricula(rs.getInt("matricula"));
+                    prestador.setDomicilioPrestador(rs.getString("domicilioPrestador"));
+                    prestador.setTelefonoPrestador(rs.getString("telefonoPrestador"));
+                    prestador.setEstado(rs.getBoolean("estado"));
+                    int idEspecialidad = rs.getInt("idEspecialidad");
+                    Especialidad especialidad = espeData.obtenerEspecialidadPorId(idEspecialidad);
+                    prestador.setEspecialidad(especialidad);
+                }
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener el prestador: " + e.getMessage());
+        }
+        return prestador;
+    }
+
     public void borrarPrestador(int idPrestador) {
         try {
             if (existePrestador(idPrestador)) {
@@ -132,6 +160,7 @@ public class PrestadorData {
         }
 
     }
+
     //Controlar que especialidad no sea null en vistas
     public List<Prestador> listarPrestadores() {
         List<Prestador> lista = new ArrayList<>();
@@ -164,7 +193,7 @@ public class PrestadorData {
         return lista;
     }
 
-    //Extra prestador existe
+//Extra prestador existe
     private boolean existePrestador(int idPrestador) throws SQLException {
         String sql = "SELECT * FROM prestadores WHERE idPrestador=?;";
         PreparedStatement ps = conn.prepareStatement(sql);
