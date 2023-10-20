@@ -6,5 +6,6 @@ public enum FormaDePagoEnum {
   DEBITO,
   CREDITO,
   TRANSFERENCIABANCARIA,
-  MERCADOPAGO;
+  MERCADOPAGO,
+  OTROS;
 }

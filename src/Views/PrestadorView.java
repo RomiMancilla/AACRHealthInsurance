@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Views;
 
+import Controller.EspecialidadData;
 import Controller.PrestadorData;
+import Model.Especialidad;
 import Model.Prestador;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +12,13 @@ import javax.swing.JOptionPane;
  * @author andres
  */
 public class PrestadorView extends javax.swing.JPanel {
-
-    PrestadorData prestadata = new PrestadorData();
-
+    
+    PrestadorData prestaData = new PrestadorData();
+    EspecialidadData espeData = new EspecialidadData();
+    
     public PrestadorView() {
         initComponents();
+        cargarEspecialidadesEnComboBox();
     }
 
     /**
@@ -32,7 +33,6 @@ public class PrestadorView extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         tfBusqueda = new javax.swing.JTextField();
-        tfEspecialidad = new javax.swing.JTextField();
         tfIdPrestador = new javax.swing.JTextField();
         tfNombrePrestador = new javax.swing.JTextField();
         tfApellidoPrestador = new javax.swing.JTextField();
@@ -51,30 +51,26 @@ public class PrestadorView extends javax.swing.JPanel {
         btNuevo = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
         btGuardar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btBusqueda = new javax.swing.JButton();
+        cbEspecialidad = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Prestadores");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 14, 770, -1));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 380, -1));
-        add(tfBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 250, 40));
 
-        tfEspecialidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfEspecialidadActionPerformed(evt);
+        tfBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfBusquedaKeyTyped(evt);
             }
         });
-        add(tfEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 530, 340, 40));
 
+        tfIdPrestador.setEditable(false);
         tfIdPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfIdPrestadorActionPerformed(evt);
             }
         });
-        add(tfIdPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 130, 40));
 
         tfNombrePrestador.setMaximumSize(new java.awt.Dimension(128, 2147483647));
         tfNombrePrestador.addActionListener(new java.awt.event.ActionListener() {
@@ -82,84 +78,234 @@ public class PrestadorView extends javax.swing.JPanel {
                 tfNombrePrestadorActionPerformed(evt);
             }
         });
-        add(tfNombrePrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 340, 40));
+        tfNombrePrestador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfNombrePrestadorKeyTyped(evt);
+            }
+        });
 
         tfApellidoPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfApellidoPrestadorActionPerformed(evt);
             }
         });
-        add(tfApellidoPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 340, 40));
+        tfApellidoPrestador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfApellidoPrestadorKeyTyped(evt);
+            }
+        });
 
         tfMatricula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfMatriculaActionPerformed(evt);
             }
         });
-        add(tfMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 340, 40));
+        tfMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfMatriculaKeyTyped(evt);
+            }
+        });
 
         tfDomicilioPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDomicilioPrestadorActionPerformed(evt);
             }
         });
-        add(tfDomicilioPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 340, 40));
 
         tfTelefonoPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfTelefonoPrestadorActionPerformed(evt);
             }
         });
-        add(tfTelefonoPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 340, 40));
-
-        rbEstado.setText("Estado");
-        add(rbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 600, -1, -1));
-
-        jLabel2.setText("IdPrestador");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 180, 83, -1));
-
-        jLabel3.setText("Nombre");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 240, -1, -1));
-
-        jLabel4.setText("Apellido");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 300, -1, -1));
-
-        jLabel5.setText("Matricula");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 360, -1, -1));
-
-        jLabel6.setText("Domicilio");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
-
-        jLabel7.setText("Teléfono");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
-
-        jLabel8.setText("Especialidad");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 540, -1, -1));
-
-        btSalir.setText("Salir");
-        add(btSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, 140, 40));
-
-        btNuevo.setText("Nuevo");
-        add(btNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, 140, 40));
-
-        btEliminar.setText("Eliminar");
-        add(btEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 280, 140, 40));
-
-        btGuardar.setText("Guardar");
-        add(btGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 350, 140, 40));
-
-        jButton1.setText("B");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        tfTelefonoPrestador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfTelefonoPrestadorKeyTyped(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 90, 50, 40));
-    }// </editor-fold>//GEN-END:initComponents
 
-    private void tfEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEspecialidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfEspecialidadActionPerformed
+        rbEstado.setText("Estado");
+
+        jLabel2.setText("IdPrestador");
+
+        jLabel3.setText("Nombre");
+
+        jLabel4.setText("Apellido");
+
+        jLabel5.setText("Matricula");
+
+        jLabel6.setText("Domicilio");
+
+        jLabel7.setText("Teléfono");
+
+        jLabel8.setText("Especialidad");
+
+        btSalir.setText("Salir");
+
+        btNuevo.setText("Nuevo");
+        btNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNuevoActionPerformed(evt);
+            }
+        });
+
+        btEliminar.setText("Eliminar");
+        btEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEliminarActionPerformed(evt);
+            }
+        });
+
+        btGuardar.setText("Guardar");
+        btGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGuardarActionPerformed(evt);
+            }
+        });
+
+        btBusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/searching-a-person32.png"))); // NOI18N
+        btBusqueda.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btBusqueda.setContentAreaFilled(false);
+        btBusqueda.setPreferredSize(new java.awt.Dimension(48, 40));
+        btBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBusquedaActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Ingrese Matricula:");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(220, 220, 220)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(320, 320, 320)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(tfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(tfIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel3)
+                .addGap(57, 57, 57)
+                .addComponent(tfNombrePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130)
+                .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel4)
+                .addGap(58, 58, 58)
+                .addComponent(tfApellidoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130)
+                .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel5)
+                .addGap(58, 58, 58)
+                .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130)
+                .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfDomicilioPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfTelefonoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(130, 130, 130)
+                .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel8)
+                .addGap(37, 37, 37)
+                .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(rbEstado))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addGap(16, 16, 16)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel9))
+                    .addComponent(tfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel2))
+                    .addComponent(tfIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(tfNombrePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(tfApellidoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel5))
+                    .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel6)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfDomicilioPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(tfTelefonoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel8))
+                    .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(rbEstado))
+        );
+    }// </editor-fold>//GEN-END:initComponents
 
     private void tfIdPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIdPrestadorActionPerformed
         // TODO add your handling code here:
@@ -185,12 +331,12 @@ public class PrestadorView extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfTelefonoPrestadorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBusquedaActionPerformed
         cleanAll();
         String matriculaBuscada = tfBusqueda.getText();
         if (!matriculaBuscada.isEmpty()) {
             int matricula = Integer.parseInt(matriculaBuscada);
-            Prestador prestador = prestadata.obtenerPrestadorPorMatricula(matricula);
+            Prestador prestador = prestaData.obtenerPrestadorPorMatricula(matricula);
             if (prestador != null) {
                 tfIdPrestador.setText(String.valueOf(prestador.getIdPrestador()));
                 tfApellidoPrestador.setText(prestador.getApellidoPrestador());
@@ -198,23 +344,72 @@ public class PrestadorView extends javax.swing.JPanel {
                 tfMatricula.setText(String.valueOf(prestador.getMatricula()));
                 tfDomicilioPrestador.setText(prestador.getDomicilioPrestador());
                 tfTelefonoPrestador.setText(prestador.getTelefonoPrestador());
-                tfEspecialidad.setText(prestador.getEspecialidad().getNombreEspecialidad());
                 rbEstado.setSelected(prestador.isEstado());
+                // Establece la especialidad en el JComboBox
+                cbEspecialidad.setSelectedItem(prestador.getEspecialidad().getNombreEspecialidad());
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró esa matrícula");
             }
         } else {
             JOptionPane.showMessageDialog(null, "El campo de busqueda no puede estar vacio.");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btBusquedaActionPerformed
+
+    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
+        String idPrestadorSrt = tfIdPrestador.getText();
+        if (!idPrestadorSrt.isEmpty()) {
+            int idPrestador = Integer.parseInt(idPrestadorSrt);
+            prestaData.borrarPrestador(idPrestador);
+            cleanAll();
+        } else {
+            JOptionPane.showMessageDialog(null, "El campo IdPrestador está vacío");
+        }
+    }//GEN-LAST:event_btEliminarActionPerformed
+
+    private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
+        cleanAll();
+        cargarEspecialidadesEnComboBox();
+        activarBotones();
+    }//GEN-LAST:event_btNuevoActionPerformed
+
+    private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
+        //se toma como referencia el contenido del TextField idPrestador
+        String idPrestadorText = tfIdPrestador.getText();
+        if (idPrestadorText.isEmpty()) {
+            guardarPrestador();
+        } else {
+            actualizarPrestador();
+        }
+    }//GEN-LAST:event_btGuardarActionPerformed
+
+    private void tfBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaKeyTyped
+    Service.Validar.esNumero(evt);
+    }//GEN-LAST:event_tfBusquedaKeyTyped
+
+    private void tfNombrePrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombrePrestadorKeyTyped
+    Service.Validar.esLetra(evt);
+    }//GEN-LAST:event_tfNombrePrestadorKeyTyped
+
+    private void tfApellidoPrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfApellidoPrestadorKeyTyped
+        Service.Validar.esLetra(evt);
+    }//GEN-LAST:event_tfApellidoPrestadorKeyTyped
+
+    private void tfMatriculaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMatriculaKeyTyped
+        Service.Validar.esNumero(evt);
+    }//GEN-LAST:event_tfMatriculaKeyTyped
+
+    private void tfTelefonoPrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTelefonoPrestadorKeyTyped
+        Service.Validar.esNumero(evt);
+    }//GEN-LAST:event_tfTelefonoPrestadorKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btBusqueda;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btNuevo;
     private javax.swing.JButton btSalir;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> cbEspecialidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -223,12 +418,12 @@ public class PrestadorView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton rbEstado;
     private javax.swing.JTextField tfApellidoPrestador;
     private javax.swing.JTextField tfBusqueda;
     private javax.swing.JTextField tfDomicilioPrestador;
-    private javax.swing.JTextField tfEspecialidad;
     private javax.swing.JTextField tfIdPrestador;
     private javax.swing.JTextField tfMatricula;
     private javax.swing.JTextField tfNombrePrestador;
@@ -242,8 +437,100 @@ public class PrestadorView extends javax.swing.JPanel {
         tfMatricula.setText("");
         tfDomicilioPrestador.setText("");
         tfTelefonoPrestador.setText("");
-        tfEspecialidad.setText("");
+        cbEspecialidad.setSelectedIndex(-1); // Deseleccionar cualquier elemento...
         rbEstado.setSelected(false);
     }
+    
+    private void cargarEspecialidadesEnComboBox() {
+        List<Especialidad> listaEspecialidades = espeData.listarEspecialidades();
+        for (Especialidad especialidad : listaEspecialidades) {
+            cbEspecialidad.addItem(especialidad.getNombreEspecialidad());
+        }
+    }
+    
+    private void activarBotones() {
+        btEliminar.setEnabled(true);
+        btGuardar.setEnabled(true);
+    }
+    
+    private void desactivarBotones() {
+        btEliminar.setEnabled(false);
+        btGuardar.setEnabled(false);
+    }
 
+//****************************************************************************************************************    
+//Modularización del Boton Guardar
+    private void guardarPrestador() {
+        String nombre = tfNombrePrestador.getText();
+        String apellido = tfApellidoPrestador.getText();
+        String matriculaStr = tfMatricula.getText();
+        String domicilio = tfDomicilioPrestador.getText();
+        String telefono = tfTelefonoPrestador.getText();
+        String especialidadNom = (String) cbEspecialidad.getSelectedItem();
+        boolean estado = rbEstado.isSelected();
+
+        // Validar campos vacíos
+        if (nombre.isEmpty() || apellido.isEmpty() || matriculaStr.isEmpty() || domicilio.isEmpty() || telefono.isEmpty() || especialidadNom == null) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.");
+            return;
+        }
+
+        // Parseo matrícula a entero
+        int matricula = Integer.parseInt(matriculaStr);
+        Especialidad especialidad = espeData.obtenerEspecialidadporNombre(especialidadNom);
+        
+        if (especialidad != null) {
+            Prestador prestador = new Prestador(nombre, apellido, matricula, domicilio, telefono, estado, especialidad);
+            prestaData.guardarPrestador(prestador);
+            //JOptionPane.showMessageDialog(null, "Prestador guardado correctamente.");
+            cleanAll();
+        } else {
+            JOptionPane.showMessageDialog(null, "La especialidad no fue encontrada.");
+        }
+    }
+    
+    private void actualizarPrestador() {
+        String idPrestadorText = tfIdPrestador.getText();
+        int idPrestador = Integer.parseInt(idPrestadorText);
+        Prestador prestadorExistente = prestaData.obtenerPrestadorPorId(idPrestador);
+        
+        if (prestadorExistente != null) {
+            String nombre = tfNombrePrestador.getText();
+            String apellido = tfApellidoPrestador.getText();
+            String matriculaStr = tfMatricula.getText();
+            String domicilio = tfDomicilioPrestador.getText();
+            String telefono = tfTelefonoPrestador.getText();
+            String especialidadNom = (String) cbEspecialidad.getSelectedItem();
+            boolean estado = rbEstado.isSelected();
+
+            // Validar campos vacíos
+            if (nombre.isEmpty() || apellido.isEmpty() || matriculaStr.isEmpty() || domicilio.isEmpty() || especialidadNom == null) {
+                JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.");
+                return;
+            }
+
+            // Parseo matrícula a entero
+            int matricula = Integer.parseInt(matriculaStr);
+            Especialidad especialidad = espeData.obtenerEspecialidadporNombre(especialidadNom);
+            
+            if (especialidad != null) {
+                //Se settea el prestador con los nuevos datos
+                prestadorExistente.setNombrePrestador(nombre);
+                prestadorExistente.setApellidoPrestador(apellido);
+                prestadorExistente.setMatricula(matricula);
+                prestadorExistente.setDomicilioPrestador(domicilio);
+                prestadorExistente.setTelefonoPrestador(telefono);
+                prestadorExistente.setEstado(estado);
+                prestadorExistente.setEspecialidad(especialidad);
+                //se actualiza
+                prestaData.actualizarPrestador(prestadorExistente);
+                //JOptionPane.showMessageDialog(null, "Prestador actualizado correctamente.");
+                cleanAll();
+            } else {
+                JOptionPane.showMessageDialog(null, "La especialidad no fue encontrada.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El prestador con el ID especificado no existe.");
+        }
+    }
 }

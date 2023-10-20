@@ -132,16 +132,16 @@ public class EspecialidadData {
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se puede acceder a Especialidades "+e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se puede acceder a Especialidades " + e.getMessage());
         }
         return null;
     }
 
-    public List<Especialidad> obtenerEspecialidadPorNombre(String nombre) {
+    public List<Especialidad> obtenerEspecialidadesPorNombre(String nombre) {
         List<Especialidad> listadoEspecialidades = new ArrayList<>();
         String sql = "SELECT * FROM especialidades Where nombreEspecialidad LIKE ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1,  nombre + "%");
+            ps.setString(1, nombre + "%");
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     int id = rs.getInt("idEspecialidad");
@@ -159,7 +159,25 @@ public class EspecialidadData {
         return listadoEspecialidades;
     }
 
-    //******************************************************************************************************************
+    public Especialidad obtenerEspecialidadporNombre(String nombre) {
+        String sql = "SELECT idEspecialidad, estado FROM especialidades WHERE nombreEspecialidad LIKE ? AND estado=1;";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int idEspecialidad = rs.getInt("idEspecialidad");
+                    return new Especialidad(idEspecialidad, nombre, true);
+                }
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se puede acceder a Especialidades: " + e.getMessage());
+        }
+        return null; // Retorna null si no se encuentra una especialidad con el nombre especificado
+    }
+
+//******************************************************************************************************************
     //Extra: método para validar existencia de especialidad
     private boolean existe(int idEspecialidad) throws SQLException {
         String sql = "SELECT idEspecialidad FROM especialidades WHERE idEspecialidad=?;";

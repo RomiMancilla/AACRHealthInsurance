@@ -191,7 +191,6 @@ public class EspecialidadView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaKeyTyped
-
     }//GEN-LAST:event_tfBusquedaKeyTyped
 
     private void tfBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaKeyReleased
@@ -202,13 +201,12 @@ public class EspecialidadView extends javax.swing.JPanel {
         List<Especialidad> listaEspe = new ArrayList<>();
 
         if (!busqueda.isEmpty()) {
-            listaEspe = espeData.obtenerEspecialidadPorNombre(busqueda);
+            listaEspe = espeData.obtenerEspecialidadesPorNombre(busqueda);
             if (!listaEspe.isEmpty()) {
                 for (Especialidad espe : listaEspe) {
-                    modelo.addRow(new Object[]{espe.getIdEspecialidad(), espe.getNombreEspecialidad(), espe.isEstado()});
+                    String estado = espe.isEstado() ? "Activo" : "Inactivo";
+                    modelo.addRow(new Object[]{espe.getIdEspecialidad(), espe.getNombreEspecialidad(), estado});
                 }
-            } else {
-                modelo.addRow(new Object[]{"Sin Coincidencias...", "", ""});
             }
         } else {
             cargarEspecialidades();
@@ -246,7 +244,7 @@ public class EspecialidadView extends javax.swing.JPanel {
                 int idEspecialidad = Integer.parseInt(tfIdEspecialidad.getText());
                 Especialidad especialidad = new Especialidad(idEspecialidad, nombreActualizado, true);
                 espeData.actualizarEspecialidad(especialidad);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "El campo nombre de Especialida no puede estar vacio.");
             }
         } else {
@@ -260,11 +258,11 @@ public class EspecialidadView extends javax.swing.JPanel {
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-    String idEspecialidadSrt=tfIdEspecialidad.getText();
+        String idEspecialidadSrt = tfIdEspecialidad.getText();
         if (!idEspecialidadSrt.isEmpty()) {
-            int idEspecialidad= Integer.parseInt(idEspecialidadSrt);
+            int idEspecialidad = Integer.parseInt(idEspecialidadSrt);
             espeData.eliminarEspecialidad(idEspecialidad);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Tiene que elegir una Especialidad");
         }
     }//GEN-LAST:event_btEliminarActionPerformed
@@ -296,7 +294,8 @@ public class EspecialidadView extends javax.swing.JPanel {
     private void cargarEspecialidades() {
         List<Especialidad> listaEspecialidades = espeData.listarEspecialidades();
         for (Especialidad espe : listaEspecialidades) {
-            modelo.addRow(new Object[]{espe.getIdEspecialidad(), espe.getNombreEspecialidad(), espe.isEstado()});
+            String estado = espe.isEstado() ? "Activo" : "Inactivo";
+            modelo.addRow(new Object[]{espe.getIdEspecialidad(), espe.getNombreEspecialidad(), estado});
         }
     }
 

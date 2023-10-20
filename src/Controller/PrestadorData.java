@@ -117,7 +117,7 @@ public class PrestadorData {
                         ps.setInt(1, idPrestador);
                         int exito = ps.executeUpdate();
                         if (exito > 0) {
-                            JOptionPane.showMessageDialog(null, "Especialidad eliminada.");
+                            JOptionPane.showMessageDialog(null, "Prestador eliminado.");
                         }
                     }
                 } else {

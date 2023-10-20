@@ -1,8 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Views;
+
+import Controller.AfiliadoData;
+import Controller.EspecialidadData;
+import Controller.OrdenData;
+import Controller.PrestadorData;
+import Model.Afiliado;
+import Model.Especialidad;
+import Model.FormaDePagoEnum;
+import Model.Orden;
+import Model.Prestador;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -10,11 +22,34 @@ package Views;
  */
 public class OrdenView extends javax.swing.JPanel {
 
-    /**
-     * Creates new form OrdenView
-     */
+    DefaultTableModel modeloTablaAfiliado = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            // Hacer la columna 1 editable y lo demás no...
+            return false;
+        }
+    };
+
+    DefaultTableModel modeloTablaPrestadores = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            // Hacer la columna 1 editable y lo demás no...
+            return false;
+        }
+    };
+
+    AfiliadoData afiData = new AfiliadoData();
+    EspecialidadData espeData = new EspecialidadData();
+    OrdenData ordenData = new OrdenData();
+    PrestadorData prestaData = new PrestadorData();
+
     public OrdenView() {
         initComponents();
+        cabeceraTablaAfiliado();
+        cargarTablaAfiliado();
+        cabeceraTablaPrestadores();
+        cargarTablaPrestadores();
+        cargarCombo();
     }
 
     /**
@@ -28,30 +63,54 @@ public class OrdenView extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tfBusquedaAfiliado = new javax.swing.JTextField();
+        tfBuscarPrestador = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbAfiliado = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jdcFecha = new com.toedter.calendar.JDateChooser();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        tbPrestadores = new javax.swing.JTable();
+        dcFechaOrden = new com.toedter.calendar.JDateChooser();
+        cbFormaPago = new javax.swing.JComboBox<>();
+        tfIdOrdenes = new javax.swing.JTextField();
+        tfImporteOrden = new javax.swing.JTextField();
+        rbEstadoOrden = new javax.swing.JRadioButton();
+        btGuardar = new javax.swing.JButton();
+        btNuevo = new javax.swing.JButton();
+        btEliminar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tfIdAfiliado = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        tfIdPrestador = new javax.swing.JTextField();
+        tfBusquedaOrden = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Emisión de Órdenes");
 
-        jTextField1.setText("Busqueda Afiliado ");
+        tfBusquedaAfiliado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfBusquedaAfiliadoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfBusquedaAfiliadoKeyTyped(evt);
+            }
+        });
 
-        jTextField2.setText("Buscar Epecialidad");
+        tfBuscarPrestador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfBuscarPrestadorKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfBuscarPrestadorKeyTyped(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbAfiliado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,9 +121,14 @@ public class OrdenView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbAfiliado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbAfiliadoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbAfiliado);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbPrestadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -75,67 +139,108 @@ public class OrdenView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tbPrestadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPrestadoresMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbPrestadores);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rbEstadoOrden.setText("Estado");
 
-        jTextField3.setText("ID");
+        btGuardar.setText("Guardar");
 
-        jTextField4.setText("importe");
+        btNuevo.setText("Nuevo");
+        btNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNuevoActionPerformed(evt);
+            }
+        });
 
-        jRadioButton1.setText("Estado");
+        btEliminar.setText("Eliminar");
 
-        jButton1.setText("Guardar");
+        jLabel2.setText("ID Orden");
 
-        jButton2.setText("Nuevo");
+        jLabel3.setText("Importe");
 
-        jButton3.setText("Eliminar");
+        jLabel4.setText("Forma de Pago");
+
+        jLabel5.setText("Fecha");
+
+        jLabel6.setText("Id Afiliado");
+
+        jLabel7.setText("Id Prestador");
+
+        tfBusquedaOrden.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfBusquedaOrdenKeyReleased(evt);
+            }
+        });
+
+        jLabel8.setText("Buscar Órden por ID");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jTextField1)
-                        .addGap(210, 210, 210)
-                        .addComponent(jTextField2)
-                        .addGap(80, 80, 80))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(20, 20, 20))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jdcFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(210, 210, 210)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(210, 210, 210)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                .addGap(430, 430, 430)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jRadioButton1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField3)
-                                .addGap(610, 610, 610)))
-                        .addGap(30, 30, 30)))
-                .addGap(17, 17, 17))
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(tfBusquedaAfiliado, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(210, 210, 210)
+                .addComponent(tfBuscarPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel2)
+                .addGap(22, 22, 22)
+                .addComponent(tfIdOrdenes, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jLabel6)
+                .addGap(15, 15, 15)
+                .addComponent(tfIdAfiliado, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(jLabel8)
+                .addGap(9, 9, 9)
+                .addComponent(tfBusquedaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(234, 234, 234)
+                .addComponent(jLabel7)
+                .addGap(15, 15, 15)
+                .addComponent(tfIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel5)
+                .addGap(11, 11, 11)
+                .addComponent(dcFechaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(210, 210, 210)
+                .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(cbFormaPago, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(210, 210, 210)
+                .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(tfImporteOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(360, 360, 360)
+                .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(rbEstadoOrden))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,60 +251,233 @@ public class OrdenView extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfBusquedaAfiliado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfBuscarPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfIdOrdenes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfIdAfiliado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfBusquedaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8))))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)))
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel7))
+                    .addComponent(tfIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)))
-                .addComponent(jRadioButton1)
-                .addContainerGap())
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(dcFechaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel4))
+                    .addComponent(cbFormaPago, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfImporteOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(4, 4, 4)
+                .addComponent(rbEstadoOrden))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tfBusquedaAfiliadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaAfiliadoKeyReleased
+        cleanTableAfiliado();
+        String busquedaSrt = tfBusquedaAfiliado.getText();
+        Afiliado afiliado = new Afiliado();
+        if (!busquedaSrt.isEmpty()) {
+            afiliado = afiData.obtenerAfiliadoPorDni(busquedaSrt);
+            if (afiliado != null) {
+                modeloTablaAfiliado.addRow(new Object[]{afiliado.getIdAfiliado(), afiliado.getApellidoAfiliado(), afiliado.getNombreAfiliado()});
+            }
+        } else {
+            cargarTablaAfiliado();
+        }
+    }//GEN-LAST:event_tfBusquedaAfiliadoKeyReleased
+
+    private void tfBusquedaAfiliadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaAfiliadoKeyTyped
+        Service.Validar.esNumero(evt);
+    }//GEN-LAST:event_tfBusquedaAfiliadoKeyTyped
+
+    private void tfBuscarPrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarPrestadorKeyTyped
+        Service.Validar.esNumero(evt);
+    }//GEN-LAST:event_tfBuscarPrestadorKeyTyped
+
+    private void tfBuscarPrestadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarPrestadorKeyReleased
+        //buscar prestadores
+        cleanTablePrestadores();
+        String busquedaSrt = tfBuscarPrestador.getText();
+        if (!busquedaSrt.isEmpty()) {
+            int matriculaBuscada = Integer.parseInt(busquedaSrt);
+            Prestador prestador = prestaData.obtenerPrestadorPorMatricula(matriculaBuscada);
+            if (prestador != null) {
+                modeloTablaPrestadores.addRow(new Object[]{prestador.getIdPrestador(), prestador.getApellidoPrestador(), prestador.getNombrePrestador()});
+            } else {
+                //JOptionPane.showMessageDialog(null, "No se encontró esa matrícula.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar una matrícula.");
+        }
+    }//GEN-LAST:event_tfBuscarPrestadorKeyReleased
+
+    private void tbAfiliadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAfiliadoMouseClicked
+        int rowSelect = tbAfiliado.getSelectedRow();
+        if (rowSelect != -1) {
+            int idAfiliado = (int) tbAfiliado.getValueAt(rowSelect, 0);
+            Afiliado afi = afiData.obtenerAfiliadoPorId(idAfiliado);
+            if (afi != null) {
+                tfIdAfiliado.setText(String.valueOf(afi.getIdAfiliado()));
+            }
+        }
+    }//GEN-LAST:event_tbAfiliadoMouseClicked
+
+    private void tbPrestadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPrestadoresMouseClicked
+        int rowSelect = tbPrestadores.getSelectedRow();
+        if (rowSelect != -1) {
+            int idPrestador = (int) tbPrestadores.getValueAt(rowSelect, 0);
+            Prestador prestador = prestaData.obtenerPrestadorPorId(idPrestador);
+            if (prestador != null) {
+                tfIdPrestador.setText(String.valueOf(prestador.getIdPrestador()));
+            }
+        }
+    }//GEN-LAST:event_tbPrestadoresMouseClicked
+
+    private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
+        cleanGeneral();
+    }//GEN-LAST:event_btNuevoActionPerformed
+
+    private void tfBusquedaOrdenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaOrdenKeyReleased
+//buscar órden
+        cleanGeneral();
+        String buscarOrdenSrt = tfBusquedaOrden.getText();
+        if (!buscarOrdenSrt.isEmpty()) {
+            int idOrdenBuscada = Integer.parseInt(buscarOrdenSrt);
+            Orden orden = ordenData.buscarOrdenPorID(idOrdenBuscada);
+            if (orden != null) {
+                tfIdOrdenes.setText(String.valueOf(orden.getIdOrden()));
+                tfIdAfiliado.setText(String.valueOf(orden.getAfiliado().getIdAfiliado()));
+                tfIdPrestador.setText(String.valueOf(orden.getPrestador().getIdPrestador()));
+                dcFechaOrden.setDate(java.sql.Date.valueOf(orden.getFecha()));
+                cbFormaPago.setSelectedItem(orden.getFormaDePago().toString());
+                tfImporteOrden.setText(String.valueOf(orden.getImporte()));
+                rbEstadoOrden.setSelected(orden.isEstado());
+
+            }
+        }
+    }//GEN-LAST:event_tfBusquedaOrdenKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btEliminar;
+    private javax.swing.JButton btGuardar;
+    private javax.swing.JButton btNuevo;
+    private javax.swing.JComboBox<String> cbFormaPago;
+    private com.toedter.calendar.JDateChooser dcFechaOrden;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private com.toedter.calendar.JDateChooser jdcFecha;
+    private javax.swing.JRadioButton rbEstadoOrden;
+    private javax.swing.JTable tbAfiliado;
+    private javax.swing.JTable tbPrestadores;
+    private javax.swing.JTextField tfBuscarPrestador;
+    private javax.swing.JTextField tfBusquedaAfiliado;
+    private javax.swing.JTextField tfBusquedaOrden;
+    private javax.swing.JTextField tfIdAfiliado;
+    private javax.swing.JTextField tfIdOrdenes;
+    private javax.swing.JTextField tfIdPrestador;
+    private javax.swing.JTextField tfImporteOrden;
     // End of variables declaration//GEN-END:variables
+
+    private void cabeceraTablaAfiliado() {
+        modeloTablaAfiliado.addColumn("idAfiliado");
+        modeloTablaAfiliado.addColumn("Apellido");
+        modeloTablaAfiliado.addColumn("Nombre");
+        tbAfiliado.setModel(modeloTablaAfiliado);
+    }
+
+    private void cabeceraTablaPrestadores() {
+        modeloTablaPrestadores.addColumn("ID");
+        modeloTablaPrestadores.addColumn("Apellido");
+        modeloTablaPrestadores.addColumn("Nombre");
+        tbPrestadores.setModel(modeloTablaPrestadores);
+    }
+
+    private void cargarTablaAfiliado() {
+        List<Afiliado> listaAfiliado = afiData.listarAfiliados();
+        for (Afiliado afiliado : listaAfiliado) {
+            modeloTablaAfiliado.addRow(new Object[]{afiliado.getIdAfiliado(), afiliado.getApellidoAfiliado(), afiliado.getNombreAfiliado()});
+        }
+    }
+
+    private void cargarTablaPrestadores() {
+        List<Prestador> listaPrestadores = prestaData.listarPrestadores();
+        for (Prestador presta : listaPrestadores) {
+            modeloTablaPrestadores.addRow(new Object[]{presta.getIdPrestador(), presta.getApellidoPrestador(), presta.getNombrePrestador()});
+        }
+    }
+
+    private void cargarCombo() {
+        FormaDePagoEnum[] formasDePago = FormaDePagoEnum.values();
+        String[] formasDePagoStrings = new String[formasDePago.length];
+        for (int i = 0; i < formasDePago.length; i++) {
+            formasDePagoStrings[i] = formasDePago[i].toString();
+        }
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(formasDePagoStrings);
+        cbFormaPago.setModel(comboBoxModel);
+    }
+
+    private void cleanTableAfiliado() {
+        modeloTablaAfiliado.setRowCount(0);
+    }
+
+    private void cleanTablePrestadores() {
+        modeloTablaPrestadores.setRowCount(0);
+    }
+
+    private void cleanGeneral() {
+        //tfBusquedaOrden.setText("");
+        tfBusquedaAfiliado.setText("");
+        tfBuscarPrestador.setText("");
+        tfIdOrdenes.setText("");
+        tfIdAfiliado.setText("");
+        tfIdPrestador.setText("");
+        //dcFechaOrden.setDate(null);
+        dcFechaOrden.setDate(new Date());
+        cbFormaPago.setSelectedIndex(-1);
+        tfImporteOrden.setText("");
+        rbEstadoOrden.setSelected(false);
+        cargarTablaAfiliado();
+        cargarTablaPrestadores();
+    }
+
 }
