@@ -156,9 +156,28 @@ public class OrdenView extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbPrestadoresMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbPrestadoresMousePressed(evt);
+            }
         });
         jScrollPane2.setViewportView(tbPrestadores);
 
+        dcFechaOrden.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dcFechaOrdenPropertyChange(evt);
+            }
+        });
+
+        cbFormaPago.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbFormaPagoItemStateChanged(evt);
+            }
+        });
+        cbFormaPago.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cbFormaPagoPropertyChange(evt);
+            }
+        });
         cbFormaPago.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 cbFormaPagoKeyTyped(evt);
@@ -167,7 +186,15 @@ public class OrdenView extends javax.swing.JPanel {
 
         tfIdOrdenes.setEditable(false);
 
+        tfImporteOrden.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tfImporteOrdenPropertyChange(evt);
+            }
+        });
         tfImporteOrden.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfImporteOrdenKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfImporteOrdenKeyTyped(evt);
             }
@@ -405,10 +432,8 @@ public class OrdenView extends javax.swing.JPanel {
         cleanTablePrestadores();
         String prestadorBuscado = tfBuscarPrestador.getText();
         if (!prestadorBuscado.isEmpty()) {
-            System.out.println("Entré al primer if...");
             List<Prestador> listaPrestadores = prestaData.buscarPrestadoresPorNombreEspecialidad(prestadorBuscado);
             if (listaPrestadores != null) {
-                System.out.println("Segundo If....");
                 for (Prestador presta : listaPrestadores) {
                     modeloTablaPrestadores.addRow(new Object[]{presta.getIdPrestador(), presta.getApellidoPrestador(), presta.getNombrePrestador(), presta.getEspecialidad().getNombreEspecialidad()});
                 }
@@ -544,8 +569,9 @@ public class OrdenView extends javax.swing.JPanel {
 
             Orden orden = new Orden(idOrden, fechaLocalDate, formaPago, importe, true, afiliado, prestador);
             ordenData.actualizarOrden(orden);
+            cambiosEnOrden = false;
             cleanGeneral();
-            
+
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 
@@ -557,6 +583,36 @@ public class OrdenView extends javax.swing.JPanel {
             activarBotonGuardar();
         }
     }//GEN-LAST:event_tbAfiliadoMousePressed
+
+    private void tbPrestadoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPrestadoresMousePressed
+        if (cambiosEnOrden) {
+            activarBotonGuardar();
+        }
+    }//GEN-LAST:event_tbPrestadoresMousePressed
+
+    private void dcFechaOrdenPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcFechaOrdenPropertyChange
+        if (cambiosEnOrden) {
+            activarBotonGuardar();
+        }
+    }//GEN-LAST:event_dcFechaOrdenPropertyChange
+
+    private void cbFormaPagoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbFormaPagoPropertyChange
+    }//GEN-LAST:event_cbFormaPagoPropertyChange
+
+    private void cbFormaPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbFormaPagoItemStateChanged
+        if (cambiosEnOrden) {
+            activarBotonGuardar();
+        }
+    }//GEN-LAST:event_cbFormaPagoItemStateChanged
+
+    private void tfImporteOrdenPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tfImporteOrdenPropertyChange
+    }//GEN-LAST:event_tfImporteOrdenPropertyChange
+
+    private void tfImporteOrdenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfImporteOrdenKeyReleased
+        if (cambiosEnOrden) {
+            activarBotonGuardar();
+        }
+    }//GEN-LAST:event_tfImporteOrdenKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
