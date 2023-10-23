@@ -193,6 +193,44 @@ public class PrestadorData {
         return lista;
     }
 
+    public List<Prestador> buscarPrestadoresPorNombreEspecialidad(String textoBuscado) {
+        List<Prestador> prestadoresEncontrados = new ArrayList<>();
+        try {
+            String sql = "SELECT prestadores.*, especialidades.nombreEspecialidad "
+                    + "FROM prestadores INNER JOIN especialidades especialidades "
+                    + "ON prestadores.idEspecialidad  =especialidades.idEspecialidad "
+                    + "WHERE especialidades.nombreEspecialidad LIKE ?;";
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, textoBuscado + "%");
+
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        Prestador prestador = new Prestador();
+                        prestador.setIdPrestador(rs.getInt("idPrestador"));
+                        prestador.setNombrePrestador(rs.getString("nombrePrestador"));
+                        prestador.setApellidoPrestador(rs.getString("apellidoPrestador"));
+                        prestador.setMatricula(rs.getInt("matricula"));
+                        prestador.setDomicilioPrestador(rs.getString("domicilioPrestador"));
+                        prestador.setTelefonoPrestador(rs.getString("telefonoPrestador"));
+                        prestador.setEstado(rs.getBoolean("estado"));
+
+                        int idEspecialidad = rs.getInt("idEspecialidad");
+                        Especialidad especialidad = espeData.obtenerEspecialidadPorId(idEspecialidad);
+                        prestador.setEspecialidad(especialidad);
+
+                        prestadoresEncontrados.add(prestador);
+                    }
+                }
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a Prestadores: " + e.getMessage());
+        }
+        return prestadoresEncontrados;
+    }
+
 //Extra prestador existe
     private boolean existePrestador(int idPrestador) throws SQLException {
         String sql = "SELECT * FROM prestadores WHERE idPrestador=?;";
