@@ -466,6 +466,7 @@ public class OrdenView extends javax.swing.JPanel {
     private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
         cleanGeneral();
         activarBotonGuardar();
+        cambiosEnOrden = false;
     }//GEN-LAST:event_btNuevoActionPerformed
 
     private void tfBusquedaOrdenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaOrdenKeyReleased
@@ -501,6 +502,7 @@ public class OrdenView extends javax.swing.JPanel {
                 cleanGeneral();
                 tfBusquedaOrden.setText("");
                 desactivarBotonEliminar();
+                cambiosEnOrden = false;
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una órden.");
@@ -571,6 +573,8 @@ public class OrdenView extends javax.swing.JPanel {
             ordenData.actualizarOrden(orden);
             cambiosEnOrden = false;
             cleanGeneral();
+            desactivarBotonGuardar();
+            desactivarBotonEliminar();
 
         }
     }//GEN-LAST:event_btGuardarActionPerformed
@@ -667,6 +671,7 @@ public class OrdenView extends javax.swing.JPanel {
     }
 
     private void cargarTablaAfiliado() {
+        cleanTableAfiliado();
         List<Afiliado> listaAfiliado = afiData.listarAfiliados();
         tbAfiliado.clearSelection();
         for (Afiliado afiliado : listaAfiliado) {
@@ -675,6 +680,7 @@ public class OrdenView extends javax.swing.JPanel {
     }
 
     private void cargarTablaPrestadores() {
+        cleanTablePrestadores();
         List<Prestador> listaPrestadores = prestaData.listarPrestadores();
         tbPrestadores.setAutoResizeMode(2);
         tbPrestadores.clearSelection();
