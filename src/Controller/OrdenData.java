@@ -73,7 +73,7 @@ public class OrdenData {
                     orden.setAfiliado(afiData.obtenerAfiliadoPorId(rs.getInt("idAfiliado")));
                     orden.setPrestador(prestaData.obtenerPrestadorPorId(rs.getInt("idPrestador")));
                 } else {
-                    JOptionPane.showMessageDialog(null, "Id no encontrado.");
+                    //JOptionPane.showMessageDialog(null, "Id no encontrado.");
                 }
             }
         } catch (SQLSyntaxErrorException syn) {

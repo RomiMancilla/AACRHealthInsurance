@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Especialidad;
+import Model.Prestador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -177,8 +178,28 @@ public class EspecialidadData {
         return null; // Retorna null si no se encuentra una especialidad con el nombre especificado
     }
 
+    public int obtenerIdEspecialidadPorNombre(String nombre) {
+        int idEspecialidad=-1;
+        try {
+            String sql = "SELECT idEspecialidad FROM especialidades Where nombreEspecialidad LIKE ? AND estado=1; ";
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, nombre + "%");
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        idEspecialidad = rs.getInt("idEspecialidad");
+                    }
+                }
+            }
+        } catch (SQLSyntaxErrorException syn) {
+            JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se puede acceder a Especialidades: " + e.getMessage());
+        }
+        return idEspecialidad;
+    }
 //******************************************************************************************************************
     //Extra: método para validar existencia de especialidad
+
     private boolean existe(int idEspecialidad) throws SQLException {
         String sql = "SELECT idEspecialidad FROM especialidades WHERE idEspecialidad=?;";
         PreparedStatement ps = conn.prepareStatement(sql);
