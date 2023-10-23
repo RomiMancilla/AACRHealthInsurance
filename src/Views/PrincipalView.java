@@ -45,7 +45,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jpPanelDinamico = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1080, 835));
+        setMinimumSize(new java.awt.Dimension(1080, 800));
 
         jpBack.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -236,7 +236,6 @@ public class PrincipalView extends javax.swing.JFrame {
         jpPanelDinamico.add(ordenView, BorderLayout.CENTER);
         jpPanelDinamico.revalidate();
         jpPanelDinamico.repaint();
-        ordenView.setFocusTfBusquedaOrden();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
