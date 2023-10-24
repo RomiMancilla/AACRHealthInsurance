@@ -407,13 +407,13 @@ public class InformeView extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JTable tablaImprimir = tbOrdenes;
-        Pdf.generarPdf(tablaImprimir, 2);
+        Pdf.generarPdf(tablaImprimir, 3);
         JOptionPane.showMessageDialog(null, "PDF generado con éxito");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         JTable tableToPrint = tbPrestadores;
-        Pdf.generarPdf(tableToPrint, 3);
+        Pdf.generarPdf(tableToPrint, 4);
         JOptionPane.showMessageDialog(null, "PDF generado con éxito");
 
     }//GEN-LAST:event_jButton3ActionPerformed
