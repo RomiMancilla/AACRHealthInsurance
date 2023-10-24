@@ -8,10 +8,13 @@ import Model.Afiliado;
 import Model.Especialidad;
 import Model.Orden;
 import Model.Prestador;
+import Service.Pdf;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
@@ -21,7 +24,7 @@ import javax.swing.table.TableColumnModel;
  * @author andres
  */
 public class InformeView extends javax.swing.JPanel {
-    
+
     DefaultTableModel modeloTablaAfiliado = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -46,12 +49,12 @@ public class InformeView extends javax.swing.JPanel {
             return false;
         }
     };
-    
+
     AfiliadoData afiData = new AfiliadoData();
     PrestadorData prestadorData = new PrestadorData();
     OrdenData ordenData = new OrdenData();
     EspecialidadData espeData = new EspecialidadData();
-    
+
     public InformeView() {
         initComponents();
         cabeceraTablaAfiliado();
@@ -115,6 +118,11 @@ public class InformeView extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbAfiliadoPrestador);
 
         jButton1.setText("Imprimir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         cbListadoAfiliado.setSelected(true);
         cbListadoAfiliado.setText("Listado Afiliados");
@@ -199,6 +207,11 @@ public class InformeView extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tbOrdenes);
 
         jButton2.setText("Imprimir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -263,6 +276,11 @@ public class InformeView extends javax.swing.JPanel {
         jScrollPane3.setViewportView(tbPrestadores);
 
         jButton3.setText("Imprimir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -374,6 +392,32 @@ public class InformeView extends javax.swing.JPanel {
         cargarTablaPrestadoresxEspecialidad();
     }//GEN-LAST:event_cbEspecialidadItemStateChanged
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Obtener la tabla que deseas imprimir
+        if (cbListadoAfiliado.isSelected()) {
+            JTable tableToPrint = tbAfiliadoPrestador;
+            Pdf.generarPdf(tableToPrint, 1);
+            JOptionPane.showMessageDialog(null, "PDF generado con éxito");
+        } else {
+            JTable tableToPrint = tbAfiliadoPrestador;
+            Pdf.generarPdf(tableToPrint, 2);
+            JOptionPane.showMessageDialog(null, "PDF generado con éxito");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JTable tablaImprimir = tbOrdenes;
+        Pdf.generarPdf(tablaImprimir, 2);
+        JOptionPane.showMessageDialog(null, "PDF generado con éxito");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        JTable tableToPrint = tbPrestadores;
+        Pdf.generarPdf(tableToPrint, 3);
+        JOptionPane.showMessageDialog(null, "PDF generado con éxito");
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbEspecialidad;
@@ -412,7 +456,7 @@ public class InformeView extends javax.swing.JPanel {
         //TableColumn idColumn = columnModel.getColumn(0);
         //idColumn.setPreferredWidth(20);
     }
-    
+
     private void cargarTablaPrestadores() {
         cleanTablePrestadores();
         List<Prestador> listaPrestador = prestadorData.listarPrestadores();
@@ -423,7 +467,7 @@ public class InformeView extends javax.swing.JPanel {
         }
         tbAfiliadoPrestador.setModel(modeloTablaPrestador);
     }
-    
+
     private void cabeceraTablaAfiliado() {
         modeloTablaAfiliado.addColumn("ID Afiliado");
         modeloTablaAfiliado.addColumn("Apellido");
@@ -431,7 +475,7 @@ public class InformeView extends javax.swing.JPanel {
         modeloTablaAfiliado.addColumn("Dni");
         tbAfiliadoPrestador.setModel(modeloTablaAfiliado);
     }
-    
+
     private void cargarTablaAfiliados() {
         cleanTableAfiliado();
         List<Afiliado> listaAfiliado = afiData.listarAfiliados();
@@ -442,19 +486,19 @@ public class InformeView extends javax.swing.JPanel {
         }
         tbAfiliadoPrestador.setModel(modeloTablaAfiliado);
     }
-    
+
     private void cleanTableAfiliado() {
         modeloTablaAfiliado.setRowCount(0);
     }
-    
+
     private void cleanTablePrestadores() {
         modeloTablaPrestador.setRowCount(0);
     }
-    
+
     private void cleanTableOrdenes() {
         modeloTablaOrdenes.setRowCount(0);
     }
-    
+
     private void cabeceraTablaOrdenes() {
         modeloTablaOrdenes.addColumn("ID Orden");
         modeloTablaOrdenes.addColumn("Fecha");
@@ -464,7 +508,7 @@ public class InformeView extends javax.swing.JPanel {
         modeloTablaOrdenes.addColumn("ID Prestador");
         tbOrdenes.setModel(modeloTablaOrdenes);
     }
-    
+
     private void cargarTablaOrdenes() {
         cleanTableOrdenes();
         List<Orden> listaOrden = ordenData.listaDeOrdenes();
@@ -475,7 +519,7 @@ public class InformeView extends javax.swing.JPanel {
         }
         tbOrdenes.setModel(modeloTablaOrdenes);
     }
-    
+
     private void cabeceraPrestadoresXEspecialidad() {
         modeloTablaPrestadores.addColumn("ID Prestador");
         modeloTablaPrestadores.addColumn("Apellido");
@@ -484,7 +528,7 @@ public class InformeView extends javax.swing.JPanel {
         modeloTablaPrestadores.addColumn("Especialidad");
         tbPrestadores.setModel(modeloTablaPrestadores);
     }
-    
+
     private void cargarTablaPrestadoresxEspecialidad() {
         cleanTablaPrestadoresxEspe();
         List<Prestador> listaPrestador = prestadorData.listarPrestadores();
@@ -497,11 +541,11 @@ public class InformeView extends javax.swing.JPanel {
         }
         tbPrestadores.setModel(modeloTablaPrestadores);
     }
-    
+
     private void cleanTablaPrestadoresxEspe() {
         modeloTablaPrestadores.setRowCount(0);
     }
-    
+
     private void cargarComboEspeciliadades() {
         List<Especialidad> listaEspecialidad = espeData.listarEspecialidades();
         if (listaEspecialidad != null) {
