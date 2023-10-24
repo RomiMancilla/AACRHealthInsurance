@@ -207,7 +207,7 @@ public class PrincipalView extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         jpPanelDinamico.setLayout(new BorderLayout());
-        Informe informe = new Informe();
+        InformeView informe = new InformeView();
         informe.setSize(817, 663);
         informe.setLocation(0, 0);
         jpPanelDinamico.removeAll();
