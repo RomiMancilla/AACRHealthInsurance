@@ -1,9 +1,14 @@
 package Views;
 
 import Controller.AfiliadoData;
+import Controller.OrdenData;
 import Controller.PrestadorData;
 import Model.Afiliado;
+import Model.Orden;
 import Model.Prestador;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -27,14 +32,24 @@ public class InformeView extends javax.swing.JPanel {
             return false;
         }
     };
+    DefaultTableModel modeloTablaOrdenes = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+
     AfiliadoData afiData = new AfiliadoData();
     PrestadorData prestadorData = new PrestadorData();
+    OrdenData ordenData = new OrdenData();
 
     public InformeView() {
         initComponents();
         cabeceraTablaAfiliado();
         cabeceraTablaPrestadores();
         cargarTablaAfiliados();
+        cabeceraTablaOrdenes();
+        cargarTablaOrdenes();
     }
 
     /**
@@ -56,6 +71,10 @@ public class InformeView extends javax.swing.JPanel {
         cbListadoPrestadores = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        dcFecha = new com.toedter.calendar.JDateChooser();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbOrdenes = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -136,7 +155,7 @@ public class InformeView extends javax.swing.JPanel {
                     .addComponent(cbListadoPrestadores))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(22, 22, 22))
         );
@@ -145,23 +164,62 @@ public class InformeView extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 204, 204));
 
-        jLabel2.setText("Informe de Órdenes por afiliado");
+        jLabel2.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Informe de Órdenes por Fecha");
+
+        dcFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dcFechaPropertyChange(evt);
+            }
+        });
+
+        tbOrdenes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tbOrdenes);
+
+        jButton2.setText("jButton2");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(186, 186, 186)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel2)
-                .addContainerGap(490, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
 
         jTabbedPane1.addTab("Informe Órdenes", jPanel3);
@@ -184,7 +242,7 @@ public class InformeView extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel3)
-                .addContainerGap(483, Short.MAX_VALUE))
+                .addContainerGap(511, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Informe Prestadores", jPanel4);
@@ -212,11 +270,37 @@ public class InformeView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbListadoPrestadoresActionPerformed
 
+    private void dcFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcFechaPropertyChange
+   cleanTableOrdenes();
+    Date fecha = dcFecha.getDate();
+    if (fecha != null) {
+        LocalDate localDate = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        List<Orden> listaOrdenes = ordenData.listaDeOrdenes();
+        if (listaOrdenes != null) {
+            for (Orden orden : listaOrdenes) {
+                if (orden.getFecha().equals(localDate)) {
+                    Object[] rowData = {
+                        orden.getIdOrden(),
+                        orden.getFecha().toString(),
+                        orden.getFormaDePago(),
+                        orden.getImporte(),
+                        orden.getAfiliado().getIdAfiliado(),
+                        orden.getPrestador().getIdPrestador()
+                    };
+                    modeloTablaOrdenes.addRow(rowData);
+                }
+            }
+        }
+    }
+    }//GEN-LAST:event_dcFechaPropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox cbListadoAfiliado;
     private javax.swing.JCheckBox cbListadoPrestadores;
+    private com.toedter.calendar.JDateChooser dcFecha;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -225,13 +309,15 @@ public class InformeView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tbAfiliadoPrestador;
+    private javax.swing.JTable tbOrdenes;
     // End of variables declaration//GEN-END:variables
 
     private void cabeceraTablaPrestadores() {
-        modeloTablaPrestador.addColumn("ID");
+        modeloTablaPrestador.addColumn("ID Prestador");
         modeloTablaPrestador.addColumn("Apellido");
         modeloTablaPrestador.addColumn("Nombre");
         modeloTablaPrestador.addColumn("Especialidad");
@@ -255,10 +341,10 @@ public class InformeView extends javax.swing.JPanel {
     }
 
     private void cabeceraTablaAfiliado() {
-        modeloTablaAfiliado.addColumn("idAfiliado");
-        modeloTablaAfiliado.addColumn("apellidoAfiliado");
-        modeloTablaAfiliado.addColumn("nombreAfiliado");
-        modeloTablaAfiliado.addColumn("dni");
+        modeloTablaAfiliado.addColumn("ID Afiliado");
+        modeloTablaAfiliado.addColumn("Apellido");
+        modeloTablaAfiliado.addColumn("Nombre");
+        modeloTablaAfiliado.addColumn("Dni");
         tbAfiliadoPrestador.setModel(modeloTablaAfiliado);
     }
 
@@ -281,4 +367,28 @@ public class InformeView extends javax.swing.JPanel {
         modeloTablaPrestador.setRowCount(0);
     }
 
+    private void cleanTableOrdenes() {
+        modeloTablaOrdenes.setRowCount(0);
+    }
+
+    private void cabeceraTablaOrdenes() {
+        modeloTablaOrdenes.addColumn("ID Orden");
+        modeloTablaOrdenes.addColumn("Fecha");
+        modeloTablaOrdenes.addColumn("Forma de Pago");
+        modeloTablaOrdenes.addColumn("Importe");
+        modeloTablaOrdenes.addColumn("ID Afiliado");
+        modeloTablaOrdenes.addColumn("ID Prestador");
+        tbOrdenes.setModel(modeloTablaOrdenes);
+    }
+
+    private void cargarTablaOrdenes() {
+        cleanTableOrdenes();
+        List<Orden> listaOrden = ordenData.listaDeOrdenes();
+        if (listaOrden != null) {
+            for (Orden orden : listaOrden) {
+                modeloTablaOrdenes.addRow(new Object[]{orden.getIdOrden(), orden.getFecha(), orden.getFormaDePago(), orden.getImporte(), orden.getAfiliado().getIdAfiliado(), orden.getPrestador().getIdPrestador()});
+            }
+        }
+        tbOrdenes.setModel(modeloTablaOrdenes);
+    }
 }
