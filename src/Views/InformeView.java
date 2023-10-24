@@ -1,9 +1,11 @@
 package Views;
 
 import Controller.AfiliadoData;
+import Controller.EspecialidadData;
 import Controller.OrdenData;
 import Controller.PrestadorData;
 import Model.Afiliado;
+import Model.Especialidad;
 import Model.Orden;
 import Model.Prestador;
 import java.time.LocalDate;
@@ -19,7 +21,7 @@ import javax.swing.table.TableColumnModel;
  * @author andres
  */
 public class InformeView extends javax.swing.JPanel {
-
+    
     DefaultTableModel modeloTablaAfiliado = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -38,11 +40,18 @@ public class InformeView extends javax.swing.JPanel {
             return false;
         }
     };
-
+    DefaultTableModel modeloTablaPrestadores = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    
     AfiliadoData afiData = new AfiliadoData();
     PrestadorData prestadorData = new PrestadorData();
     OrdenData ordenData = new OrdenData();
-
+    EspecialidadData espeData = new EspecialidadData();
+    
     public InformeView() {
         initComponents();
         cabeceraTablaAfiliado();
@@ -50,6 +59,8 @@ public class InformeView extends javax.swing.JPanel {
         cargarTablaAfiliados();
         cabeceraTablaOrdenes();
         cargarTablaOrdenes();
+        cargarComboEspeciliadades();
+        cabeceraPrestadoresXEspecialidad();
     }
 
     /**
@@ -77,14 +88,16 @@ public class InformeView extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        cbEspecialidad = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbPrestadores = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
-        jLabel1.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Cantarell", 1, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Informe de Afiliados Activos");
 
@@ -123,26 +136,24 @@ public class InformeView extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGap(635, 635, 635)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 33, Short.MAX_VALUE)))
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(192, 192, 192)
-                .addComponent(cbListadoAfiliado)
-                .addGap(169, 169, 169)
-                .addComponent(cbListadoPrestadores)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(cbListadoAfiliado)
+                        .addGap(169, 169, 169)
+                        .addComponent(cbListadoPrestadores))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,17 +165,17 @@ public class InformeView extends javax.swing.JPanel {
                     .addComponent(cbListadoAfiliado)
                     .addComponent(cbListadoPrestadores))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(22, 22, 22))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Informe Afiliados", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(255, 204, 204));
 
-        jLabel2.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Cantarell", 1, 20)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Informe de Órdenes por Fecha");
 
@@ -187,7 +198,7 @@ public class InformeView extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tbOrdenes);
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Imprimir");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -202,11 +213,13 @@ public class InformeView extends javax.swing.JPanel {
                         .addGap(242, 242, 242)
                         .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,45 +228,108 @@ public class InformeView extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(13, 13, 13))
         );
 
         jTabbedPane1.addTab("Informe Órdenes", jPanel3);
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 204));
 
+        jLabel3.setFont(new java.awt.Font("Cantarell", 1, 20)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Informe de Prestadores por Especialidades");
+
+        cbEspecialidad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbEspecialidadItemStateChanged(evt);
+            }
+        });
+
+        tbPrestadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tbPrestadores);
+
+        jButton3.setText("Imprimir");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(172, 172, 172)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel3)
-                .addContainerGap(511, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Informe Prestadores", jPanel4);
 
-        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
-
         jLabel4.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Informes");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 780, -1));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 280, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel4)
+                .addGap(0, 0, 0)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbListadoAfiliadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbListadoAfiliadoActionPerformed
@@ -271,36 +347,42 @@ public class InformeView extends javax.swing.JPanel {
     }//GEN-LAST:event_cbListadoPrestadoresActionPerformed
 
     private void dcFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcFechaPropertyChange
-   cleanTableOrdenes();
-    Date fecha = dcFecha.getDate();
-    if (fecha != null) {
-        LocalDate localDate = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        List<Orden> listaOrdenes = ordenData.listaDeOrdenes();
-        if (listaOrdenes != null) {
-            for (Orden orden : listaOrdenes) {
-                if (orden.getFecha().equals(localDate)) {
-                    Object[] rowData = {
-                        orden.getIdOrden(),
-                        orden.getFecha().toString(),
-                        orden.getFormaDePago(),
-                        orden.getImporte(),
-                        orden.getAfiliado().getIdAfiliado(),
-                        orden.getPrestador().getIdPrestador()
-                    };
-                    modeloTablaOrdenes.addRow(rowData);
+        cleanTableOrdenes();
+        Date fecha = dcFecha.getDate();
+        if (fecha != null) {
+            LocalDate localDate = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            List<Orden> listaOrdenes = ordenData.listaDeOrdenes();
+            if (listaOrdenes != null) {
+                for (Orden orden : listaOrdenes) {
+                    if (orden.getFecha().equals(localDate)) {
+                        Object[] rowData = {
+                            orden.getIdOrden(),
+                            orden.getFecha().toString(),
+                            orden.getFormaDePago(),
+                            orden.getImporte(),
+                            orden.getAfiliado().getIdAfiliado(),
+                            orden.getPrestador().getIdPrestador()};
+                        modeloTablaOrdenes.addRow(rowData);
+                    }
                 }
             }
         }
-    }
     }//GEN-LAST:event_dcFechaPropertyChange
+
+    private void cbEspecialidadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbEspecialidadItemStateChanged
+        cleanTablaPrestadoresxEspe();
+        cargarTablaPrestadoresxEspecialidad();
+    }//GEN-LAST:event_cbEspecialidadItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbEspecialidad;
     private javax.swing.JCheckBox cbListadoAfiliado;
     private javax.swing.JCheckBox cbListadoPrestadores;
     private com.toedter.calendar.JDateChooser dcFecha;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -310,10 +392,12 @@ public class InformeView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tbAfiliadoPrestador;
     private javax.swing.JTable tbOrdenes;
+    private javax.swing.JTable tbPrestadores;
     // End of variables declaration//GEN-END:variables
 
     private void cabeceraTablaPrestadores() {
@@ -328,7 +412,7 @@ public class InformeView extends javax.swing.JPanel {
         //TableColumn idColumn = columnModel.getColumn(0);
         //idColumn.setPreferredWidth(20);
     }
-
+    
     private void cargarTablaPrestadores() {
         cleanTablePrestadores();
         List<Prestador> listaPrestador = prestadorData.listarPrestadores();
@@ -339,7 +423,7 @@ public class InformeView extends javax.swing.JPanel {
         }
         tbAfiliadoPrestador.setModel(modeloTablaPrestador);
     }
-
+    
     private void cabeceraTablaAfiliado() {
         modeloTablaAfiliado.addColumn("ID Afiliado");
         modeloTablaAfiliado.addColumn("Apellido");
@@ -347,7 +431,7 @@ public class InformeView extends javax.swing.JPanel {
         modeloTablaAfiliado.addColumn("Dni");
         tbAfiliadoPrestador.setModel(modeloTablaAfiliado);
     }
-
+    
     private void cargarTablaAfiliados() {
         cleanTableAfiliado();
         List<Afiliado> listaAfiliado = afiData.listarAfiliados();
@@ -358,19 +442,19 @@ public class InformeView extends javax.swing.JPanel {
         }
         tbAfiliadoPrestador.setModel(modeloTablaAfiliado);
     }
-
+    
     private void cleanTableAfiliado() {
         modeloTablaAfiliado.setRowCount(0);
     }
-
+    
     private void cleanTablePrestadores() {
         modeloTablaPrestador.setRowCount(0);
     }
-
+    
     private void cleanTableOrdenes() {
         modeloTablaOrdenes.setRowCount(0);
     }
-
+    
     private void cabeceraTablaOrdenes() {
         modeloTablaOrdenes.addColumn("ID Orden");
         modeloTablaOrdenes.addColumn("Fecha");
@@ -380,7 +464,7 @@ public class InformeView extends javax.swing.JPanel {
         modeloTablaOrdenes.addColumn("ID Prestador");
         tbOrdenes.setModel(modeloTablaOrdenes);
     }
-
+    
     private void cargarTablaOrdenes() {
         cleanTableOrdenes();
         List<Orden> listaOrden = ordenData.listaDeOrdenes();
@@ -390,5 +474,40 @@ public class InformeView extends javax.swing.JPanel {
             }
         }
         tbOrdenes.setModel(modeloTablaOrdenes);
+    }
+    
+    private void cabeceraPrestadoresXEspecialidad() {
+        modeloTablaPrestadores.addColumn("ID Prestador");
+        modeloTablaPrestadores.addColumn("Apellido");
+        modeloTablaPrestadores.addColumn("Nombre");
+        modeloTablaPrestadores.addColumn("Matricula");
+        modeloTablaPrestadores.addColumn("Especialidad");
+        tbPrestadores.setModel(modeloTablaPrestadores);
+    }
+    
+    private void cargarTablaPrestadoresxEspecialidad() {
+        cleanTablaPrestadoresxEspe();
+        List<Prestador> listaPrestador = prestadorData.listarPrestadores();
+        if (listaPrestador != null) {
+            for (Prestador prestador : listaPrestador) {
+                if (prestador.getEspecialidad().getNombreEspecialidad().equals(cbEspecialidad.getSelectedItem())) {
+                    modeloTablaPrestadores.addRow(new Object[]{prestador.getIdPrestador(), prestador.getApellidoPrestador(), prestador.getNombrePrestador(), prestador.getMatricula(), prestador.getEspecialidad().getNombreEspecialidad()});
+                }
+            }
+        }
+        tbPrestadores.setModel(modeloTablaPrestadores);
+    }
+    
+    private void cleanTablaPrestadoresxEspe() {
+        modeloTablaPrestadores.setRowCount(0);
+    }
+    
+    private void cargarComboEspeciliadades() {
+        List<Especialidad> listaEspecialidad = espeData.listarEspecialidades();
+        if (listaEspecialidad != null) {
+            for (Especialidad especialidad : listaEspecialidad) {
+                cbEspecialidad.addItem(especialidad.getNombreEspecialidad());
+            }
+        }
     }
 }

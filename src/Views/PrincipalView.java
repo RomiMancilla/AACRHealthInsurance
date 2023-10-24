@@ -267,11 +267,11 @@ public class PrincipalView extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //FlatMacDarkLaf.setup();
-        //FlatMacLightLaf.setup();
+        FlatMacLightLaf.setup();
         //FlatMaterialLighterIJTheme.setup();
         //FlatLightLaf.setup();
-        //UIManager.put("Button.arc", 999);
-        //UIManager.put( "Component.arrowType", "chevron" );
+        UIManager.put("Button.arc", 999);
+        UIManager.put( "Component.arrowType", "chevron" );
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
