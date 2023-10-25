@@ -102,7 +102,7 @@ public class InformeView extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Informe de Afiliados Activos");
+        jLabel1.setText("Informe de Afiliados / Prestadores Activos");
 
         tbAfiliadoPrestador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

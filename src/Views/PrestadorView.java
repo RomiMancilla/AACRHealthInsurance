@@ -439,6 +439,7 @@ public class PrestadorView extends javax.swing.JPanel {
         tfTelefonoPrestador.setText("");
         cbEspecialidad.setSelectedIndex(-1); // Deseleccionar cualquier elemento...
         rbEstado.setSelected(false);
+       
     }
     
     private void cargarEspecialidadesEnComboBox() {

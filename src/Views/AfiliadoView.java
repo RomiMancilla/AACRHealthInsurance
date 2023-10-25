@@ -49,6 +49,19 @@ public class AfiliadoView extends javax.swing.JPanel {
 
         tfTelefono.setEditable(false);
         tfTelefono.setMaximumSize(new java.awt.Dimension(150, 2147483647));
+        tfTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfTelefonoActionPerformed(evt);
+            }
+        });
+        tfTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfTelefonoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfTelefonoKeyTyped(evt);
+            }
+        });
 
         tfBusqueda.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
         tfBusqueda.setMaximumSize(new java.awt.Dimension(80, 2147483647));
@@ -57,15 +70,35 @@ public class AfiliadoView extends javax.swing.JPanel {
                 tfBusquedaActionPerformed(evt);
             }
         });
+        tfBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfBusquedaKeyTyped(evt);
+            }
+        });
 
         tfDni.setEditable(false);
         tfDni.setMaximumSize(new java.awt.Dimension(150, 2147483647));
+        tfDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfDniKeyTyped(evt);
+            }
+        });
 
         tfApellido.setEditable(false);
         tfApellido.setMaximumSize(new java.awt.Dimension(150, 2147483647));
+        tfApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfApellidoKeyTyped(evt);
+            }
+        });
 
         tfNombre.setEditable(false);
         tfNombre.setMaximumSize(new java.awt.Dimension(150, 2147483647));
+        tfNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfNombreKeyTyped(evt);
+            }
+        });
 
         tfDireccion.setEditable(false);
         tfDireccion.setMaximumSize(new java.awt.Dimension(150, 2147483647));
@@ -148,7 +181,8 @@ public class AfiliadoView extends javax.swing.JPanel {
             }
         });
 
-        label1.setEnabled(false);
+        label1.setAlignment(java.awt.Label.RIGHT);
+        label1.setText("DNI Afiliado");
 
         label2.setEnabled(false);
 
@@ -406,12 +440,42 @@ public class AfiliadoView extends javax.swing.JPanel {
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void cbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEditarActionPerformed
+        if(!tfId.getText().isEmpty()){
         if (cbEditar.isSelected()) {
             activarCampos();
         }else{
             desactivarCampos();
         }
+        }
     }//GEN-LAST:event_cbEditarActionPerformed
+
+    private void tfTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfTelefonoActionPerformed
+
+    private void tfTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTelefonoKeyReleased
+        
+    }//GEN-LAST:event_tfTelefonoKeyReleased
+
+    private void tfTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTelefonoKeyTyped
+        Service.Validar.esNumero(evt);
+    }//GEN-LAST:event_tfTelefonoKeyTyped
+
+    private void tfDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDniKeyTyped
+        Service.Validar.esNumero(evt);
+    }//GEN-LAST:event_tfDniKeyTyped
+
+    private void tfApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfApellidoKeyTyped
+        Service.Validar.esLetra(evt);
+    }//GEN-LAST:event_tfApellidoKeyTyped
+
+    private void tfNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombreKeyTyped
+        Service.Validar.esLetra(evt);
+    }//GEN-LAST:event_tfNombreKeyTyped
+
+    private void tfBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaKeyTyped
+       Service.Validar.esNumero(evt);
+    }//GEN-LAST:event_tfBusquedaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

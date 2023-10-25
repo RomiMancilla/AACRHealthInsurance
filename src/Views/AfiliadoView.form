@@ -220,6 +220,11 @@
           <Dimension value="[150, 2147483647]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfTelefonoActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfTelefonoKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfTelefonoKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfBusqueda">
       <Properties>
@@ -232,6 +237,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfBusquedaActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfBusquedaKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfDni">
@@ -241,6 +247,9 @@
           <Dimension value="[150, 2147483647]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfDniKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfApellido">
       <Properties>
@@ -249,6 +258,9 @@
           <Dimension value="[150, 2147483647]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfApellidoKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfNombre">
       <Properties>
@@ -257,6 +269,9 @@
           <Dimension value="[150, 2147483647]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfNombreKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfDireccion">
       <Properties>
@@ -402,7 +417,8 @@
     </Component>
     <Component class="java.awt.Label" name="label1">
       <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="alignment" type="int" value="2"/>
+        <Property name="text" type="java.lang.String" value="DNI Afiliado"/>
       </Properties>
     </Component>
     <Component class="java.awt.Label" name="label2">
