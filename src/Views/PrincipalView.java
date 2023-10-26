@@ -13,6 +13,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedLight
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.BorderLayout;
+import java.util.Locale;
 import javax.swing.UIManager;
 
 /**
@@ -243,6 +244,7 @@ public class PrincipalView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        Locale.setDefault(new Locale("es", "ES"));
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

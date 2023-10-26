@@ -14,11 +14,11 @@ public class EspecialidadView extends javax.swing.JPanel {
         @Override
         public boolean isCellEditable(int row, int column) {
             // Hacer la columna 1 editable y lo demás no...
-            return column == 1;
+            return false;
         }
     };
     EspecialidadData espeData = new EspecialidadData();
-    boolean edit = true;
+    boolean edit = true;//Flag de derivación entre guradar y editar con el botón "Guardar"
 
     public EspecialidadView() {
         initComponents();
@@ -204,18 +204,20 @@ public class EspecialidadView extends javax.swing.JPanel {
             listaEspe = espeData.obtenerEspecialidadesPorNombre(busqueda);
             if (!listaEspe.isEmpty()) {
                 for (Especialidad espe : listaEspe) {
-                    String estado = espe.isEstado() ? "Activo" : "Inactivo";
+                    String estado = espe.isEstado() ? "Activo" : "Inactivo";//Cambio estado a un String más legible para el usuario.
                     modelo.addRow(new Object[]{espe.getIdEspecialidad(), espe.getNombreEspecialidad(), estado});
                 }
+                activarTabla();
             }
         } else {
             cargarEspecialidades();
+            activarTabla();
         }
     }//GEN-LAST:event_tfBusquedaKeyReleased
 
     private void tbEpecialidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEpecialidadesMouseClicked
         int rowSelected = tbEpecialidades.getSelectedRow();
-        if (rowSelected != -1) {
+        if (rowSelected != -1 && tbEpecialidades.isEnabled()) {
             int idEspecialidad = (int) tbEpecialidades.getValueAt(rowSelected, 0);
             Especialidad espe = espeData.obtenerEspecialidadPorId(idEspecialidad);
             if (espe != null) {
@@ -223,12 +225,14 @@ public class EspecialidadView extends javax.swing.JPanel {
                 tfNombreEspecialidad.setText(espe.getNombreEspecialidad());
                 rbEstado.setSelected(espe.isEstado());
                 edit = true;
+                activarCampoNombre();
             }
         }
     }//GEN-LAST:event_tbEpecialidadesMouseClicked
 
     private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
         cleanAll();
+        desactivarTabla();
         edit = false;
         cargarEspecialidades();
         activarCampoNombre();
@@ -244,8 +248,9 @@ public class EspecialidadView extends javax.swing.JPanel {
                 int idEspecialidad = Integer.parseInt(tfIdEspecialidad.getText());
                 Especialidad especialidad = new Especialidad(idEspecialidad, nombreActualizado, true);
                 espeData.actualizarEspecialidad(especialidad);
+                cleanAll();
             } else {
-                JOptionPane.showMessageDialog(null, "El campo nombre de Especialida no puede estar vacio.");
+                JOptionPane.showMessageDialog(null, "El campo nombre de Especialidad no puede estar vacio.");
             }
         } else {
             //Si el flag está en False se intenta gurdar
@@ -322,5 +327,13 @@ public class EspecialidadView extends javax.swing.JPanel {
 
     private void desactivarCampoNombre() {
         tfNombreEspecialidad.setEditable(false);
+    }
+
+    private void desactivarTabla() {
+        tbEpecialidades.setEnabled(false);
+    }
+
+    private void activarTabla() {
+        tbEpecialidades.setEnabled(true);
     }
 }

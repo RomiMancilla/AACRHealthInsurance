@@ -56,8 +56,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Informe Afiliados">
-                <Property name="tabTitle" type="java.lang.String" value="Informe Afiliados"/>
+              <JTabbedPaneConstraints tabName="Afiliados/Prestadores">
+                <Property name="tabTitle" type="java.lang.String" value="Afiliados/Prestadores"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -118,7 +118,7 @@
                   <Font name="Cantarell" size="20" style="1"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Informe de Afiliados Activos"/>
+                <Property name="text" type="java.lang.String" value="Informe de Afiliados y Prestadores Activos"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -177,8 +177,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Informe &#xd3;rdenes">
-                <Property name="tabTitle" type="java.lang.String" value="Informe &#xd3;rdenes"/>
+              <JTabbedPaneConstraints tabName="&#xd3;rdenes">
+                <Property name="tabTitle" type="java.lang.String" value="&#xd3;rdenes"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -280,8 +280,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Informe Prestadores">
-                <Property name="tabTitle" type="java.lang.String" value="Informe Prestadores"/>
+              <JTabbedPaneConstraints tabName="Prestadores">
+                <Property name="tabTitle" type="java.lang.String" value="Prestadores"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
