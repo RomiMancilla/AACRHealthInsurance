@@ -37,13 +37,13 @@
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Component id="jLabel9" min="-2" pref="140" max="-2" attributes="0"/>
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Component id="tfBusquedaAfiliado" min="-2" pref="209" max="-2" attributes="0"/>
-              <EmptySpace min="51" pref="51" max="-2" attributes="0"/>
-              <Component id="jLabel10" min="-2" pref="160" max="-2" attributes="0"/>
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Component id="tfBuscarPrestador" min="-2" pref="210" max="-2" attributes="0"/>
+              <Component id="jLabel9" min="-2" pref="180" max="-2" attributes="0"/>
+              <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
+              <Component id="tfBusquedaAfiliado" min="-2" pref="180" max="-2" attributes="0"/>
+              <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
+              <Component id="jLabel10" min="-2" pref="230" max="-2" attributes="0"/>
+              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+              <Component id="tfBuscarPrestador" min="-2" pref="130" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
@@ -388,12 +388,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Busqueda Afiliado:"/>
+        <Property name="text" type="java.lang.String" value="Busqueda Afiliado por DNI:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Busqueda Prestador:"/>
+        <Property name="text" type="java.lang.String" value="Buscar Prestador por Especialidad:"/>
       </Properties>
     </Component>
   </SubComponents>

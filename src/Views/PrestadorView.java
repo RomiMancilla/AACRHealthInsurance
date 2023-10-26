@@ -169,7 +169,7 @@ public class PrestadorView extends javax.swing.JPanel {
             }
         });
 
-        jLabel9.setText("Ingrese Matricula:");
+        jLabel9.setText("Ingrese Matrícula:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
