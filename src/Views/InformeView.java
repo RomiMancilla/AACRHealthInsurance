@@ -462,7 +462,10 @@ public class InformeView extends javax.swing.JPanel {
         List<Prestador> listaPrestador = prestadorData.listarPrestadores();
         if (listaPrestador != null) {
             for (Prestador prestador : listaPrestador) {
-                modeloTablaPrestador.addRow(new Object[]{prestador.getIdPrestador(), prestador.getApellidoPrestador(), prestador.getNombrePrestador(), prestador.getEspecialidad().getNombreEspecialidad()});
+                if (prestador.getEspecialidad() != null) {
+
+                    modeloTablaPrestador.addRow(new Object[]{prestador.getIdPrestador(), prestador.getApellidoPrestador(), prestador.getNombrePrestador(), prestador.getEspecialidad().getNombreEspecialidad()});
+                }
             }
         }
         tbAfiliadoPrestador.setModel(modeloTablaPrestador);
@@ -534,8 +537,10 @@ public class InformeView extends javax.swing.JPanel {
         List<Prestador> listaPrestador = prestadorData.listarPrestadores();
         if (listaPrestador != null) {
             for (Prestador prestador : listaPrestador) {
-                if (prestador.getEspecialidad().getNombreEspecialidad().equals(cbEspecialidad.getSelectedItem())) {
-                    modeloTablaPrestadores.addRow(new Object[]{prestador.getIdPrestador(), prestador.getApellidoPrestador(), prestador.getNombrePrestador(), prestador.getMatricula(), prestador.getEspecialidad().getNombreEspecialidad()});
+                if (prestador.getEspecialidad() != null) {
+                    if (prestador.getEspecialidad().getNombreEspecialidad().equals(cbEspecialidad.getSelectedItem())) {
+                        modeloTablaPrestadores.addRow(new Object[]{prestador.getIdPrestador(), prestador.getApellidoPrestador(), prestador.getNombrePrestador(), prestador.getMatricula(), prestador.getEspecialidad().getNombreEspecialidad()});
+                    }
                 }
             }
         }
