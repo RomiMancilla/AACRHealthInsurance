@@ -3,6 +3,8 @@ package Views;
 import Controller.EspecialidadData;
 import Model.Especialidad;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import javax.management.loading.PrivateClassLoader;
 import javax.swing.JOptionPane;
@@ -264,6 +266,7 @@ public class EspecialidadView extends javax.swing.JPanel {
 
     private void cargarEspecialidades() {
         List<Especialidad> listaEspecialidades = espeData.listarEspecialidades();
+        Collections.sort(listaEspecialidades);
         for (Especialidad espe : listaEspecialidades) {
             if (listaEspecialidades != null) {
                 String estado = espe.isEstado() ? "Activo" : "Inactivo";//Cambio a visualización más legible para el usuario.

@@ -1,9 +1,7 @@
-
 package Model;
 
+public class Afiliado implements Comparable<Afiliado> {
 
-public class Afiliado {
-    
     private int idAfiliado;
     private String nombreAfiliado;
     private String apellidoAfiliado;
@@ -95,6 +93,14 @@ public class Afiliado {
         return "Afiliado{" + "idAfiliado=" + idAfiliado + ", nombreAfiliado=" + nombreAfiliado + ", apellidoAfiliado=" + apellidoAfiliado + ", dni=" + dni + ", domicilioAfiliado=" + domicilioAfiliado + ", telefonoAfiliado=" + telefonoAfiliado + ", estado=" + estado + '}';
     }
 
-       
-    
+    @Override
+    public int compareTo(Afiliado o) {
+        int comparacionApellido = this.apellidoAfiliado.compareTo(o.apellidoAfiliado);
+        if (comparacionApellido != 0) {
+            return comparacionApellido;
+        } else {
+            return this.nombreAfiliado.compareTo(o.getNombreAfiliado());
+        }
+    }
+
 }

@@ -12,6 +12,7 @@ import Model.Prestador;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -689,6 +690,7 @@ public class OrdenView extends javax.swing.JPanel {
     private void cargarTablaAfiliado() {
         cleanTableAfiliado();
         List<Afiliado> listaAfiliado = afiData.listarAfiliados();
+        Collections.sort(listaAfiliado);
         tbAfiliado.clearSelection();
         for (Afiliado afiliado : listaAfiliado) {
             modeloTablaAfiliado.addRow(new Object[]{afiliado.getIdAfiliado(), afiliado.getApellidoAfiliado(), afiliado.getNombreAfiliado()});
@@ -700,6 +702,7 @@ public class OrdenView extends javax.swing.JPanel {
         List<Prestador> listaPrestadores = prestaData.listarPrestadores();
         tbPrestadores.setAutoResizeMode(2);
         tbPrestadores.clearSelection();
+        Collections.sort(listaPrestadores);
         if (listaPrestadores != null) {
             for (Prestador presta : listaPrestadores) {
                 if (presta != null && presta.getEspecialidad() != null) {

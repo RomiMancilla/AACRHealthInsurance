@@ -11,6 +11,7 @@ import Model.Prestador;
 import Service.Pdf;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -460,6 +461,7 @@ public class InformeView extends javax.swing.JPanel {
     private void cargarTablaPrestadores() {
         cleanTablePrestadores();
         List<Prestador> listaPrestador = prestadorData.listarPrestadores();
+        Collections.sort(listaPrestador);
         if (listaPrestador != null) {
             for (Prestador prestador : listaPrestador) {
                 if (prestador.getEspecialidad() != null) {
@@ -482,6 +484,7 @@ public class InformeView extends javax.swing.JPanel {
     private void cargarTablaAfiliados() {
         cleanTableAfiliado();
         List<Afiliado> listaAfiliado = afiData.listarAfiliados();
+        Collections.sort(listaAfiliado);
         if (listaAfiliado != null) {
             for (Afiliado afiliado : listaAfiliado) {
                 modeloTablaAfiliado.addRow(new Object[]{afiliado.getIdAfiliado(), afiliado.getApellidoAfiliado(), afiliado.getNombreAfiliado(), afiliado.getDni()});
@@ -535,6 +538,7 @@ public class InformeView extends javax.swing.JPanel {
     private void cargarTablaPrestadoresxEspecialidad() {
         cleanTablaPrestadoresxEspe();
         List<Prestador> listaPrestador = prestadorData.listarPrestadores();
+        Collections.sort(listaPrestador);
         if (listaPrestador != null) {
             for (Prestador prestador : listaPrestador) {
                 if (prestador.getEspecialidad() != null) {

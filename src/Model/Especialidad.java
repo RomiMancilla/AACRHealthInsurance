@@ -1,6 +1,6 @@
 package Model;
 
-public class Especialidad {
+public class Especialidad implements Comparable<Especialidad>{
 
     private int idEspecialidad;
     private String nombreEspecialidad;
@@ -47,5 +47,10 @@ public class Especialidad {
     @Override
     public String toString() {
         return "Especialidad{" + "idEspecialidad=" + idEspecialidad + ", nombreEspecialidad=" + nombreEspecialidad + ", estado=" + estado + '}';
+    }
+
+    @Override
+    public int compareTo(Especialidad o) {
+        return this.nombreEspecialidad.compareTo(o.nombreEspecialidad);
     }
 }
