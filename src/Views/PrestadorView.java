@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
  * @author andres
  */
 public class PrestadorView extends javax.swing.JPanel {
-    
+
     PrestadorData prestaData = new PrestadorData();
     EspecialidadData espeData = new EspecialidadData();
-    
+
     public PrestadorView() {
         initComponents();
         cargarEspecialidadesEnComboBox();
@@ -341,6 +341,7 @@ public class PrestadorView extends javax.swing.JPanel {
                 rbEstado.setSelected(prestador.isEstado());
                 // Establece la especialidad en el JComboBox
                 cbEspecialidad.setSelectedItem(prestador.getEspecialidad().getNombreEspecialidad());
+                activarCampos();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró esa matrícula");
             }
@@ -350,11 +351,17 @@ public class PrestadorView extends javax.swing.JPanel {
     }//GEN-LAST:event_btBusquedaActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-        String idPrestadorSrt = tfIdPrestador.getText();
-        if (!idPrestadorSrt.isEmpty()) {
-            int idPrestador = Integer.parseInt(idPrestadorSrt);
-            prestaData.borrarPrestador(idPrestador);
-            cleanAll();
+        String idPrestadorStr = tfIdPrestador.getText();
+        if (!idPrestadorStr.isEmpty()) {
+            int idPrestador = Integer.parseInt(idPrestadorStr);
+            //Mostrar confirmación
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que quieres eliminar este prestador?", "Confirmación de eliminación", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                prestaData.borrarPrestador(idPrestador);
+                cleanAll();
+                desactivarCampos();
+                tfBusqueda.setText("");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "El campo IdPrestador está vacío");
         }
@@ -364,6 +371,7 @@ public class PrestadorView extends javax.swing.JPanel {
         cleanAll();
         cargarEspecialidadesEnComboBox();
         activarBotones();
+        activarCampos();
         tfBusqueda.setText("");
     }//GEN-LAST:event_btNuevoActionPerformed
 
@@ -372,17 +380,20 @@ public class PrestadorView extends javax.swing.JPanel {
         String idPrestadorText = tfIdPrestador.getText();
         if (idPrestadorText.isEmpty()) {
             guardarPrestador();
+            desactivarCampos();
         } else {
             actualizarPrestador();
+            desactivarCampos();
+            
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void tfBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaKeyTyped
-    Service.Validar.esNumero(evt);
+        Service.Validar.esNumero(evt);
     }//GEN-LAST:event_tfBusquedaKeyTyped
 
     private void tfNombrePrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombrePrestadorKeyTyped
-    Service.Validar.esLetra(evt);
+        Service.Validar.esLetra(evt);
     }//GEN-LAST:event_tfNombrePrestadorKeyTyped
 
     private void tfApellidoPrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfApellidoPrestadorKeyTyped
@@ -434,23 +445,43 @@ public class PrestadorView extends javax.swing.JPanel {
         cbEspecialidad.setSelectedIndex(-1); // Deseleccionar cualquier elemento...
         rbEstado.setSelected(false);
     }
-    
+
     private void cargarEspecialidadesEnComboBox() {
         List<Especialidad> listaEspecialidades = espeData.listarEspecialidades();
         for (Especialidad especialidad : listaEspecialidades) {
             cbEspecialidad.addItem(especialidad.getNombreEspecialidad());
         }
     }
-    
+
     private void activarBotones() {
         btEliminar.setEnabled(true);
         btGuardar.setEnabled(true);
     }
-    
+
     private void desactivarBotones() {
         btEliminar.setEnabled(false);
         btGuardar.setEnabled(false);
     }
+    
+    private void activarCampos(){
+        tfApellidoPrestador.setEditable(true);
+        tfNombrePrestador.setEditable(true);
+        tfDomicilioPrestador.setEditable(true);
+        tfMatricula.setEditable(true);
+        tfTelefonoPrestador.setEditable(true);
+        cbEspecialidad.setEnabled(true);
+        rbEstado.setEnabled(true);
+    }
+    
+    private void desactivarCampos() {
+    tfApellidoPrestador.setEditable(false);
+    tfNombrePrestador.setEditable(false);
+    tfDomicilioPrestador.setEditable(false);
+    tfMatricula.setEditable(false);
+    tfTelefonoPrestador.setEditable(false);
+    cbEspecialidad.setEnabled(false); 
+    rbEstado.setEnabled(false);
+}
 
 //****************************************************************************************************************    
 //Modularización del Boton Guardar
@@ -472,7 +503,7 @@ public class PrestadorView extends javax.swing.JPanel {
         // Parseo matrícula a entero
         int matricula = Integer.parseInt(matriculaStr);
         Especialidad especialidad = espeData.obtenerEspecialidadporNombre(especialidadNom);
-        
+
         if (especialidad != null) {
             Prestador prestador = new Prestador(nombre, apellido, matricula, domicilio, telefono, estado, especialidad);
             prestaData.guardarPrestador(prestador);
@@ -482,12 +513,12 @@ public class PrestadorView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "La especialidad no fue encontrada.");
         }
     }
-    
+
     private void actualizarPrestador() {
         String idPrestadorText = tfIdPrestador.getText();
         int idPrestador = Integer.parseInt(idPrestadorText);
         Prestador prestadorExistente = prestaData.obtenerPrestadorPorId(idPrestador);
-        
+
         if (prestadorExistente != null) {
             String nombre = tfNombrePrestador.getText();
             String apellido = tfApellidoPrestador.getText();
@@ -506,7 +537,7 @@ public class PrestadorView extends javax.swing.JPanel {
             // Parseo matrícula a entero
             int matricula = Integer.parseInt(matriculaStr);
             Especialidad especialidad = espeData.obtenerEspecialidadporNombre(especialidadNom);
-            
+
             if (especialidad != null) {
                 //Se settea el prestador con los nuevos datos
                 prestadorExistente.setNombrePrestador(nombre);
@@ -520,6 +551,7 @@ public class PrestadorView extends javax.swing.JPanel {
                 prestaData.actualizarPrestador(prestadorExistente);
                 //JOptionPane.showMessageDialog(null, "Prestador actualizado correctamente.");
                 cleanAll();
+                tfBusqueda.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "La especialidad no fue encontrada.");
             }
