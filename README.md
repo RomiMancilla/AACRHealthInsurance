@@ -65,6 +65,15 @@ En la eliminación, se aplica un soft delete, para tener la opción de activarlo
 
 
 
+**Colaboradores:**
+
+Andrés Quiroga, Adrián Zuloaga, Cecilia Morales y Romina Mancilla
+
+
+
+
+
+
 **GRACIAS POR ACOMPAÑARNOS!!!**
 
 
