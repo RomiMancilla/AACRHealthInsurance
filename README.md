@@ -61,7 +61,7 @@ En la eliminación, se aplica un soft delete, para tener la opción de activarlo
 
 **BD: phpMyAdmin
 
-**Librerías: jcalendar-1.4.jar, Absolute Layout - AbsoluteLayaout.jar, flatlaf-3.2.1.jar, flatlaf-intellij-themes-3.2.1.jar, itextpdf-5.4.0.jar
+**Librerías: jcalendar-1.4.jar, flatlaf-3.2.1.jar, flatlaf-intellij-themes-3.2.1.jar, itextpdf-5.4.0.jar
 
 
 
