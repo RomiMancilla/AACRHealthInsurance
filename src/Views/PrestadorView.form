@@ -43,44 +43,45 @@
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="57" pref="57" max="-2" attributes="0"/>
               <Component id="tfNombrePrestador" min="-2" pref="340" max="-2" attributes="0"/>
-              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
-              <Component id="btNuevo" min="-2" pref="140" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="49" pref="49" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="58" pref="58" max="-2" attributes="0"/>
               <Component id="tfApellidoPrestador" min="-2" pref="340" max="-2" attributes="0"/>
-              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
-              <Component id="btEliminar" min="-2" pref="140" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
-              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace min="58" pref="58" max="-2" attributes="0"/>
-              <Component id="tfMatricula" min="-2" pref="340" max="-2" attributes="0"/>
-              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
-              <Component id="btGuardar" min="-2" pref="140" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="tfMatricula" min="-2" pref="340" max="-2" attributes="0"/>
+                  <Component id="tfDomicilioPrestador" min="-2" pref="340" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+              <Component id="btNuevo" min="-2" pref="140" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="58" pref="58" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="tfDomicilioPrestador" min="-2" pref="340" max="-2" attributes="0"/>
-                  <Component id="tfTelefonoPrestador" min="-2" pref="340" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="63" pref="63" max="-2" attributes="0"/>
+              <Component id="tfTelefonoPrestador" min="-2" pref="340" max="-2" attributes="0"/>
               <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
-              <Component id="btSalir" min="-2" pref="140" max="-2" attributes="0"/>
+              <Component id="btEliminar" min="-2" pref="140" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
               <Component id="cbEspecialidad" min="-2" pref="340" max="-2" attributes="0"/>
+              <EmptySpace min="130" pref="130" max="-2" attributes="0"/>
+              <Component id="btGuardar" min="-2" pref="140" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace min="160" pref="160" max="-2" attributes="0"/>
@@ -112,56 +113,51 @@
                   </Group>
                   <Component id="tfIdPrestador" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="tfNombrePrestador" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="btNuevo" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="tfNombrePrestador" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="tfApellidoPrestador" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="btEliminar" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="tfApellidoPrestador" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="tfMatricula" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="btGuardar" min="-2" pref="40" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="41" pref="41" max="-2" attributes="0"/>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="tfDomicilioPrestador" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="tfMatricula" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                      <Component id="tfTelefonoPrestador" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="tfDomicilioPrestador" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
-                      <Component id="btSalir" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btNuevo" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
+              </Group>
+              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <Component id="tfTelefonoPrestador" min="-2" pref="40" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btEliminar" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -170,6 +166,7 @@
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="cbEspecialidad" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="btGuardar" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
               <Component id="rbEstado" min="-2" max="-2" attributes="0"/>
@@ -274,11 +271,6 @@
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="text" type="java.lang.String" value="Especialidad"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btSalir">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btNuevo">

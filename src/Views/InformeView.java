@@ -102,7 +102,7 @@ public class InformeView extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 20)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Informe de Afiliados Activos");
+        jLabel1.setText("Informe de Afiliados y Prestadores Activos");
 
         tbAfiliadoPrestador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,7 +179,7 @@ public class InformeView extends javax.swing.JPanel {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Informe Afiliados", jPanel2);
+        jTabbedPane1.addTab("Afiliados/Prestadores", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(255, 204, 204));
 
@@ -248,7 +248,7 @@ public class InformeView extends javax.swing.JPanel {
                 .addGap(13, 13, 13))
         );
 
-        jTabbedPane1.addTab("Informe Órdenes", jPanel3);
+        jTabbedPane1.addTab("Órdenes", jPanel3);
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -318,7 +318,7 @@ public class InformeView extends javax.swing.JPanel {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Informe Prestadores", jPanel4);
+        jTabbedPane1.addTab("Prestadores", jPanel4);
 
         jLabel4.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

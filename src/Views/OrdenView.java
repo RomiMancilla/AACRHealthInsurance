@@ -663,7 +663,7 @@ public class OrdenView extends javax.swing.JPanel {
         modeloTablaPrestadores.addColumn("Especialidad");
         tbPrestadores.setModel(modeloTablaPrestadores);
 
-        // Establecer el ancho preferido de la columna ID (columna 0)
+        // Establecer el ancho preferido de columna ID (columna 0)
         TableColumnModel columnModel = tbPrestadores.getColumnModel();
         TableColumn idColumn = columnModel.getColumn(0);
         idColumn.setPreferredWidth(20);
