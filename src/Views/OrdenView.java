@@ -683,8 +683,12 @@ public class OrdenView extends javax.swing.JPanel {
         List<Prestador> listaPrestadores = prestaData.listarPrestadores();
         tbPrestadores.setAutoResizeMode(2);
         tbPrestadores.clearSelection();
-        for (Prestador presta : listaPrestadores) {
-            modeloTablaPrestadores.addRow(new Object[]{presta.getIdPrestador(), presta.getApellidoPrestador(), presta.getNombrePrestador(), presta.getEspecialidad().getNombreEspecialidad()});
+        if (listaPrestadores != null) {
+            for (Prestador presta : listaPrestadores) {
+                if (presta != null && presta.getEspecialidad() != null) {
+                    modeloTablaPrestadores.addRow(new Object[]{presta.getIdPrestador(), presta.getApellidoPrestador(), presta.getNombrePrestador(), presta.getEspecialidad().getNombreEspecialidad()});
+                }
+            }
         }
     }
 

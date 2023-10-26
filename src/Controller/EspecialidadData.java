@@ -79,7 +79,7 @@ public class EspecialidadData {
                 return;
             }
             if (nombreEsIgual(especialidad.getIdEspecialidad(), especialidad.getNombreEspecialidad())) {
-                JOptionPane.showMessageDialog(null, "El nombre de la especialidad ya existe en la base de datos.");
+                JOptionPane.showMessageDialog(null, "La Especialidad ya existe en la Base de Datos.");
                 return;
             }
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -87,7 +87,7 @@ public class EspecialidadData {
                 ps.setInt(2, especialidad.getIdEspecialidad());
                 int exito = ps.executeUpdate();
                 if (exito > 0) {
-                    JOptionPane.showMessageDialog(null, "Especialidad actualizada.");
+                    JOptionPane.showMessageDialog(null, "Especialidad Actualizada.");
                 }
             } catch (SQLSyntaxErrorException syn) {
                 JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
