@@ -1,7 +1,7 @@
 
 package Model;
 
-public class Prestador {
+public class Prestador implements Comparable<Prestador>{
     
     private int idPrestador;
     private String nombrePrestador, apellidoPrestador;
@@ -102,6 +102,16 @@ public class Prestador {
     @Override
     public String toString() {
         return "Prestador{" + "idPrestador=" + idPrestador + ", nombrePrestador=" + nombrePrestador + ", apellidoPrestador=" + apellidoPrestador + ", matricula=" + matricula + ", domicilioPrestador=" + domicilioPrestador + ", telefonoPrestador=" + telefonoPrestador + ", estado=" + estado + ", especialidad=" + especialidad + '}';
+    }
+
+    @Override
+    public int compareTo(Prestador o) {
+        int comparacionApellido=this.apellidoPrestador.compareTo(o.apellidoPrestador);
+        if (comparacionApellido!=0) {
+            return comparacionApellido;
+        }else{
+            return this.nombrePrestador.compareTo(o.nombrePrestador);
+        }
     }
 
     
