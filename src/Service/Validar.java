@@ -1,6 +1,7 @@
-
 package Service;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -11,7 +12,7 @@ import javax.swing.Timer;
  * @author andres
  */
 public class Validar {
-  
+
     //Se agregan métodos estáticos de validación da datos general
     //para usar en *texfield...
     public static void esLetra(KeyEvent evt) {
@@ -31,7 +32,7 @@ public class Validar {
         int key = evt.getKeyChar();
         boolean numero = key >= 48 && key <= 57;
         //Se agregan teclas Delete y borrar <-- como permitidas
-        if (!numero && evt.getKeyChar() != KeyEvent.VK_DELETE && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE)  {
+        if (!numero && evt.getKeyChar() != KeyEvent.VK_DELETE && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
             evt.consume();
             mostrarMensajeFlotante("SÓLO se permiten NÚMEROS en este campo.", 1500);
         }
@@ -42,6 +43,15 @@ public class Validar {
         dialog.setAlwaysOnTop(true);
         dialog.setUndecorated(true);
         JLabel label = new JLabel(mensaje);
+
+        //Formato fuente
+        Font font = new Font("Arial", Font.PLAIN, 15);
+        label.setFont(font);
+
+        // Configura el fondo del mensaje
+        label.setBackground(Color.YELLOW);
+        label.setOpaque(true);
+
         label.setHorizontalAlignment(JLabel.CENTER);
         dialog.getContentPane().add(label);
         dialog.pack();
@@ -53,5 +63,5 @@ public class Validar {
         dialog.setVisible(true);
         timer.start();
     }
-    
+
 }
