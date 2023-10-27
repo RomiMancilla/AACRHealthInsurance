@@ -80,7 +80,7 @@ $${\color{blue} Andrés Quiroga, Adrián Zuloaga, Cecilia Morales y Romina Manci
 ```
 $${\color{red}Welcome \space \color{lightblue}To \space \color{orange}Stackoverflow}$$
 
-
+The background color is `#ffffff` for light mode and `#000000` for dark mode.
 
 
 **GRACIAS POR ACOMPAÑARNOS!!!**
