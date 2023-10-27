@@ -1,4 +1,4 @@
-## AACRHealthInsurance
+## AACRHealthInsurance`#RRGGBB`
 
 **Proyecto Final 10-2023**
 
@@ -14,8 +14,7 @@ la idea del sistema ACCR Health Insurance, ¿nos acompañás a hacer un tour por
 
 *A continuación te detallamos cuáles son las opciones y qué podrás hacer en cada una de ellas, con su vista de pantalla correspondiente:*
 
-**Afiliados: 
-[Botón azul grande](Afiliados){.btn.btn-lg.btn-primary}Podrás buscar afiliados por DNI, generar nuevos afiliados y guardalos, editarlos y/o eliminarlos; cada afiliado tendrá información con sus datos personales.
+**Afiliados: Podrás buscar afiliados por DNI, generar nuevos afiliados y guardalos, editarlos y/o eliminarlos; cada afiliado tendrá información con sus datos personales.
 
 ![Screenshot Afiliado jpg](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/01d322c3-b69f-4b5a-868e-db6a150873c2)
 
