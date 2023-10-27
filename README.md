@@ -1,4 +1,4 @@
- <input type="color" value="#ff0000" /> AACRHealthInsurance
+## AACRHealthInsurance
 
 **Proyecto Final 10-2023**
 
@@ -14,31 +14,31 @@ la idea del sistema ACCR Health Insurance, ¿nos acompañás a hacer un tour por
 
 *A continuación te detallamos cuáles son las opciones y qué podrás hacer en cada una de ellas, con su vista de pantalla correspondiente:*
 
-**Afiliados: Podrás buscar afiliados por DNI, generar nuevos afiliados y guardalos, editarlos y/o eliminarlos; cada afiliado tendrá información con sus datos personales.
+**Afiliados:** Podrás buscar afiliados por DNI, generar nuevos afiliados y guardalos, editarlos y/o eliminarlos; cada afiliado tendrá información con sus datos personales.
 
 ![Screenshot Afiliado jpg](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/01d322c3-b69f-4b5a-868e-db6a150873c2)
 
 
 
-**Prestadores: Podrás buscar prestadores por matrícula, generar nuevos prestadores y guardarlos, editarlos y/o eliminarlos, cada prestador tendrá información con sus datos personales.
+**Prestadores:** Podrás buscar prestadores por matrícula, generar nuevos prestadores y guardarlos, editarlos y/o eliminarlos, cada prestador tendrá información con sus datos personales.
 
 ![Screenshot Prestadores jpg](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/297c3a6b-3c6f-4a86-be35-a1f3b4cee64c)
 
 
 
-**Especialidades: Podrás buscar una especialidad médica por el nombre, cuando la marcas con el cursor, se pinta en azul, lo que permite editarla, también se pueden generar nuevas especialidades médicas, guardarlas y eliminarlas.
+**Especialidades:** Podrás buscar una especialidad médica por el nombre, cuando la marcas con el cursor, se pinta en azul, lo que permite editarla, también se pueden generar nuevas especialidades médicas, guardarlas y eliminarlas.
 
 ![Screenshot Especialidades jpg](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/899988a1-f018-4d5a-8970-fac531a8b974)
 
 
 
-**Órdenes: Podrás buscar órdenes por ID, también podrás buscar afiliados por DNI y prestadores por especialidad, eligiendo la forma de pago.
+**Órdenes:** Podrás buscar órdenes por ID, también podrás buscar afiliados por DNI y prestadores por especialidad, eligiendo la forma de pago.
 
 ![Screenshot Ordenes jpg](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/2355199f-f3ec-43df-b2a7-8c89592acbdc)
 
 
 
-**Informes: Podrás obtener reportes en formato PDF de afiliados y prestadores activos, de órdenes a fecha determinada, y de los prestadores activos por especialidad.
+**Informes:** Podrás obtener reportes en formato PDF de afiliados y prestadores activos, de órdenes a fecha determinada, y de los prestadores activos por especialidad.
 
 ![Screenshot Informes jpg](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/f7c257ef-72b6-4888-9726-7eacf938bc16)
 
