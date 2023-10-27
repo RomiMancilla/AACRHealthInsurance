@@ -3,6 +3,8 @@ package Views;
 import Controller.EspecialidadData;
 import Model.Especialidad;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import javax.management.loading.PrivateClassLoader;
 import javax.swing.JOptionPane;
@@ -13,12 +15,12 @@ public class EspecialidadView extends javax.swing.JPanel {
     DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
-            // Hacer la columna 1 editable y lo demás no...
-            return column == 1;
+            return false;
         }
     };
+
     EspecialidadData espeData = new EspecialidadData();
-    boolean edit = true;
+    boolean edit = true;//Flag de derivación entre guardar y editar con el botón "Guardar"
 
     public EspecialidadView() {
         initComponents();
@@ -48,10 +50,15 @@ public class EspecialidadView extends javax.swing.JPanel {
         btGuardar = new javax.swing.JButton();
         btNuevo = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Especialidades Médicas");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 20, 790, -1));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 380, 20));
 
         tfBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -61,11 +68,22 @@ public class EspecialidadView extends javax.swing.JPanel {
                 tfBusquedaKeyTyped(evt);
             }
         });
+        add(tfBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 230, 40));
 
         tfIdEspecialidad.setEditable(false);
+        add(tfIdEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, 230, 40));
+
+        tfNombreEspecialidad.setEditable(false);
+        tfNombreEspecialidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfNombreEspecialidadKeyTyped(evt);
+            }
+        });
+        add(tfNombreEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 530, 230, 40));
 
         rbEstado.setText("Estado");
         rbEstado.setEnabled(false);
+        add(rbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 600, -1, -1));
 
         tbEpecialidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,9 +103,13 @@ public class EspecialidadView extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbEpecialidades);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 490, 270));
+
         jLabel2.setText("Id Especialidad");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, -1));
 
         jLabel3.setText("Nombre");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, -1, -1));
 
         btGuardar.setText("Guardar");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +117,7 @@ public class EspecialidadView extends javax.swing.JPanel {
                 btGuardarActionPerformed(evt);
             }
         });
+        add(btGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 580, 150, 40));
 
         btNuevo.setText("Nuevo");
         btNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +125,7 @@ public class EspecialidadView extends javax.swing.JPanel {
                 btNuevoActionPerformed(evt);
             }
         });
+        add(btNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, 150, 40));
 
         btEliminar.setText("Eliminar");
         btEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -109,88 +133,16 @@ public class EspecialidadView extends javax.swing.JPanel {
                 btEliminarActionPerformed(evt);
             }
         });
+        add(btEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 510, 150, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(15, 15, 15))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(jSeparator1)
-                .addGap(227, 227, 227))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1)
-                .addGap(297, 297, 297))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(560, 560, 560)
-                        .addComponent(tfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel2)
-                        .addGap(22, 22, 22)
-                        .addComponent(tfIdEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(240, 240, 240)
-                        .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jLabel3)
-                        .addGap(46, 46, 46)
-                        .addComponent(tfNombreEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(240, 240, 240)
-                        .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(rbEstado)
-                        .addGap(402, 402, 402)
-                        .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(10, 10, 10)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(tfBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(tfIdEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(tfNombreEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(rbEstado))
-                    .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        jLabel4.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Nombre Especialidad:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 510, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaKeyTyped
+        Service.Validar.esLetra(evt);
     }//GEN-LAST:event_tfBusquedaKeyTyped
 
     private void tfBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaKeyReleased
@@ -204,18 +156,20 @@ public class EspecialidadView extends javax.swing.JPanel {
             listaEspe = espeData.obtenerEspecialidadesPorNombre(busqueda);
             if (!listaEspe.isEmpty()) {
                 for (Especialidad espe : listaEspe) {
-                    String estado = espe.isEstado() ? "Activo" : "Inactivo";
+                    String estado = espe.isEstado() ? "Activo" : "Inactivo";//Cambio estado a un String más legible para el usuario.
                     modelo.addRow(new Object[]{espe.getIdEspecialidad(), espe.getNombreEspecialidad(), estado});
                 }
+                activarTabla();
             }
         } else {
             cargarEspecialidades();
+            activarTabla();
         }
     }//GEN-LAST:event_tfBusquedaKeyReleased
 
     private void tbEpecialidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEpecialidadesMouseClicked
         int rowSelected = tbEpecialidades.getSelectedRow();
-        if (rowSelected != -1) {
+        if (rowSelected != -1 && tbEpecialidades.isEnabled()) {
             int idEspecialidad = (int) tbEpecialidades.getValueAt(rowSelected, 0);
             Especialidad espe = espeData.obtenerEspecialidadPorId(idEspecialidad);
             if (espe != null) {
@@ -223,12 +177,14 @@ public class EspecialidadView extends javax.swing.JPanel {
                 tfNombreEspecialidad.setText(espe.getNombreEspecialidad());
                 rbEstado.setSelected(espe.isEstado());
                 edit = true;
+                activarCampoNombre();
             }
         }
     }//GEN-LAST:event_tbEpecialidadesMouseClicked
 
     private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
         cleanAll();
+        desactivarTabla();
         edit = false;
         cargarEspecialidades();
         activarCampoNombre();
@@ -236,7 +192,7 @@ public class EspecialidadView extends javax.swing.JPanel {
     }//GEN-LAST:event_btNuevoActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        //Si el glag edit está en True se intenta hacer la edición...
+        //Si el flag edit está en True se intenta hacer la edición...
         String nombreActualizado = tfNombreEspecialidad.getText();
         String idEspecialidadStr = tfIdEspecialidad.getText();
         if (edit == true) {
@@ -244,28 +200,44 @@ public class EspecialidadView extends javax.swing.JPanel {
                 int idEspecialidad = Integer.parseInt(tfIdEspecialidad.getText());
                 Especialidad especialidad = new Especialidad(idEspecialidad, nombreActualizado, true);
                 espeData.actualizarEspecialidad(especialidad);
+                cleanAll();
+                desactivarCampoNombre();
+                tbEpecialidades.clearSelection();
             } else {
-                JOptionPane.showMessageDialog(null, "El campo nombre de Especialida no puede estar vacio.");
+                JOptionPane.showMessageDialog(null, "El campo nombre de Especialidad no puede estar vacio.");
             }
         } else {
-            //Si el flag está en False se intenta gurdar
+            //Si el flag está en False se intenta guardar
             if (!nombreActualizado.isEmpty()) {
                 Especialidad especialidad = new Especialidad(nombreActualizado, true);
                 espeData.agregarEspecialidad(especialidad);
+                desactivarCampoNombre();
+                cleanAll();
+                tbEpecialidades.clearSelection();
             }
         }
 
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-        String idEspecialidadSrt = tfIdEspecialidad.getText();
-        if (!idEspecialidadSrt.isEmpty()) {
-            int idEspecialidad = Integer.parseInt(idEspecialidadSrt);
-            espeData.eliminarEspecialidad(idEspecialidad);
+        String idEspecialidadStr = tfIdEspecialidad.getText();
+        if (!idEspecialidadStr.isEmpty()) {
+            int idEspecialidad = Integer.parseInt(idEspecialidadStr);
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar esta especialidad?", "Confirmación de eliminación", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                espeData.eliminarEspecialidad(idEspecialidad);
+                cleanAll();
+                cleanTable();
+                cargarEspecialidades();
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Tiene que elegir una Especialidad");
         }
     }//GEN-LAST:event_btEliminarActionPerformed
+
+    private void tfNombreEspecialidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombreEspecialidadKeyTyped
+        Service.Validar.esLetra(evt);
+    }//GEN-LAST:event_tfNombreEspecialidadKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -275,6 +247,7 @@ public class EspecialidadView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton rbEstado;
@@ -293,9 +266,12 @@ public class EspecialidadView extends javax.swing.JPanel {
 
     private void cargarEspecialidades() {
         List<Especialidad> listaEspecialidades = espeData.listarEspecialidades();
+        Collections.sort(listaEspecialidades);
         for (Especialidad espe : listaEspecialidades) {
-            String estado = espe.isEstado() ? "Activo" : "Inactivo";
-            modelo.addRow(new Object[]{espe.getIdEspecialidad(), espe.getNombreEspecialidad(), estado});
+            if (listaEspecialidades != null) {
+                String estado = espe.isEstado() ? "Activo" : "Inactivo";//Cambio a visualización más legible para el usuario.
+                modelo.addRow(new Object[]{espe.getIdEspecialidad(), espe.getNombreEspecialidad(), estado});
+            }
         }
     }
 
@@ -322,5 +298,13 @@ public class EspecialidadView extends javax.swing.JPanel {
 
     private void desactivarCampoNombre() {
         tfNombreEspecialidad.setEditable(false);
+    }
+
+    private void desactivarTabla() {
+        tbEpecialidades.setEnabled(false);
+    }
+
+    private void activarTabla() {
+        tbEpecialidades.setEnabled(true);
     }
 }

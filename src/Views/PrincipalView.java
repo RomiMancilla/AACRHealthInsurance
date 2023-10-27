@@ -13,6 +13,7 @@ import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatSolarizedLight
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.BorderLayout;
+import java.util.Locale;
 import javax.swing.UIManager;
 
 /**
@@ -121,16 +122,16 @@ public class PrincipalView extends javax.swing.JFrame {
         jpMenuLayout.setVerticalGroup(
             jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMenuLayout.createSequentialGroup()
-                .addGap(178, 178, 178)
+                .addGap(166, 166, 166)
+                .addComponent(jButton5)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(214, 214, 214)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addGap(18, 18, 18)
-                .addComponent(jButton5)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -243,6 +244,7 @@ public class PrincipalView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        Locale.setDefault(new Locale("es", "ES"));
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

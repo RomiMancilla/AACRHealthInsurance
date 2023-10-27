@@ -12,10 +12,10 @@ import javax.swing.JOptionPane;
  * @author andres
  */
 public class PrestadorView extends javax.swing.JPanel {
-    
+
     PrestadorData prestaData = new PrestadorData();
     EspecialidadData espeData = new EspecialidadData();
-    
+
     public PrestadorView() {
         initComponents();
         cargarEspecialidadesEnComboBox();
@@ -47,7 +47,6 @@ public class PrestadorView extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        btSalir = new javax.swing.JButton();
         btNuevo = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
         btGuardar = new javax.swing.JButton();
@@ -124,6 +123,7 @@ public class PrestadorView extends javax.swing.JPanel {
         });
 
         rbEstado.setText("Estado");
+        rbEstado.setEnabled(false);
 
         jLabel2.setText("IdPrestador");
 
@@ -138,8 +138,6 @@ public class PrestadorView extends javax.swing.JPanel {
         jLabel7.setText("Teléfono");
 
         jLabel8.setText("Especialidad");
-
-        btSalir.setText("Salir");
 
         btNuevo.setText("Nuevo");
         btNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +170,7 @@ public class PrestadorView extends javax.swing.JPanel {
             }
         });
 
-        jLabel9.setText("Ingrese Matricula:");
+        jLabel9.setText("Ingrese Matrícula:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -200,39 +198,39 @@ public class PrestadorView extends javax.swing.JPanel {
                 .addGap(49, 49, 49)
                 .addComponent(jLabel3)
                 .addGap(57, 57, 57)
-                .addComponent(tfNombrePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130)
-                .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tfNombrePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(jLabel4)
                 .addGap(58, 58, 58)
-                .addComponent(tfApellidoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130)
-                .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tfApellidoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jLabel5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel6)))
                 .addGap(58, 58, 58)
-                .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130)
-                .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfDomicilioPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(133, 133, 133)
+                .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfDomicilioPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfTelefonoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel7)
+                .addGap(63, 63, 63)
+                .addComponent(tfTelefonoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130)
-                .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel8)
                 .addGap(37, 37, 37)
-                .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130)
+                .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(160, 160, 160)
                 .addComponent(rbEstado))
@@ -257,51 +255,48 @@ public class PrestadorView extends javax.swing.JPanel {
                         .addGap(10, 10, 10)
                         .addComponent(jLabel2))
                     .addComponent(tfIdPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(10, 10, 10)
                         .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(tfNombrePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                    .addComponent(tfNombrePrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(10, 10, 10)
                         .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(tfApellidoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfApellidoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel5))
-                    .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel6)
+                        .addComponent(jLabel5)
                         .addGap(41, 41, 41)
-                        .addComponent(jLabel7))
+                        .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tfDomicilioPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
-                        .addComponent(tfTelefonoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfDomicilioPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(tfTelefonoPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel8))
-                    .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(rbEstado))
         );
@@ -347,6 +342,8 @@ public class PrestadorView extends javax.swing.JPanel {
                 rbEstado.setSelected(prestador.isEstado());
                 // Establece la especialidad en el JComboBox
                 cbEspecialidad.setSelectedItem(prestador.getEspecialidad().getNombreEspecialidad());
+                activarCampos();
+                disableStatus();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró esa matrícula");
             }
@@ -356,11 +353,17 @@ public class PrestadorView extends javax.swing.JPanel {
     }//GEN-LAST:event_btBusquedaActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-        String idPrestadorSrt = tfIdPrestador.getText();
-        if (!idPrestadorSrt.isEmpty()) {
-            int idPrestador = Integer.parseInt(idPrestadorSrt);
-            prestaData.borrarPrestador(idPrestador);
-            cleanAll();
+        String idPrestadorStr = tfIdPrestador.getText();
+        if (!idPrestadorStr.isEmpty()) {
+            int idPrestador = Integer.parseInt(idPrestadorStr);
+            //Mostrar confirmación
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que quieres eliminar este prestador?", "Confirmación de eliminación", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                prestaData.borrarPrestador(idPrestador);
+                cleanAll();
+                desactivarCampos();
+                tfBusqueda.setText("");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "El campo IdPrestador está vacío");
         }
@@ -370,24 +373,33 @@ public class PrestadorView extends javax.swing.JPanel {
         cleanAll();
         cargarEspecialidadesEnComboBox();
         activarBotones();
+        activarCampos();
+        tfBusqueda.setText("");
+        rbEstado.setEnabled(true);
     }//GEN-LAST:event_btNuevoActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         //se toma como referencia el contenido del TextField idPrestador
         String idPrestadorText = tfIdPrestador.getText();
         if (idPrestadorText.isEmpty()) {
-            guardarPrestador();
+            boolean exito = guardarPrestador();
+            if (exito) {
+                desactivarCampos();
+                disableStatus();
+            }
         } else {
             actualizarPrestador();
+            desactivarCampos();
+            disableStatus();
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 
     private void tfBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaKeyTyped
-    Service.Validar.esNumero(evt);
+        Service.Validar.esNumero(evt);
     }//GEN-LAST:event_tfBusquedaKeyTyped
 
     private void tfNombrePrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNombrePrestadorKeyTyped
-    Service.Validar.esLetra(evt);
+        Service.Validar.esLetra(evt);
     }//GEN-LAST:event_tfNombrePrestadorKeyTyped
 
     private void tfApellidoPrestadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfApellidoPrestadorKeyTyped
@@ -408,7 +420,6 @@ public class PrestadorView extends javax.swing.JPanel {
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btGuardar;
     private javax.swing.JButton btNuevo;
-    private javax.swing.JButton btSalir;
     private javax.swing.JComboBox<String> cbEspecialidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -440,27 +451,55 @@ public class PrestadorView extends javax.swing.JPanel {
         cbEspecialidad.setSelectedIndex(-1); // Deseleccionar cualquier elemento...
         rbEstado.setSelected(false);
     }
-    
+
     private void cargarEspecialidadesEnComboBox() {
         List<Especialidad> listaEspecialidades = espeData.listarEspecialidades();
         for (Especialidad especialidad : listaEspecialidades) {
             cbEspecialidad.addItem(especialidad.getNombreEspecialidad());
         }
     }
-    
+
     private void activarBotones() {
         btEliminar.setEnabled(true);
         btGuardar.setEnabled(true);
     }
-    
+
     private void desactivarBotones() {
         btEliminar.setEnabled(false);
         btGuardar.setEnabled(false);
     }
 
+    private void activarCampos() {
+        tfApellidoPrestador.setEditable(true);
+        tfNombrePrestador.setEditable(true);
+        tfDomicilioPrestador.setEditable(true);
+        tfMatricula.setEditable(true);
+        tfTelefonoPrestador.setEditable(true);
+        cbEspecialidad.setEnabled(true);
+        rbEstado.setEnabled(true);
+    }
+
+    private void desactivarCampos() {
+        tfApellidoPrestador.setEditable(false);
+        tfNombrePrestador.setEditable(false);
+        tfDomicilioPrestador.setEditable(false);
+        tfMatricula.setEditable(false);
+        tfTelefonoPrestador.setEditable(false);
+        cbEspecialidad.setEnabled(false);
+        rbEstado.setEnabled(false);
+    }
+
+    private void disableStatus() {
+        rbEstado.setEnabled(false);
+    }
+
+    private void enableStatus() {
+        rbEstado.setEnabled(true);
+    }
+
 //****************************************************************************************************************    
 //Modularización del Boton Guardar
-    private void guardarPrestador() {
+    private boolean guardarPrestador() {
         String nombre = tfNombrePrestador.getText();
         String apellido = tfApellidoPrestador.getText();
         String matriculaStr = tfMatricula.getText();
@@ -468,17 +507,18 @@ public class PrestadorView extends javax.swing.JPanel {
         String telefono = tfTelefonoPrestador.getText();
         String especialidadNom = (String) cbEspecialidad.getSelectedItem();
         boolean estado = rbEstado.isSelected();
+        System.out.println("El estado es : " + estado);
 
         // Validar campos vacíos
         if (nombre.isEmpty() || apellido.isEmpty() || matriculaStr.isEmpty() || domicilio.isEmpty() || telefono.isEmpty() || especialidadNom == null) {
-            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.");
-            return;
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios. GUARDAR");
+            return false;
         }
 
         // Parseo matrícula a entero
         int matricula = Integer.parseInt(matriculaStr);
         Especialidad especialidad = espeData.obtenerEspecialidadporNombre(especialidadNom);
-        
+
         if (especialidad != null) {
             Prestador prestador = new Prestador(nombre, apellido, matricula, domicilio, telefono, estado, especialidad);
             prestaData.guardarPrestador(prestador);
@@ -487,13 +527,17 @@ public class PrestadorView extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "La especialidad no fue encontrada.");
         }
+        return true;
     }
-    
+
     private void actualizarPrestador() {
         String idPrestadorText = tfIdPrestador.getText();
+        if (idPrestadorText.isEmpty()) {
+            return;
+        }
         int idPrestador = Integer.parseInt(idPrestadorText);
         Prestador prestadorExistente = prestaData.obtenerPrestadorPorId(idPrestador);
-        
+
         if (prestadorExistente != null) {
             String nombre = tfNombrePrestador.getText();
             String apellido = tfApellidoPrestador.getText();
@@ -505,14 +549,14 @@ public class PrestadorView extends javax.swing.JPanel {
 
             // Validar campos vacíos
             if (nombre.isEmpty() || apellido.isEmpty() || matriculaStr.isEmpty() || domicilio.isEmpty() || especialidadNom == null) {
-                JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.");
+                JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.ACTUALIZAR");
                 return;
             }
 
             // Parseo matrícula a entero
             int matricula = Integer.parseInt(matriculaStr);
             Especialidad especialidad = espeData.obtenerEspecialidadporNombre(especialidadNom);
-            
+
             if (especialidad != null) {
                 //Se settea el prestador con los nuevos datos
                 prestadorExistente.setNombrePrestador(nombre);
@@ -526,6 +570,7 @@ public class PrestadorView extends javax.swing.JPanel {
                 prestaData.actualizarPrestador(prestadorExistente);
                 //JOptionPane.showMessageDialog(null, "Prestador actualizado correctamente.");
                 cleanAll();
+                tfBusqueda.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "La especialidad no fue encontrada.");
             }

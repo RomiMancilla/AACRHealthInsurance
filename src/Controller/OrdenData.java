@@ -49,7 +49,7 @@ public class OrdenData {
                 }
             }
         } catch (SQLIntegrityConstraintViolationException integrity) {
-            JOptionPane.showMessageDialog(null, "No se permiten dos órdenes en la misma fecha para el Afiliado\n" + integrity.getMessage());
+            JOptionPane.showMessageDialog(null, "No se permiten dos órdenes en la misma fecha para un Afiliado\n" + integrity.getMessage());
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
         } catch (SQLException e) {
