@@ -74,6 +74,9 @@
               <Color blue="ff" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new ImagenFondoPanel()"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -94,6 +97,9 @@
               <Color blue="ff" green="cc" red="33" type="rgb"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanelDegrade()"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
