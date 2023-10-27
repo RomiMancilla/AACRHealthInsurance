@@ -547,7 +547,7 @@ public class OrdenView extends javax.swing.JPanel {
                 Date fecha = dcFechaOrden.getDate();
                 FormaDePagoEnum formaPago = (FormaDePagoEnum) cbFormaPago.getSelectedItem();
                 String importeSrt = tfImporteOrden.getText();
-                boolean estado = rbEstadoOrden.isSelected();
+                boolean estado = true;
                 // Verificar si algún campo está vacío
                 if (idAfiliadoSrt.isEmpty() || idPrestadorSrt.isEmpty() || fecha == null || formaPago == null || importeSrt.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Debes completar todos los campos.");
