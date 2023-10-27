@@ -15,6 +15,8 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import java.awt.BorderLayout;
 import java.util.Locale;
 import javax.swing.UIManager;
+import Service.ImagenFondoPanel;
+import Service.JPanelDegrade;
 
 /**
  *
@@ -36,8 +38,8 @@ public class PrincipalView extends javax.swing.JFrame {
     private void initComponents() {
 
         jpBack = new javax.swing.JPanel();
-        jpBanner = new javax.swing.JPanel();
-        jpMenu = new javax.swing.JPanel();
+        jpBanner = new ImagenFondoPanel();
+        jpMenu = new JPanelDegrade();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
