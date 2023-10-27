@@ -27,21 +27,21 @@ import javax.swing.table.TableColumnModel;
  * @author andres
  */
 public class OrdenView extends javax.swing.JPanel {
-    
+
     DefaultTableModel modeloTablaAfiliado = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
         }
     };
-    
+
     DefaultTableModel modeloTablaPrestadores = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
         }
     };
-    
+
     private AfiliadoData afiData = new AfiliadoData();
     private EspecialidadData espeData = new EspecialidadData();
     private OrdenData ordenData = new OrdenData();
@@ -258,6 +258,9 @@ public class OrdenView extends javax.swing.JPanel {
         tfIdPrestador.setEditable(false);
 
         tfBusquedaOrden.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfBusquedaOrdenKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfBusquedaOrdenKeyReleased(evt);
             }
@@ -441,7 +444,9 @@ public class OrdenView extends javax.swing.JPanel {
             List<Prestador> listaPrestadores = prestaData.buscarPrestadoresPorNombreEspecialidad(prestadorBuscado);
             if (listaPrestadores != null) {
                 for (Prestador presta : listaPrestadores) {
-                    modeloTablaPrestadores.addRow(new Object[]{presta.getIdPrestador(), presta.getApellidoPrestador(), presta.getNombrePrestador(), presta.getEspecialidad().getNombreEspecialidad()});
+                    if (presta.getEspecialidad() != null) {
+                        modeloTablaPrestadores.addRow(new Object[]{presta.getIdPrestador(), presta.getApellidoPrestador(), presta.getNombrePrestador(), presta.getEspecialidad().getNombreEspecialidad()});
+                    }
                 }
             }
         }
@@ -477,7 +482,8 @@ public class OrdenView extends javax.swing.JPanel {
     }//GEN-LAST:event_btNuevoActionPerformed
 
     private void tfBusquedaOrdenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaOrdenKeyReleased
-//buscar órden
+        //buscar órden
+        cambiosEnOrden = false;
         cleanGeneral();
         String buscarOrdenSrt = tfBusquedaOrden.getText();
         if (!buscarOrdenSrt.isEmpty()) {
@@ -552,11 +558,11 @@ public class OrdenView extends javax.swing.JPanel {
                     // Obtener objetos Afiliado y Prestador a partir de sus IDs (reemplaza estos métodos con los adecuados)
                     Afiliado afiliado = afiData.obtenerAfiliadoPorId(idAfiliado);
                     Prestador prestador = prestaData.obtenerPrestadorPorId(idPrestador);
-                    
+
                     double importe = Double.parseDouble(importeSrt);
                     LocalDate fechaLocalDate = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     Orden orden = new Orden(fechaLocalDate, formaPago, importe, estado, afiliado, prestador);
-                    
+
                     ordenData.guardarOrden(orden);
                     desactivarBotonGuardar();
                     cleanGeneral();
@@ -577,9 +583,9 @@ public class OrdenView extends javax.swing.JPanel {
             //
             Date fecha = dcFechaOrden.getDate();
             LocalDate fechaLocalDate = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            
+
             FormaDePagoEnum formaPago = (FormaDePagoEnum) cbFormaPago.getSelectedItem();
-            
+
             Orden orden = new Orden(idOrden, fechaLocalDate, formaPago, importe, true, afiliado, prestador);
             ordenData.actualizarOrden(orden);
             cambiosEnOrden = false;
@@ -635,6 +641,9 @@ public class OrdenView extends javax.swing.JPanel {
     private void tfBusquedaAfiliadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfBusquedaAfiliadoFocusLost
     }//GEN-LAST:event_tfBusquedaAfiliadoFocusLost
 
+    private void tfBusquedaOrdenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaOrdenKeyPressed
+    }//GEN-LAST:event_tfBusquedaOrdenKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEliminar;
@@ -673,7 +682,7 @@ public class OrdenView extends javax.swing.JPanel {
         modeloTablaAfiliado.addColumn("Nombre");
         tbAfiliado.setModel(modeloTablaAfiliado);
     }
-    
+
     private void cabeceraTablaPrestadores() {
         modeloTablaPrestadores.addColumn("ID");
         modeloTablaPrestadores.addColumn("Apellido");
@@ -686,7 +695,7 @@ public class OrdenView extends javax.swing.JPanel {
         TableColumn idColumn = columnModel.getColumn(0);
         idColumn.setPreferredWidth(20);
     }
-    
+
     private void cargarTablaAfiliado() {
         cleanTableAfiliado();
         List<Afiliado> listaAfiliado = afiData.listarAfiliados();
@@ -696,7 +705,7 @@ public class OrdenView extends javax.swing.JPanel {
             modeloTablaAfiliado.addRow(new Object[]{afiliado.getIdAfiliado(), afiliado.getApellidoAfiliado(), afiliado.getNombreAfiliado()});
         }
     }
-    
+
     private void cargarTablaPrestadores() {
         cleanTablePrestadores();
         List<Prestador> listaPrestadores = prestaData.listarPrestadores();
@@ -711,21 +720,21 @@ public class OrdenView extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void cargarCombo() {
         FormaDePagoEnum[] formasDePago = FormaDePagoEnum.values();
         DefaultComboBoxModel<FormaDePagoEnum> comboBoxModel = new DefaultComboBoxModel<>(formasDePago);
         cbFormaPago.setModel(comboBoxModel);
     }
-    
+
     private void cleanTableAfiliado() {
         modeloTablaAfiliado.setRowCount(0);
     }
-    
+
     private void cleanTablePrestadores() {
         modeloTablaPrestadores.setRowCount(0);
     }
-    
+
     private void cleanGeneral() {
         //tfBusquedaOrden.setText("");
         tfBusquedaAfiliado.setText("");
@@ -741,23 +750,23 @@ public class OrdenView extends javax.swing.JPanel {
         cargarTablaAfiliado();
         cargarTablaPrestadores();
     }
-    
+
     private void activarBotonEliminar() {
         btEliminar.setEnabled(true);
     }
-    
+
     private void desactivarBotonEliminar() {
         btEliminar.setEnabled(false);
     }
-    
+
     private void activarBotonGuardar() {
         btGuardar.setEnabled(true);
     }
-    
+
     private void desactivarBotonGuardar() {
         btGuardar.setEnabled(false);
     }
-    
+
     public void setFocusTfBusquedaOrden() {
         tfBusquedaOrden.requestFocus();
     }

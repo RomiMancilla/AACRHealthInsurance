@@ -236,6 +236,7 @@
     <Component class="javax.swing.JRadioButton" name="rbEstado">
       <Properties>
         <Property name="text" type="java.lang.String" value="Estado"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
