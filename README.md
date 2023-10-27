@@ -1,4 +1,4 @@
- <h1 style="color: skyblue;">AACRHealthInsurance</h1>
+ <input type="color" value="#ff0000" /> AACRHealthInsurance
 
 **Proyecto Final 10-2023**
 
