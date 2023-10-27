@@ -31,7 +31,7 @@ public class PrestadorData {
             ps.setInt(3, prestador.getMatricula());
             ps.setString(4, prestador.getDomicilioPrestador());
             ps.setString(5, prestador.getTelefonoPrestador());
-            ps.setBoolean(6, true);
+            ps.setBoolean(6, prestador.isEstado());
             ps.setInt(7, prestador.getEspecialidad().getIdEspecialidad());
             int exito = ps.executeUpdate();
             if (exito > 0) {

@@ -123,6 +123,7 @@ public class PrestadorView extends javax.swing.JPanel {
         });
 
         rbEstado.setText("Estado");
+        rbEstado.setEnabled(false);
 
         jLabel2.setText("IdPrestador");
 
@@ -342,6 +343,7 @@ public class PrestadorView extends javax.swing.JPanel {
                 // Establece la especialidad en el JComboBox
                 cbEspecialidad.setSelectedItem(prestador.getEspecialidad().getNombreEspecialidad());
                 activarCampos();
+                disableStatus();
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró esa matrícula");
             }
@@ -373,18 +375,22 @@ public class PrestadorView extends javax.swing.JPanel {
         activarBotones();
         activarCampos();
         tfBusqueda.setText("");
+        rbEstado.setEnabled(true);
     }//GEN-LAST:event_btNuevoActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         //se toma como referencia el contenido del TextField idPrestador
         String idPrestadorText = tfIdPrestador.getText();
         if (idPrestadorText.isEmpty()) {
-            guardarPrestador();
-            desactivarCampos();
+            boolean exito = guardarPrestador();
+            if (exito) {
+                desactivarCampos();
+                disableStatus();
+            }
         } else {
             actualizarPrestador();
             desactivarCampos();
-            
+            disableStatus();
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 
@@ -462,8 +468,8 @@ public class PrestadorView extends javax.swing.JPanel {
         btEliminar.setEnabled(false);
         btGuardar.setEnabled(false);
     }
-    
-    private void activarCampos(){
+
+    private void activarCampos() {
         tfApellidoPrestador.setEditable(true);
         tfNombrePrestador.setEditable(true);
         tfDomicilioPrestador.setEditable(true);
@@ -472,20 +478,28 @@ public class PrestadorView extends javax.swing.JPanel {
         cbEspecialidad.setEnabled(true);
         rbEstado.setEnabled(true);
     }
-    
+
     private void desactivarCampos() {
-    tfApellidoPrestador.setEditable(false);
-    tfNombrePrestador.setEditable(false);
-    tfDomicilioPrestador.setEditable(false);
-    tfMatricula.setEditable(false);
-    tfTelefonoPrestador.setEditable(false);
-    cbEspecialidad.setEnabled(false); 
-    rbEstado.setEnabled(false);
-}
+        tfApellidoPrestador.setEditable(false);
+        tfNombrePrestador.setEditable(false);
+        tfDomicilioPrestador.setEditable(false);
+        tfMatricula.setEditable(false);
+        tfTelefonoPrestador.setEditable(false);
+        cbEspecialidad.setEnabled(false);
+        rbEstado.setEnabled(false);
+    }
+
+    private void disableStatus() {
+        rbEstado.setEnabled(false);
+    }
+
+    private void enableStatus() {
+        rbEstado.setEnabled(true);
+    }
 
 //****************************************************************************************************************    
 //Modularización del Boton Guardar
-    private void guardarPrestador() {
+    private boolean guardarPrestador() {
         String nombre = tfNombrePrestador.getText();
         String apellido = tfApellidoPrestador.getText();
         String matriculaStr = tfMatricula.getText();
@@ -493,11 +507,12 @@ public class PrestadorView extends javax.swing.JPanel {
         String telefono = tfTelefonoPrestador.getText();
         String especialidadNom = (String) cbEspecialidad.getSelectedItem();
         boolean estado = rbEstado.isSelected();
+        System.out.println("El estado es : " + estado);
 
         // Validar campos vacíos
         if (nombre.isEmpty() || apellido.isEmpty() || matriculaStr.isEmpty() || domicilio.isEmpty() || telefono.isEmpty() || especialidadNom == null) {
-            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.");
-            return;
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios. GUARDAR");
+            return false;
         }
 
         // Parseo matrícula a entero
@@ -512,10 +527,14 @@ public class PrestadorView extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "La especialidad no fue encontrada.");
         }
+        return true;
     }
 
     private void actualizarPrestador() {
         String idPrestadorText = tfIdPrestador.getText();
+        if (idPrestadorText.isEmpty()) {
+            return;
+        }
         int idPrestador = Integer.parseInt(idPrestadorText);
         Prestador prestadorExistente = prestaData.obtenerPrestadorPorId(idPrestador);
 
@@ -530,7 +549,7 @@ public class PrestadorView extends javax.swing.JPanel {
 
             // Validar campos vacíos
             if (nombre.isEmpty() || apellido.isEmpty() || matriculaStr.isEmpty() || domicilio.isEmpty() || especialidadNom == null) {
-                JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.");
+                JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.ACTUALIZAR");
                 return;
             }
 

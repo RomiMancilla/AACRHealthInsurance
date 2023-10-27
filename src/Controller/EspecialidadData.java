@@ -140,7 +140,7 @@ public class EspecialidadData {
 
     public List<Especialidad> obtenerEspecialidadesPorNombre(String nombre) {
         List<Especialidad> listadoEspecialidades = new ArrayList<>();
-        String sql = "SELECT * FROM especialidades Where nombreEspecialidad LIKE ?";
+        String sql = "SELECT * FROM especialidades Where nombreEspecialidad LIKE ? AND estado=1";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, nombre + "%");
             try (ResultSet rs = ps.executeQuery()) {
