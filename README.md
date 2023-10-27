@@ -68,7 +68,13 @@ En la eliminación, se aplica un soft delete, para tener la opción de activarlo
 **Colaboradores:**
 
 Andrés Quiroga, Adrián Zuloaga, Cecilia Morales y Romina Mancilla
-
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
 
 
 
