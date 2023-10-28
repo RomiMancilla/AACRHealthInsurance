@@ -137,7 +137,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jpPanelDinamico.setBackground(new java.awt.Color(102, 102, 255));
+        jpPanelDinamico.setBackground(new java.awt.Color(102, 153, 255));
 
         javax.swing.GroupLayout jpPanelDinamicoLayout = new javax.swing.GroupLayout(jpPanelDinamico);
         jpPanelDinamico.setLayout(jpPanelDinamicoLayout);
@@ -270,7 +270,7 @@ public class PrincipalView extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //FlatMacDarkLaf.setup();
+        FlatMacDarkLaf.setup();
         //FlatMacLightLaf.setup();
         //FlatMaterialLighterIJTheme.setup();
         //FlatLightLaf.setup();

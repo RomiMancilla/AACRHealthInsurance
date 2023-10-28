@@ -19,7 +19,7 @@ public class ImagenFondoPanel extends JPanel {
     private Image imagen;
 
     public ImagenFondoPanel() {
-        imagen = new ImageIcon(getClass().getResource("/Images/BannerTest1.png")).getImage();
+        imagen = new ImageIcon(getClass().getResource("/Images/BannerTest6.png")).getImage();
     }
 
     @Override

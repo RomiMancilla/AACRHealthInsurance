@@ -18,9 +18,9 @@ public class JPanelDegrade extends JPanel {
         int width = getWidth();
         int height = getHeight();
 
-        Color color1 = new Color(255, 254, 255);
-        Color color2 = new Color(102, 102, 255);
-        GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
+        Color color1 = new Color(111, 177, 252);
+        Color color2 = new Color(2, 27, 121);
+        GradientPaint gp = new GradientPaint(0, 0, color1,180, height, color2);
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, width, height);
     }
