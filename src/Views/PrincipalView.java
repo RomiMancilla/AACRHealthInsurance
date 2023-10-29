@@ -17,6 +17,10 @@ import java.util.Locale;
 import javax.swing.UIManager;
 import Service.ImagenFondoPanel;
 import Service.JPanelDegrade;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -24,8 +28,11 @@ import Service.JPanelDegrade;
  */
 public class PrincipalView extends javax.swing.JFrame {
 
+    private boolean claro = true;
+
     public PrincipalView() {
         initComponents();
+        mostrarFecha();
     }
 
     /**
@@ -45,6 +52,10 @@ public class PrincipalView extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lbFecha = new javax.swing.JLabel();
+        lbDia = new javax.swing.JLabel();
+        rbClaro = new javax.swing.JRadioButton();
         jpPanelDinamico = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,6 +118,50 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setOpaque(false);
+
+        lbFecha.setFont(new java.awt.Font("Cantarell", 1, 30)); // NOI18N
+        lbFecha.setForeground(new java.awt.Color(255, 255, 255));
+        lbFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lbDia.setFont(new java.awt.Font("Cantarell", 1, 30)); // NOI18N
+        lbDia.setForeground(new java.awt.Color(255, 255, 255));
+        lbDia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(lbDia, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(lbDia, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        rbClaro.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
+        rbClaro.setForeground(new java.awt.Color(255, 255, 255));
+        rbClaro.setText("Claro");
+        rbClaro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rbClaro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lightMode.png"))); // NOI18N
+        rbClaro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbClaroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpMenuLayout = new javax.swing.GroupLayout(jpMenu);
         jpMenu.setLayout(jpMenuLayout);
         jpMenuLayout.setHorizontalGroup(
@@ -119,12 +174,20 @@ public class PrincipalView extends javax.swing.JFrame {
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMenuLayout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rbClaro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
         jpMenuLayout.setVerticalGroup(
             jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMenuLayout.createSequentialGroup()
-                .addGap(166, 166, 166)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
@@ -134,7 +197,9 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addComponent(rbClaro)
+                .addGap(28, 28, 28))
         );
 
         jpPanelDinamico.setBackground(new java.awt.Color(102, 153, 255));
@@ -147,7 +212,7 @@ public class PrincipalView extends javax.swing.JFrame {
         );
         jpPanelDinamicoLayout.setVerticalGroup(
             jpPanelDinamicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 663, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpBackLayout = new javax.swing.GroupLayout(jpBack);
@@ -242,6 +307,30 @@ public class PrincipalView extends javax.swing.JFrame {
         ordenView.setFocusTfBusquedaOrden();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void rbClaroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbClaroActionPerformed
+        // Cambia el texto del JRadioButton
+        if (claro) {
+            rbClaro.setText("Oscuro");
+
+            // Carga el nuevo ícono
+            ImageIcon nuevoIcono = new ImageIcon(getClass().getResource("/Images/darkMode.png"));
+
+            // Asigna el ícono al JRadioButton
+            rbClaro.setIcon(nuevoIcono);
+            FlatMacDarkLaf.setup();
+           cambiarTema("com.formdev.flatlaf.FlatDarkLaf");
+            claro = false;
+        } else {
+            rbClaro.setText("Claro");
+            ImageIcon iconoClaro = new ImageIcon(getClass().getResource("/Images/lightMode.png"));
+            rbClaro.setIcon(iconoClaro);
+            FlatMacLightLaf.setup();
+            cambiarTema("com.formdev.flatlaf.FlatLightLaf");
+            claro = true;
+        }
+       
+    }//GEN-LAST:event_rbClaroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -270,12 +359,12 @@ public class PrincipalView extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        FlatMacDarkLaf.setup();
-        //FlatMacLightLaf.setup();
+        //FlatMacDarkLaf.setup();
+        FlatMacLightLaf.setup();
         //FlatMaterialLighterIJTheme.setup();
         //FlatLightLaf.setup();
-        //UIManager.put("Button.arc", 999);
-        //UIManager.put( "Component.arrowType", "chevron" );
+        UIManager.put("Button.arc", 999);
+        UIManager.put("Component.arrowType", "chevron");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -290,9 +379,44 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jpBack;
     private javax.swing.JPanel jpBanner;
     private javax.swing.JPanel jpMenu;
     private javax.swing.JPanel jpPanelDinamico;
+    private javax.swing.JLabel lbDia;
+    private javax.swing.JLabel lbFecha;
+    private javax.swing.JRadioButton rbClaro;
     // End of variables declaration//GEN-END:variables
+
+    private void mostrarFecha() {
+        // Obtener la fecha actual
+        Date fechaActual = new Date();
+
+        // Formato personalizado para mostrar el día de la semana
+        SimpleDateFormat formatoDiaSemana = new SimpleDateFormat("EEEE");
+        String diaSemana = formatoDiaSemana.format(fechaActual);
+        // Convertir solo la primera letra a mayúscula
+        diaSemana = diaSemana.substring(0, 1).toUpperCase() + diaSemana.substring(1);
+
+        // Crear un formato para la fecha
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+
+        // Obtener la fecha formateada
+        String textoFecha = formatoFecha.format(fechaActual);
+
+        // Establecer el texto en el JLabel
+        lbDia.setText(diaSemana);
+        lbFecha.setText(textoFecha);
+    }
+    
+    private void cambiarTema(String tema) {
+    try {
+        UIManager.setLookAndFeel(tema);
+        SwingUtilities.updateComponentTreeUI(this); // Reemplaza "this" con tu ventana principal
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
 }
