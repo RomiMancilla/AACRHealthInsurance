@@ -28,7 +28,7 @@ public class ImagenFondoPanel extends JPanel {
         int panelWidth = getWidth();
         int imageWidth = imagen.getWidth(this);
 
-        // Dibuja la imagen en la esquina superior izquierda y extiéndela hacia la derecha
+        // Dibuja la imagen en la esquina superior izquierda...
         g.drawImage(imagen, 0, 0, imageWidth, getHeight(), this);
     }
 }
