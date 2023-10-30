@@ -5,7 +5,7 @@
 **Somos Andrés, Adrián, Ceci y Romi,  que como todos, estamos un poco cuerdos y un poco locos, no sé si más lo último que lo primero, pero por coincidencias de la vida, nos encontramos programando juntos esta aplicación, poniendo el corazón y dejando lo mejor en este proyecto.
 Más allá de los códigos sabemos que lo más importante son las personas, desde diferentes lugares, en distintas épocas, siempre seremos usuarios, y consideramos que el tiempo es uno de los haberes más valiosos, por eso siempre buscamos desarrollar aplicaciones que sean sencillas y prácticas, rápidas y confiables, que sean también amigables, esos fueron los principios que nos guiaron en este desarrollo.** 
 
-**Nuestro cliente es una obra social, que necesitaba un sistema que permitiera tener registros de Afiliados y Prestadores, y que a la vez emitiera órdenes médicas y generara reportes actualizados de los mismos, así nació la idea del sistema ACCR Health Insurance, ¿nos acompañás a hacer un tour por sus oficinas? Tenemos 5 paradas, y podés volver a ellas cada vez que lo necesites.** 
+**Nuestro cliente es una obra social, que necesitaba un sistema que permitiera tener registros de afiliados y prestadores, y que a la vez emitiera órdenes médicas y generara reportes actualizados de los mismos, así nació la idea del sistema ACCR Health Insurance, ¿nos acompañás a hacer un tour por sus oficinas? Tenemos 5 paradas, y podés volver a ellas cada vez que lo necesites.** 
 
 ![LOGO PRESENTACION GITHUB](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/57fc7eed-2939-4233-8a34-a2fa785656ce)
 
