@@ -10,7 +10,8 @@ Más allá de los códigos sabemos que lo más importante son las personas, desd
 ![LOGO PRESENTACION GITHUB](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/57fc7eed-2939-4233-8a34-a2fa785656ce)
 
 
-**Cuando ingreses verás a tu izquierda cinco opciones, cada una presta servicios diferentes. Al final del menú podés configurar la vista de tu pantalla en claro o en oscuro, aunque en las imágenes de muestra utilizamos el modo claro, en el uso habitual te recomendamos el modo oscuro para cuidar tu visión! A continuación te detallamos cuáles son las opciones y qué podrás hacer en cada una de ellas, ¿nos acompañás?**
+**Cuando ingreses verás a tu izquierda cinco opciones, cada una presta servicios diferentes. Al final del menú podés configurar la vista de tu pantalla en claro o en oscuro, aunque en las imágenes de muestra utilizamos el modo claro, en el uso habitual te recomendamos el modo oscuro para cuidar tu visión! A continuación te detallamos cuáles son las opciones y qué podrás hacer en cada una de ellas,    
+¿nos acompañás?**
 
 
 
