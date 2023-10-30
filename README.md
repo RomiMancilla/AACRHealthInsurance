@@ -5,12 +5,12 @@
 **Somos Andrés, Adrián, Ceci y Romi,  que como todos, estamos un poco cuerdos y un poco locos, no sé si más lo último que lo primero, pero por coincidencias de la vida, nos encontramos programando juntos esta aplicación, poniendo el corazón y dejando lo mejor en este proyecto.
 Más allá de los códigos sabemos que lo más importante son las personas, desde diferentes lugares, en distintas épocas, siempre seremos usuarios, y consideramos que el tiempo es uno de los haberes más valiosos, por eso siempre buscamos desarrollar aplicaciones que sean sencillas y prácticas, rápidas y confiables, que sean también amigables, esos fueron los principios que nos guiaron en este desarrollo.** 
 
-**Nuestro cliente es una obra social, que necesitaba un sistema que permitiera tener registros de afiliados y prestadores, y que a la vez emitiera órdenes médicas y generara reportes actualizados de los mismos, así nació la idea del sistema AACR Health Insurance, ¿nos acompañás a hacer un tour por sus oficinas? Tenemos 5 paradas, y podés volver a ellas cada vez que lo necesites.** 
+**Nuestro cliente es una obra social, que necesitaba un sistema que permitiera tener registros de afiliados y prestadores, y que a la vez emitiera órdenes médicas y generara reportes actualizados de los mismos, así nació la idea del sistema AACR Health Insurance, ¿te animás a hacer un tour por sus oficinas? Tenemos 5 paradas, y podés volver a ellas cada vez que lo necesites.** 
 
 ![LOGO PRESENTACION GITHUB](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/57fc7eed-2939-4233-8a34-a2fa785656ce)
 
 
-**Cuando ingreses verás a tu izquierda cinco opciones, cada una presta servicios diferentes. Al final del menú podés configurar la vista de tu pantalla en claro o en oscuro, te recomendamos el modo oscuro para cuidar tu visión! A continuación te detallamos cuáles son las opciones y qué podrás hacer en cada una de ellas, empecemos!**
+**Cuando ingreses verás a tu izquierda cinco opciones, cada una presta servicios diferentes. Al final del menú podés configurar la vista de tu pantalla en claro o en oscuro, te recomendamos el modo oscuro para cuidar tu visión! A continuación te detallamos cuáles son las opciones y qué podrás hacer en cada una de ellas, ¿nos acompañás?**
 
 
 
