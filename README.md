@@ -50,7 +50,8 @@ ${\color{darkblue}Prestadores}$
 Podrás buscar prestadores por matrícula, generar nuevos prestadores y guardarlos, editarlos y/o eliminarlos, cada prestador tendrá información con sus datos personales.
 
 
-![PRESTADORES PRESENTACION GITHUB](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/0073e578-8f69-4e5f-925e-a84b8e6a4807)
+![PRESTADORES PRESENTACION GITHUB](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/d569aafe-4508-490c-9477-c1f3d4b9477f)
+
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
