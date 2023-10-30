@@ -1,10 +1,12 @@
 package Service;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -25,6 +27,9 @@ public class Pdf {
             PdfWriter.getInstance(document, new FileOutputStream("Reporte.pdf"));
             document.open();
 
+            Image imagen = Image.getInstance("src/Images/informes.png");
+            document.add(imagen);
+
             switch (index) {
                 case 1:
                     generarEncabezadoLIstadoAfiliados(document);
@@ -44,6 +49,9 @@ public class Pdf {
 
             for (int i = 0; i < table.getColumnCount(); i++) {
                 PdfPCell cell = new PdfPCell(new Phrase(table.getColumnName(i)));
+                // Aplicar color de fondo a fila encabezado
+                cell.setBackgroundColor(new BaseColor(200, 200, 200)); // Fondo gris claro
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 pdfTable.addCell(cell);
             }
 
@@ -119,7 +127,7 @@ public class Pdf {
         //agrego salto de linea
         document.add(Chunk.NEWLINE);
     }
-    
+
     public static void generarEncabezadoListadoDeOrdenes(Document document) throws DocumentException {
         Paragraph header = new Paragraph("Listado de Ordenes por Fecha", new Font(Font.FontFamily.COURIER, 18, Font.NORMAL));
         header.setAlignment(Element.ALIGN_CENTER);

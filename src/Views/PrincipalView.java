@@ -78,7 +78,7 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jpMenu.setBackground(new java.awt.Color(51, 204, 255));
 
-        jButton1.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
         jButton1.setText("Afiliados");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +86,7 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
         jButton2.setText("Prestadores");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +94,7 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
         jButton3.setText("Informes");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +102,7 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
         jButton4.setText("Especialidades");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +110,7 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Cantarell", 0, 20)); // NOI18N
         jButton5.setText("Órdenes");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,11 +120,12 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jPanel1.setOpaque(false);
 
-        lbFecha.setFont(new java.awt.Font("Cantarell", 1, 30)); // NOI18N
+        lbFecha.setBackground(new java.awt.Color(204, 204, 204));
+        lbFecha.setFont(new java.awt.Font("Cantarell", 1, 26)); // NOI18N
         lbFecha.setForeground(new java.awt.Color(255, 255, 255));
         lbFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        lbDia.setFont(new java.awt.Font("Cantarell", 1, 30)); // NOI18N
+        lbDia.setFont(new java.awt.Font("Cantarell", 1, 26)); // NOI18N
         lbDia.setForeground(new java.awt.Color(255, 255, 255));
         lbDia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -134,21 +135,21 @@ public class PrincipalView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(14, 14, 14)
                 .addComponent(lbDia, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(14, 14, 14)
                 .addComponent(lbDia, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(26, 26, 26))
         );
 
         rbClaro.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
@@ -189,15 +190,15 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
-                .addGap(18, 18, 18)
+                .addGap(41, 41, 41)
                 .addComponent(jButton3)
-                .addGap(214, 214, 214)
+                .addGap(129, 129, 129)
                 .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addComponent(jButton2)
-                .addGap(18, 18, 18)
+                .addGap(41, 41, 41)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
                 .addComponent(rbClaro)
                 .addGap(28, 28, 28))
         );
@@ -318,7 +319,7 @@ public class PrincipalView extends javax.swing.JFrame {
             // Asigna el ícono al JRadioButton
             rbClaro.setIcon(nuevoIcono);
             FlatMacDarkLaf.setup();
-           cambiarTema("com.formdev.flatlaf.FlatDarkLaf");
+            cambiarTema("com.formdev.flatlaf.FlatDarkLaf");
             claro = false;
         } else {
             rbClaro.setText("Claro");
@@ -328,7 +329,7 @@ public class PrincipalView extends javax.swing.JFrame {
             cambiarTema("com.formdev.flatlaf.FlatLightLaf");
             claro = true;
         }
-       
+
     }//GEN-LAST:event_rbClaroActionPerformed
 
     /**
@@ -365,6 +366,12 @@ public class PrincipalView extends javax.swing.JFrame {
         //FlatLightLaf.setup();
         UIManager.put("Button.arc", 999);
         UIManager.put("Component.arrowType", "chevron");
+
+//        UIManager.put("Button.arc", 50);
+        UIManager.put("Component.arc", 18);//ComboBox redondeado
+//        UIManager.put("ProgressBar.arc", 50);
+        UIManager.put("TextComponent.arc", 10);//Redondea TextField
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -409,14 +416,14 @@ public class PrincipalView extends javax.swing.JFrame {
         lbDia.setText(diaSemana);
         lbFecha.setText(textoFecha);
     }
-    
+
     private void cambiarTema(String tema) {
-    try {
-        UIManager.setLookAndFeel(tema);
-        SwingUtilities.updateComponentTreeUI(this); // Reemplaza "this" con tu ventana principal
-    } catch (Exception e) {
-        e.printStackTrace();
+        try {
+            UIManager.setLookAndFeel(tema);
+            SwingUtilities.updateComponentTreeUI(this); // Reemplaza "this" con tu ventana principal
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
 
 }
