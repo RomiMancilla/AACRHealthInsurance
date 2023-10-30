@@ -588,7 +588,7 @@ public class PrestadorView extends javax.swing.JPanel {
 
         // Validar campos vacíos
         if (nombre.isEmpty() || apellido.isEmpty() || matriculaStr.isEmpty() || domicilio.isEmpty() || telefono.isEmpty() || especialidadNom == null) {
-            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios. GUARDAR");
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.");
             return false;
         }
 
@@ -626,7 +626,7 @@ public class PrestadorView extends javax.swing.JPanel {
 
             // Validar campos vacíos
             if (nombre.isEmpty() || apellido.isEmpty() || matriculaStr.isEmpty() || domicilio.isEmpty() || especialidadNom == null) {
-                JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.ACTUALIZAR");
+                JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos obligatorios.");
                 return;
             }
 
