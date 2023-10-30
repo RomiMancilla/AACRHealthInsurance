@@ -429,6 +429,7 @@ public class PrestadorView extends javax.swing.JPanel {
                 cleanAll();
                 desactivarCampos();
                 tfBusqueda.setText("");
+                setFocusTfBusqueda();
             }
         } else {
             JOptionPane.showMessageDialog(null, "El campo IdPrestador está vacío");
@@ -442,6 +443,7 @@ public class PrestadorView extends javax.swing.JPanel {
         activarCampos();
         tfBusqueda.setText("");
         rbEstado.setEnabled(true);
+        tfNombrePrestador.requestFocus();
     }//GEN-LAST:event_btNuevoActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
@@ -452,11 +454,13 @@ public class PrestadorView extends javax.swing.JPanel {
             if (exito) {
                 desactivarCampos();
                 disableStatus();
+                tfBusqueda.requestFocus();
             }
         } else {
             actualizarPrestador();
             desactivarCampos();
             disableStatus();
+            tfBusqueda.requestFocus();
         }
     }//GEN-LAST:event_btGuardarActionPerformed
 

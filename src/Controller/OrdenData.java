@@ -19,15 +19,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OrdenData {
-    
+
     private Connection conn = null;
     AfiliadoData afiData = new AfiliadoData();
     PrestadorData prestaData = new PrestadorData();
-    
+
     public OrdenData() {
         conn = ConnectionDB.obtenerConexion();
     }
-    
+
     public void guardarOrden(Orden orden) {
         String sql = "INSERT INTO ordenes (fecha, formaPago, importe, estado, idAfiliado, IdPrestador) VALUES (?,?,?,?,?,?);";
         try (PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -56,7 +56,7 @@ public class OrdenData {
             JOptionPane.showMessageDialog(null, "Error al acceder a orden.");
         }
     }
-    
+
     public Orden buscarOrdenPorID(int idOrden) {
         Orden orden = null;
         String sql = "SELECT * FROM ordenes WHERE idOrden =? AND estado =1;";
@@ -69,7 +69,7 @@ public class OrdenData {
                     orden.setFecha(rs.getDate("fecha").toLocalDate());
                     orden.setFormaDePago(FormaDePagoEnum.valueOf(rs.getString("formaPago")));
                     orden.setImporte(rs.getDouble("importe"));
-                    orden.setEstado(rs.getBoolean("estado"));
+                    orden.setEstado(rs.getBoolean("estado"));               
                     orden.setAfiliado(afiData.obtenerAfiliadoPorId(rs.getInt("idAfiliado")));
                     orden.setPrestador(prestaData.obtenerPrestadorPorId(rs.getInt("idPrestador")));
                 } else {
@@ -83,7 +83,7 @@ public class OrdenData {
         }
         return orden;
     }
-    
+
     public void eliminarOrden(int idOrden) {
         try {
             if (!existeOrden(idOrden)) {//Si no existe el ID se termina la ejecución del método
@@ -104,12 +104,12 @@ public class OrdenData {
             }
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a ordenes." + ex.getMessage());
         }
     }
-    
+
     public void actualizarOrden(Orden orden) {
         String sql = "UPDATE ordenes SET fecha=?, formaPago=?, importe=?, idAfiliado=?, idPrestador=? WHERE idOrden=?;";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -131,7 +131,7 @@ public class OrdenData {
             JOptionPane.showMessageDialog(null, "Error al acceder a ordenes. " + e.getMessage());
         }
     }
-    
+
     public List<Orden> listaDeOrdenes() {
         List<Orden> lista = new ArrayList<>();
         String sql = "SELECT * FROM ordenes WHERE estado=1;";
@@ -170,7 +170,7 @@ public class OrdenData {
             return false;
         }
     }
-    
+
     private boolean existeOrden(int idOrden) throws SQLException {
         String sql = "SELECT idOrden FROM ordenes WHERE idOrden = ?;";
         PreparedStatement ps = conn.prepareStatement(sql);
