@@ -21,6 +21,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import Service.CustomJTable;
 
 /**
  *
@@ -72,9 +73,9 @@ public class OrdenView extends javax.swing.JPanel {
         tfBusquedaAfiliado = new javax.swing.JTextField();
         tfBuscarPrestador = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbAfiliado = new javax.swing.JTable();
+        tbAfiliado = new CustomJTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbPrestadores = new javax.swing.JTable();
+        tbPrestadores = new CustomJTable();
         dcFechaOrden = new com.toedter.calendar.JDateChooser();
         cbFormaPago = new javax.swing.JComboBox<>();
         tfIdOrdenes = new javax.swing.JTextField();

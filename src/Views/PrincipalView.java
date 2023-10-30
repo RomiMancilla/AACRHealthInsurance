@@ -17,6 +17,7 @@ import java.util.Locale;
 import javax.swing.UIManager;
 import Service.ImagenFondoPanel;
 import Service.JPanelDegrade;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
@@ -56,6 +57,7 @@ public class PrincipalView extends javax.swing.JFrame {
         lbFecha = new javax.swing.JLabel();
         lbDia = new javax.swing.JLabel();
         rbClaro = new javax.swing.JRadioButton();
+        lbGitHubLink = new javax.swing.JLabel();
         jpPanelDinamico = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -163,25 +165,34 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
 
+        lbGitHubLink.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbGitHubLink.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/github-mark.png"))); // NOI18N
+        lbGitHubLink.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbGitHubLinkMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpMenuLayout = new javax.swing.GroupLayout(jpMenu);
         jpMenu.setLayout(jpMenuLayout);
         jpMenuLayout.setHorizontalGroup(
             jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpMenuLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpMenuLayout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(rbClaro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
+            .addGroup(jpMenuLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbGitHubLink, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         jpMenuLayout.setVerticalGroup(
             jpMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +209,9 @@ public class PrincipalView extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(41, 41, 41)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addGap(54, 54, 54)
+                .addComponent(lbGitHubLink)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(rbClaro)
                 .addGap(28, 28, 28))
         );
@@ -332,6 +345,10 @@ public class PrincipalView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_rbClaroActionPerformed
 
+    private void lbGitHubLinkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbGitHubLinkMouseClicked
+        abrirEnlace("https://github.com/RomiMancilla/AACRHealthInsurance");
+    }//GEN-LAST:event_lbGitHubLinkMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -393,6 +410,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JPanel jpPanelDinamico;
     private javax.swing.JLabel lbDia;
     private javax.swing.JLabel lbFecha;
+    private javax.swing.JLabel lbGitHubLink;
     private javax.swing.JRadioButton rbClaro;
     // End of variables declaration//GEN-END:variables
 
@@ -422,6 +440,14 @@ public class PrincipalView extends javax.swing.JFrame {
             UIManager.setLookAndFeel(tema);
             SwingUtilities.updateComponentTreeUI(this); // Reemplaza "this" con tu ventana principal
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void abrirEnlace(String url) {
+        try {
+            Runtime.getRuntime().exec("xdg-open " + url);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
