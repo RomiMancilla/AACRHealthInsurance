@@ -310,6 +310,8 @@ public class EspecialidadView extends javax.swing.JPanel {
                 desactivarCampoNombre();
                 cleanAll();
                 tbEpecialidades.clearSelection();
+            }else{
+                JOptionPane.showMessageDialog(null, "El campo Nombre no puede estar vacio.");
             }
         }
 

@@ -541,7 +541,7 @@ public class OrdenView extends javax.swing.JPanel {
     }//GEN-LAST:event_btNuevoActionPerformed
 
     private void tfBusquedaOrdenKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBusquedaOrdenKeyReleased
-        //buscar órden
+        //buscar órden cada vez que se digite
         cambiosEnOrden = false;
         cleanGeneral();
         String buscarOrdenSrt = tfBusquedaOrden.getText();
@@ -625,6 +625,7 @@ public class OrdenView extends javax.swing.JPanel {
                     ordenData.guardarOrden(orden);
                     desactivarBotonGuardar();
                     cleanGeneral();
+                    setFocusTfBusquedaOrden();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Presione \"Nuevo\" para agregar una orden");

@@ -388,11 +388,13 @@ public class AfiliadoView extends javax.swing.JPanel {
                 afiData.eliminarAfiliado(id);
                 cleanAll();
                 desactivarCampos();
+                setFocusTfBusqueda();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe cargar un Afiliado.");
             cleanAll();
             desactivarCampos();
+            setFocusTfBusqueda();
         }
     }//GEN-LAST:event_btEliminarActionPerformed
 
@@ -403,6 +405,7 @@ public class AfiliadoView extends javax.swing.JPanel {
     private void btNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNuevoActionPerformed
         cleanAll();
         activarCampos();
+        tfDni.requestFocus();
     }//GEN-LAST:event_btNuevoActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
@@ -419,6 +422,7 @@ public class AfiliadoView extends javax.swing.JPanel {
                     cleanAll();
                     desactivarCampos();
                     cbEditar.setSelected(false);
+                    setFocusTfBusqueda();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Por favor, cargue un ID.");
@@ -431,6 +435,7 @@ public class AfiliadoView extends javax.swing.JPanel {
                     afiData.guardarAfiliado(afiliado);
                     cleanAll();
                     desactivarCampos();
+                    setFocusTfBusqueda();
                 }
             }else JOptionPane.showMessageDialog(null, "Presione Nuevo o Editar para hacer cambios.");
         }
@@ -514,7 +519,7 @@ public class AfiliadoView extends javax.swing.JPanel {
         tfNombre.setEditable(true);
         tfDireccion.setEditable(true);
         tfTelefono.setEditable(true);
-        rbEstado.setEnabled(true);
+        //rbEstado.setEnabled(true);
     }
 
     private void desactivarCampos() {
