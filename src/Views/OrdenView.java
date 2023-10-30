@@ -219,7 +219,7 @@ public class OrdenView extends javax.swing.JPanel {
         rbEstadoOrden.setText("Estado");
         rbEstadoOrden.setEnabled(false);
 
-        btGuardar.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        btGuardar.setFont(new java.awt.Font("Cantarell", 0, 17)); // NOI18N
         btGuardar.setText("Guardar");
         btGuardar.setEnabled(false);
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +228,7 @@ public class OrdenView extends javax.swing.JPanel {
             }
         });
 
-        btNuevo.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        btNuevo.setFont(new java.awt.Font("Cantarell", 0, 17)); // NOI18N
         btNuevo.setText("Nuevo");
         btNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +236,7 @@ public class OrdenView extends javax.swing.JPanel {
             }
         });
 
-        btEliminar.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        btEliminar.setFont(new java.awt.Font("Cantarell", 0, 17)); // NOI18N
         btEliminar.setText("Eliminar");
         btEliminar.setEnabled(false);
         btEliminar.addActionListener(new java.awt.event.ActionListener() {

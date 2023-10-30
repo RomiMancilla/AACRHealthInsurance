@@ -34,6 +34,7 @@ public class PrincipalView extends javax.swing.JFrame {
     public PrincipalView() {
         initComponents();
         mostrarFecha();
+        jButton5ActionPerformed(null); // Simula un clic en el botón
     }
 
     /**
@@ -285,6 +286,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jpPanelDinamico.add(prestadorView, BorderLayout.CENTER);
         jpPanelDinamico.revalidate();
         jpPanelDinamico.repaint();
+        prestadorView.setFocusTfBusqueda();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -307,6 +309,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jpPanelDinamico.add(especialidadView, BorderLayout.CENTER);
         jpPanelDinamico.revalidate();
         jpPanelDinamico.repaint();
+        especialidadView.setFocusTfBusqueda();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
