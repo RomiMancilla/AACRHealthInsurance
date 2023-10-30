@@ -50,7 +50,8 @@ ${\color{darkblue}Prestadores}$
 Podrás buscar prestadores por matrícula, generar nuevos prestadores y guardarlos, editarlos y/o eliminarlos, cada prestador tendrá información con sus datos personales.
 
 
-![PRESTADORES PRESENTACION GITHUB](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/0073e578-8f69-4e5f-925e-a84b8e6a4807)
+![PRESTADORES PRESENTACION GITHUB](https://github.com/RomiMancilla/AACRHealthInsurance/assets/141675896/4f2d4878-2df4-4b2e-8edb-08ed5d61830d)
+
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -90,3 +91,8 @@ En la eliminación, se aplica un soft delete, para tener la opción de activarlo
 **Colaboradores:**
 
 Andrés Quiroga, Adrián Zuloaga, Cecilia Morales y Romina Mancilla
+
+
+
+**GRACIAS POR ACOMPAÑARNOS!!!**
+                                                                 
