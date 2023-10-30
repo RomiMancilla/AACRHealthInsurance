@@ -9,6 +9,7 @@ import java.util.List;
 import javax.management.loading.PrivateClassLoader;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Service.CustomJTable;
 
 public class EspecialidadView extends javax.swing.JPanel {
 
@@ -44,7 +45,7 @@ public class EspecialidadView extends javax.swing.JPanel {
         tfNombreEspecialidad = new javax.swing.JTextField();
         rbEstado = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbEpecialidades = new javax.swing.JTable();
+        tbEpecialidades = new CustomJTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btGuardar = new javax.swing.JButton();
