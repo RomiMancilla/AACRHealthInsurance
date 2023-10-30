@@ -121,6 +121,7 @@ public class InformeView extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tbAfiliadoPrestador);
 
+        jButton1.setFont(new java.awt.Font("Cantarell", 0, 17)); // NOI18N
         jButton1.setText("Imprimir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,6 +218,7 @@ public class InformeView extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tbOrdenes);
 
+        jButton2.setFont(new java.awt.Font("Cantarell", 0, 17)); // NOI18N
         jButton2.setText("Imprimir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,6 +294,7 @@ public class InformeView extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(tbPrestadores);
 
+        jButton3.setFont(new java.awt.Font("Cantarell", 0, 17)); // NOI18N
         jButton3.setText("Imprimir");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -106,7 +106,7 @@ public class EspecialidadView extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
         jLabel3.setText("Nombre");
 
-        btGuardar.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
+        btGuardar.setFont(new java.awt.Font("Cantarell", 0, 17)); // NOI18N
         btGuardar.setText("Guardar");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class EspecialidadView extends javax.swing.JPanel {
             }
         });
 
-        btNuevo.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
+        btNuevo.setFont(new java.awt.Font("Cantarell", 0, 17)); // NOI18N
         btNuevo.setText("Nuevo");
         btNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +122,7 @@ public class EspecialidadView extends javax.swing.JPanel {
             }
         });
 
-        btEliminar.setFont(new java.awt.Font("Cantarell", 1, 17)); // NOI18N
+        btEliminar.setFont(new java.awt.Font("Cantarell", 0, 17)); // NOI18N
         btEliminar.setText("Eliminar");
         btEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -405,5 +405,9 @@ public class EspecialidadView extends javax.swing.JPanel {
 
     private void activarTabla() {
         tbEpecialidades.setEnabled(true);
+    }
+    
+    public void setFocusTfBusqueda(){
+        tfBusqueda.requestFocus();
     }
 }

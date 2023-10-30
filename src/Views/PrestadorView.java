@@ -651,4 +651,8 @@ public class PrestadorView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "El prestador con el ID especificado no existe.");
         }
     }
+    
+    public void setFocusTfBusqueda(){
+        tfBusqueda.requestFocus();
+    }
 }
