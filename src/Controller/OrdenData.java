@@ -145,8 +145,10 @@ public class OrdenData {
                 boolean estado = rs.getBoolean("estado");
                 Afiliado afiliado = afiData.obtenerAfiliadoPorId(rs.getInt("idAfiliado"));
                 Prestador prestador = prestaData.obtenerPrestadorPorId(rs.getInt("idPrestador"));
+                if (afiliado!=null && prestador!=null) {
                 Orden orden = new Orden(idOrden, fecha.toLocalDate(), formaPago, importe, estado, afiliado, prestador);
-                lista.add(orden);
+                lista.add(orden);                    
+                }
             }
         } catch (SQLSyntaxErrorException syn) {
             JOptionPane.showMessageDialog(null, "Error de Sintaxis en sentencia SQL:\n " + syn.getMessage());
