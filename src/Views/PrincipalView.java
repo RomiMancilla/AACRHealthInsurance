@@ -17,9 +17,14 @@ import java.util.Locale;
 import javax.swing.UIManager;
 import Service.ImagenFondoPanel;
 import Service.JPanelDegrade;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
@@ -448,11 +453,17 @@ public class PrincipalView extends javax.swing.JFrame {
     }
 
     private static void abrirEnlace(String url) {
-        try {
+      try {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            // El sistema soporta Desktop (Windows) se usa Desktop.browse()
+            Desktop.getDesktop().browse(new URI(url));
+        } else {
+            // Si no es compatible con Desktop.browse(), utiliza xdg-open (Linux o Unix)
             Runtime.getRuntime().exec("xdg-open " + url);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+    } catch (IOException | URISyntaxException e) {
+        e.printStackTrace();
+    }
     }
 
 }
