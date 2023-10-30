@@ -21,7 +21,8 @@ public class Validar {
         Si no lo es se consume el caracter y no lo escribe .
         Se agregan teclas Delete y borrar <-- como permitidas*/
         if (!Character.isLetter(evt.getKeyChar()) && !(evt.getKeyChar() == KeyEvent.VK_SPACE)
-                && evt.getKeyChar() != KeyEvent.VK_DELETE && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
+                && evt.getKeyChar() != KeyEvent.VK_DELETE && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE
+                && evt.getKeyChar() != KeyEvent.VK_ENTER) {
             evt.consume();
             mostrarMensajeFlotante("SÓLO se permiten LETRAS en este campo.", 1500);
         }
@@ -32,7 +33,7 @@ public class Validar {
         int key = evt.getKeyChar();
         boolean numero = key >= 48 && key <= 57;
         //Se agregan teclas Delete y borrar <-- como permitidas
-        if (!numero && evt.getKeyChar() != KeyEvent.VK_DELETE && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
+        if (!numero && evt.getKeyChar() != KeyEvent.VK_DELETE && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE && evt.getKeyChar() != KeyEvent.VK_ENTER) {
             evt.consume();
             mostrarMensajeFlotante("SÓLO se permiten NÚMEROS en este campo.", 1500);
         }
