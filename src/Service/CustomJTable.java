@@ -32,11 +32,11 @@ public class CustomJTable extends JTable {
                 if (c instanceof JLabel) {
                     JLabel label = (JLabel) c;
                     label.setHorizontalAlignment(SwingConstants.LEFT);
-                    label.setForeground(Color.BLACK);
+                    label.setForeground(Color.WHITE);
                     Font font = label.getFont().deriveFont(Font.BOLD | Font.PLAIN);
                     label.setFont(font);
                     label.setOpaque(true);
-                    label.setBackground(Color.LIGHT_GRAY);
+                    label.setBackground(new Color(35, 57, 82));//5,106,217
                 }
                 return c;
             }

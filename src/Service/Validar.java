@@ -47,9 +47,10 @@ public class Validar {
         //Formato fuente
         Font font = new Font("Arial", Font.PLAIN, 15);
         label.setFont(font);
+        label.setForeground(Color.WHITE);
 
         // Configura el fondo del mensaje
-        label.setBackground(Color.YELLOW);
+        label.setBackground(Color.RED);
         label.setOpaque(true);
 
         label.setHorizontalAlignment(JLabel.CENTER);
