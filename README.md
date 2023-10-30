@@ -1,6 +1,6 @@
 ## AACRHealthInsurance
 
-**Proyecto Final 10-2023** 
+**Proyecto Final 11-2023** 
 
 **Somos Andrés, Adrián, Ceci y Romi,  que como todos, estamos un poco cuerdos y un poco locos, no sé si más lo último que lo primero, pero por coincidencias de la vida, nos encontramos programando juntos esta aplicación, poniendo el corazón y dejando lo mejor en este proyecto.
 Más allá de los códigos sabemos que lo más importante son las personas, desde diferentes lugares, en distintas épocas, siempre seremos usuarios, y consideramos que el tiempo es uno de los haberes más valiosos, por eso siempre buscamos desarrollar aplicaciones que sean sencillas y prácticas, rápidas y confiables, que sean también amigables, esos fueron los principios que nos guiaron en este desarrollo.** 
