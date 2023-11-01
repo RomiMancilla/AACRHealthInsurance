@@ -548,23 +548,27 @@ public class OrdenView extends javax.swing.JPanel {
         if (!buscarOrdenSrt.isEmpty()) {
             int idOrdenBuscada = Integer.parseInt(buscarOrdenSrt);
             Orden orden = ordenData.buscarOrdenPorID(idOrdenBuscada);
+            //Verificar si no se eliminó el Afiliado o Prestador en el Objeto Orden...                
             if (orden != null) {
-                tfIdOrdenes.setText(String.valueOf(orden.getIdOrden()));
-                tfIdAfiliado.setText(String.valueOf(orden.getAfiliado().getIdAfiliado()));
-                tfIdPrestador.setText(String.valueOf(orden.getPrestador().getIdPrestador()));
-                dcFechaOrden.setDate(java.sql.Date.valueOf(orden.getFecha()));
-                cbFormaPago.setSelectedItem(orden.getFormaDePago());
-                tfImporteOrden.setText(String.valueOf(orden.getImporte()));
-                rbEstadoOrden.setSelected(orden.isEstado());
-                activarBotonEliminar();
-                cambiosEnOrden = true;
+                if (orden.getAfiliado() != null && orden.getPrestador() != null) {
+                    tfIdOrdenes.setText(String.valueOf(orden.getIdOrden()));
+                    tfIdAfiliado.setText(String.valueOf(orden.getAfiliado().getIdAfiliado()));
+                    tfIdPrestador.setText(String.valueOf(orden.getPrestador().getIdPrestador()));
+                    dcFechaOrden.setDate(java.sql.Date.valueOf(orden.getFecha()));
+                    cbFormaPago.setSelectedItem(orden.getFormaDePago());
+                    tfImporteOrden.setText(String.valueOf(orden.getImporte()));
+                    rbEstadoOrden.setSelected(orden.isEstado());
+                    activarBotonEliminar();
+                    cambiosEnOrden = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "El Afiliado o Prestador asociado a esta Órden fue Eliminado.");
+                    desactivarBotonEliminar();
+                    desactivarBotonGuardar();
+                }
             } else {
                 desactivarBotonEliminar();
                 desactivarBotonGuardar();
             }
-        } else {
-            desactivarBotonEliminar();
-            desactivarBotonGuardar();
         }
     }//GEN-LAST:event_tfBusquedaOrdenKeyReleased
 
